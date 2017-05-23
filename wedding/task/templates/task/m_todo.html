@@ -1,0 +1,31 @@
+{% extends "admin/m_base_site.html" %}
+{% load i18n admin_static %}
+{% block title %}新任务{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}
+ <link rel="stylesheet" href="{% static "task/css/m_todo_new.css" %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<form id="id_user_form"  action=""  method="POST" enctype="multipart/form-data">
+{% if not validate %}
+<div>
+  <label class="errornote" >请输入新任务名称和描述。或者你没权限！</label>
+</div>
+{% else%}
+    {% csrf_token %} 
+        {{ form.as_ul }}
+   {% if saved %}
+   <ul class="messagelist">
+  <li class="text-success" >已保存</li>
+</ul>
+   {% endif %}
+   <a  class="btn btn-default" href="{% url 'task:todolist' %}">任务列表 </a>
+   <input type="submit" class="btn btn-default" value="保存" />
+   {% endif%}
+</form>
+</div>
+{% endblock %}

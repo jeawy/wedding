@@ -1,0 +1,28 @@
+﻿{% extends "admin/j_m_base.html" %}
+{% block title %}{{ title }} | {{ site_title|default:_('吃典') }}{% endblock %}
+{% block branding %}
+<h1 id="site-name"><img class="logo" src="/static/img/change.png" alt="logo"/><a href="{% url 'basedatas.views.index' %}"> 吃典</a></h1>
+{% endblock %}
+{% block nav-global %}
+<div id="demo_box" class="wrapper">
+            <span class="pop_ctrl"><i class="fa fa-th-large fa-6" id="fa-menu"></i></span>
+            <ul id="demo_ul">
+                <li class="demo_li"><div><a href="/"><i class="fa fa-home fa-6x"></i><div  class="link_text">主页</div></a></div></li>
+                <li class="demo_li"><div><a href="{% url 'mailer:index_lastinfo' %}"><i class="fa fa-envelope-o fa-6x"></i><div class="link_text">邮件</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-picture-o fa-6x"></i><div class="link_text">相片</div></a></div></li> 
+                <li class="demo_li"><div><a href="{% url 'bill:index' %}"><i class="fa fa-list-alt fa-6x"></i><div class="link_text">账单</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-folder fa-6x"></i><div class="link_text">Files</div></a></div></li>
+                <li class="demo_li"><div><a href="{% url 'heartbeat:index' %}"><i class="fa fa-heart-o fa-6x"></i><div class="link_text">心情</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-mobile fa-6x"></i><div class="link_text">手机</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-power-off fa-6x"></i><div class="link_text">Exit</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-heart-o fa-6x"></i><div class="link_text">Favourites</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-mobile fa-6x"></i><div class="link_text">Mobile</div></a></div></li>
+                <li class="demo_li"><div><a href="/"><i class="fa fa-cog fa-6x"></i><div class="link_text">设置</div></a></div></li>
+                {% if user and not user.is_anonymous and user.is_authenticated %}
+                <li class="demo_li"><div><a href="{% url 'admin:logout' %}"><i class="fa fa-power-off fa-6x"></i><div class="link_text">退出</div></a></div></li>
+                {% else %}
+                <li class="demo_li"><div><a href="{% url 'login' %}"><i class="fa fa-power-off fa-6x"></i><div class="link_text">登录</div></a></div></li>
+                {% endif %}
+            </ul>
+</div>
+{% endblock %}

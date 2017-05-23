@@ -1,0 +1,47 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %} {{area.short_name}} 正宗特色美食{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" href="{% static "search/css/inplace.css" %}" /> 
+ 
+{% endblock %}
+ {% block keywords%} {{area.short_name}} 正宗特色美食{%endblock%}
+  {% block description%} {{area.short_name}} 的正宗特色美食{%endblock%}
+  
+{% block content %}
+ <div class="container" >
+    <div class="row" >
+         
+                  <table class="table"> 
+                      
+                      <tbody>
+                        
+                           <tr>
+                             <td>省/直辖市</td>
+                             <td> 
+                               {{provinces_count}} 
+                              </td> 
+                           </tr>
+                            <tr>
+                             <td>市</td>
+                             <td> 
+                               {{city}} 
+                              </td> 
+                           </tr>
+                            <tr>
+                             <td>区县</td>
+                             <td> 
+                               {{county}} 
+                              </td> 
+                           </tr>
+                       
+                      </tbody>
+                   </table> 
+         </div>
+    </div>     
+  {% endblock %} 
+ 

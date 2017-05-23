@@ -1,0 +1,59 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %} {{keywords}} {{area.short_name}} 正宗特色美食{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" href="{% static "search/css/m_inplace.css" %}" /> 
+ 
+{% endblock %}
+ {% block keywords%} {{area.short_name}} 正宗特色美食{%endblock%}
+  {% block description%} {{area.short_name}} 的正宗特色美食{%endblock%}
+  
+{% block content %}
+    <div class="row" >
+            <div class="col-xs-12  ">
+                 <div class="row  " >
+                     <div class="col-xs-12  ">
+                     {% include 'search/m_select.html' %}
+                     </div>
+                 </div><!--end row search section -->
+                 <div class="row " >
+                     <div class="col-xs-12 ">
+                     {% include 'search/m_textform.html' %}
+                     </div>
+                 </div><!--end row search section --> 
+                 <!-- start items section -->
+                 <div class="row"> 
+                     {% include 'search/m_kbitems.html' %}
+                     {% include 'search/m_noitems.html' %}
+                 </div>
+                 <!-- end items section -->
+            </div> 
+    </div>
+       
+  {% endblock %} 
+ {% block footer_script %}{{ block.super}}   
+ <script> 
+			$(document).ready(function(){   
+                {% for foodslocation_item in foodslocation %}
+                var total = {{foodslocation_item.kb.count_good}}+{{foodslocation_item.kb.count_reply}}+
+                {{foodslocation_item.kb.count_confirm}}+{{foodslocation_item.kb.i_want}}+{{foodslocation_item.kb.i_ate}};
+                $('.hot-{{foodslocation_item.id}}').text(total);
+                {% endfor %} 
+                
+                {% for kb in kbs %}
+                var total = {{kb.count_good}}+{{kb.count_reply}}+
+                {{kb.count_confirm}}+{{kb.i_want}}+{{kb.i_ate}};
+                $('.hot-{{kb.id}}').text(total);
+                {% endfor %} 
+                 
+                    var imgwidth = $('.div_kb_img').width()*0.8;
+                    $('.img-container').css({'height':imgwidth});
+                     
+            });
+ </script> 
+</script>
+ {% endblock %} 

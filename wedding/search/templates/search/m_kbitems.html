@@ -1,0 +1,46 @@
+   
+{% for kb in kbs %}
+    {% if kb.top_pic %}
+    <div class="col-xs-12  search-kb-holder">
+        <div class="row">
+            
+            <div class="col-xs-4 col-sm-4 col-md-4 padding-right-no">
+                <a target="_blank" href="{% url 'kb:kb_detail' kb.id %}" >
+                <img class="search-detail-img" src="{{rootmedia}}/{{kb.top_pic.name}}"/>
+                </a>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8"> 
+                <div class="row row-words-detail">
+                    <div class="col-xs-12 col-md-12">
+                        <a target="_blank" class="kb-link-title" href="{% url 'kb:kb_detail' kb.id %}" >
+                        {{kb.title}} 
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                            <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>
+                            <label>人气指数:</label><label class="hot-{{kb.id}}" >0</label>
+
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                            <img class="hot " data-toggle="tooltip" title="参考价格" src="/static/img/money.png"/>
+                            <label>参考价格:
+                        {{kb.lower_price}}-{{kb.higher_price}}
+                            </label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <img class="kblocation" src="/static/img/map.png"/>
+                        {% for location in kb.foodlocation_set.all %}
+                            <a target="_blank" href="{% url 'search:inplace'%}?placeid={{location.area.id}}">
+                                {{location.area.short_name}}  
+                            </a>
+                        {% endfor%}
+                    </div>
+                </div>
+            </div> 
+            
+        </div> 
+    </div>
+    {% endif %}
+{% endfor %}<!---->
+ 

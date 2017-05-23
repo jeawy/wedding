@@ -1,0 +1,20 @@
+ 
+       
+ table tr .star{
+   color:red;
+   font:bold;
+   padding-top: 5%;
+ }
+ 
+ .div_err .err_label{
+    width: 410px;
+    display:inline-block;
+ }
+ .main_content,  .main_table
+ {
+      
+     width:100%; 
+ }
+.loginimg {
+    width: 100%;
+}

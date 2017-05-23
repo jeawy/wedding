@@ -1,0 +1,58 @@
+.colM #problem_search_form
+{
+    margin-top:50px;
+    width:90%;
+    margin-left:8%;
+    display: flex;
+    max-width:900px;
+}
+
+a.delete
+{
+    position: relative;
+    float:right;
+    right: -19px;
+    top: -55px;
+    font-size:1.1em;
+    
+}
+.li_delete
+{
+     
+}
+ 
+.words
+{
+    font-size:1.2em;
+     text-align:left;
+    
+}
+pre
+{
+     color:#006362;
+}
+.index_main_div
+{
+    display: inline-block;
+    width:100%;
+    text-align:center;
+}
+
+div .detail
+{ 
+    width:70%;
+    max-width:70%;
+    min-height:auto;
+ 
+    background-color:#006362;
+    background:url("/static/img/head.jpg") 0 0 no-repeat,
+                     url("/static/img/c.png") 0px 40px repeat;
+                    
+  
+}
+
+li h3
+{
+    text-align:left;
+    color:White;
+}

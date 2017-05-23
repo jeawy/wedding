@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}找不到页面{% endblock %} 
+ {% load i18n admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}404{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/notfound.css" %}" />
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+{% block content %}
+ <div class="notfound-div">
+    <label  class="notfound">找不到页面</label> 
+  </div >  
+
+   <div class="div_logout" >
+   <a method="post" class="btn btn-button btn-primary a_logout" href="/">返回首页<br /> </a>
+   </div>
+ {% endblock %}

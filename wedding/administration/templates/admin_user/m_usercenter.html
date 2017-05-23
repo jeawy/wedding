@@ -1,0 +1,83 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}个人中心 信息修改 分享的美食列表{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/usercenter.css" %}" />
+ 
+{% endblock %}
+ {% block keywords%} {{kb.title}} {%endblock%}
+  {% block description%}  {%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %} 
+    
+    <div class="container" >
+         <div class="row">
+                
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <label   >欢迎您{{request.user.get_full_name}}, 我们感谢您的分享...</label>
+            </div>
+             
+               <div class="col-xs-12   col-sm-12  btn-group">
+                   <a   href="{% url 'user:portrait' %}" class="btn btn-default" >修改头像</a>     
+                   <a   href="{% url 'kb:newkb' %}" class="btn btn-primary" >分享美食</a> 
+               </div>
+               
+            {% if committee %}
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <label>精典委员会特有功能</label>
+            </div>
+            <div class="col-xs-12 col-md-12 col-sm-12  btn-group">
+                   <a target="__blank" href="{% url 'data:update_data_place' %}" class="btn btn-default" >更新覆盖地方</a>                   
+                   <a target="__blank" href="{% url 'data:update_data_place_rate' %}" class="btn btn-default" >更新比例</a> 
+            </div>
+               
+            {% endif %}
+           
+            {% if request.user.is_superuser %}
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <label>管理员</label>
+            </div>
+            <div class="col-xs-12 col-md-12 col-sm-12  btn-group">
+                  <a target="__blank" href="{% url 'search:search_records' %}" class="btn btn-default" >搜索记录</a>                   
+                   <a target="__blank" href="{% url 'data:map' %}" class="btn btn-default" >数据</a>
+                   <a target="__blank" href="{% url 'task:todolist' %}" class="btn btn-default" >任务列表</a>
+            </div> 
+            <div class="col-xs-12 col-md-12 col-sm-12  btn-group">
+                   <a target="__blank" href="{% url 'kb:all_kb_list' %}" class="btn btn-default" >所有分享</a>
+                    <a target="__blank" href="{% url 'kb:create_magazine' %}" class="btn btn-default" >美食期刊</a>                                      
+            </div> 
+            <div class="col-xs-12 col-md-12 col-sm-12  btn-group">
+                   总共有{{kb_counter}}次分享
+            </div> 
+            {% endif %}
+         </div>
+    </div>
+       
+  {% endblock %}
+  
+ 
+ {% block footer_script %}{{ block.super}} 
+   
+<script type="text/javascript"   src="{% static 'kb/js/comment.js'%}"></script>    
+ <script type="text/javascript"  src="{% static 'kb/js/good.js' %}"></script> 
+  
+ <script>
+			 
+			$(document).ready(function(){  
+             {% for kb in mykbs %}
+                var total = {{kb.count_good}}+{{kb.count_reply}}+
+                {{kb.count_confirm}}+{{kb.i_want}}+{{kb.i_ate}};
+                $('.hot-{{kb.id}}').text(total);
+            {% endfor %} 
+            });
+ </script> 
+ <script src="{% static 'plugins/confirm/jquery.confirm.min.js' %}"></script> 
+ {% endblock %} 
+ {% block footer %}{% endblock %}
+ 

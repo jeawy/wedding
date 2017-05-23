@@ -1,0 +1,9 @@
+ .background_div
+ { 
+    position: fixed;
+    top:0;
+    z-index: -1000;
+    background-repeat: no-repeat;
+    background-size:100% 100%;  
+ }
+  

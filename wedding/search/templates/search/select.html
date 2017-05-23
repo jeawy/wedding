@@ -1,0 +1,35 @@
+ <form action="{% url 'search:inplace' %}", method='get'>
+						<div class="col-sx-12 col-sm-12 col-md-12 " >
+							<label class="slider2-header-words" >找正宗特色美食就来吃典,用心分享每份特色美食.</label>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 padding-right-sm area-select" >
+							<select name='homepage_province' class="homepage_province form-control" >
+								{% for p_item in provinces %}
+								<option value="{{p_item.pk}}" {% if province == p_item %} selected="selected" {% endif %}>{{p_item.short_name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 padding-right-sm area-select" >
+							<select name='homepage_city' class="homepage_city form-control" >
+                                <option value="-1" >-市-</option>
+								{% if cities %}
+                                    {% for city_item in cities %}
+                                    <option value="{{city_item.pk}}" {% if city == city_item %} selected="selected" {% endif %}>{{city_item.short_name}}</option>
+                                    {% endfor %}
+                                {% endif %}
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 padding-right-sm area-select" >
+							<select name='homepage_county' class="homepage_county form-control" >
+                                <option value="-1" >-区县-</option>
+								{% if counties %}
+                                    {% for county_item in counties %}
+                                    <option value="{{county_item.pk}}" {% if area == county_item %} selected="selected" {% endif %}>{{county_item.short_name}}</option>
+                                    {% endfor %}
+                                {% endif %}
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 padding-sm area-select" >
+							<input type="submit" class="btn btn-success btn-search-inplace" data-toggle="tooltip" title="点击查看当地美食."  value="搜索看看"/>
+						</div>
+</form>

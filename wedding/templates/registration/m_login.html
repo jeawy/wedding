@@ -1,0 +1,54 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}登录{% endblock %} 
+{% load i18n admin_static %}
+ 
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" href="/static/css/m_login.css"/>
+{% endblock %}
+
+  
+{% block content %} 
+<div id="content-main " class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form action="/login/"  class="login_form" method="post" id="login-form">
+          <div class="col-xs-12" >
+            <label for="id_username" class="required">{% trans '电子邮箱:' %}</label> 
+          </div>
+          <div class="col-xs-12" >
+            <input id="id_username" class="form-control" maxlength="254" name="email" type="text" value="{{email|default:""}}"/>
+          </div>
+          <div class="col-xs-12" >
+            <label for="id_password" class="required">{% trans '密码:' %}</label>
+          </div>
+          <div class="col-xs-12" >
+            <input id="id_password" class="form-control" name="password" type="password" />
+             <input type="hidden" name="next" value="{{next|default:"/"}}" />
+          </div>
+           <div class="col-xs-12" >
+             {% if error %}
+              <label class="errornote">{{error}}</label>
+              {% endif %}
+          </div>
+          <div class="col-xs-12 padding-top-midium" >
+             <input type="submit" class="btn btn-primary form-control submit_login" value="{% trans '登 录' %}" />  
+          </div>
+          
+      </form>
+      <div class="col-xs-6 text-center padding-top-big" >
+            <a method="post" class="register" href="{% url 'base:user_register'%}">{% trans '注册会员' %}</a>
+      </div>
+      <div class="col-xs-6 text-center padding-top-big" >
+            <a method="post" class="fotgot_pwd" href="{% url 'base:find_password'%}">{% trans '忘记密码' %}</a> 
+      </div>
+    </div>
+  </div><!--row-->
+</div><!--container-->
+ 
+<script type="text/javascript">
+    document.getElementById('id_username').focus();
+      
+</script>
+
+{% endblock %}
+ 

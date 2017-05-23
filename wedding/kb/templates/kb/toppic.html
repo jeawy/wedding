@@ -1,0 +1,87 @@
+{% extends "admin/base_site.html" %}
+{% block title %} 分享各地正宗美食，唤醒我们的味蕾{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link  href="/static/plugins/cropper-master/dist/cropper.css" rel="stylesheet"> 
+<link rel="stylesheet" href="/static/kb/css/main.css"/>
+<link rel="stylesheet" href="/static/kb/css/settopic.css"/>
+<link rel="stylesheet" href="/static/admin/css/change_portrait.css"/>
+<link rel="stylesheet" href="/static/plugins/loading/style.css"/>
+{% endblock %}
+ 
+{% block content %}
+
+{% if not has_perm and not has_own_perm %}
+<label class="errornote">没有权限设置顶图...</label>
+{% else %}
+
+<div class="container">
+    {% if kb %}
+    <input type="hidden" id="id_kbid" value="{{kb.id}}"/>
+    {% endif %}
+    <div class="row"> 
+      <div class="col-xs-12 col-md-12 " >
+        <h1><a href="{% url 'kb:kb_detail' kb.id %}" >{{kb.title}}</a></h1>  
+      </div> 
+    </div>
+ 
+<hr>
+ <label class="promt" >此处编辑的图片是在展示美食的时候用到。</label>
+    <div class="row">
+      
+      <div class="col-md-4">
+        <!-- <h3 class="page-header">Demo:</h3> -->
+        <div class="img-container">
+          <img id="image" src="{% if kb %}{% if kb.top_pic.name %}{{rootmedia}}{{kb.top_pic.name }}{% else %}/static/img/dish.jpg{% endif %}{% endif %}" alt="请上传顶图..">
+        </div>
+      </div> 
+      <div class="col-md-8">
+        <!-- <h3 class="page-header">Preview:</h3> -->
+            <div class="docs-preview clearfix"> 
+              <div class="row">
+                  <div class="col-md-12 docs-buttons"> 
+                  
+                    <div class="btn-group"> 
+                      <button type="button" class="btn btn-primary" data-method="rotate" data-option="-30" title="Rotate Left"> 
+                          <span class="fa fa-rotate-left"></span> 
+                      </button>
+                        <button type="button" class="btn btn-primary" data-method="rotate" data-option="30" title="Rotate Right"> 
+                            <span class="fa fa-rotate-right"></span> 
+                        </button>
+                    <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                      <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                      <span class="docs-tooltip" >
+                        <span class="fa fa-upload">&nbsp;&nbsp;浏览</span>
+                      </span>
+                    </label>
+              </div>
+        
+              <div class="btn-group btn-group-crop"> 
+                <button type="button" class="btn btn-primary" data-method="getCroppedCanvas"> 
+                  <span class="docs-tooltip" data-toggle="tooltip" title="裁剪并保存..."> <i class="fa fa-floppy-o"></i> 保存裁剪 </span>
+                </button>
+              </div>
+        
+              <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+ 
+              </div><!-- /.modal -->  
+            </div><!-- /.docs-buttons --> 
+        </div>
+        
+      </div>
+    </div>
+  </div>      
+ </div>      
+<script src="/static/plugins/cropper-master/dist/cropper.js"></script>
+<script src="/static/plugins/cropper-master/dist/canvas-toBlob.js"></script>
+<script src="/static/kb/js/top_pic.js"></script> 
+<script src="/static/kb/js/kb_place.js"></script>
+<script src="/static/kb/js/publish.js"></script>   
+<script src="/static/plugins/loading/jquery.isloading.min.js"></script>
+
+ {% endif %}
+ 
+ {% endblock %}
+ {% block baidu_spider %}{% endblock %}

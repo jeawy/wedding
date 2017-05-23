@@ -1,0 +1,61 @@
+@media (max-width: 980px){
+    .search-detail-img
+    {
+        width: 100%; 
+    }
+}
+@media (min-width: 980px){
+    .search-detail-img
+    {
+        width: 100%;
+        height: 100px;
+    }
+}
+
+.row-words-detail
+{
+    height: 102px;
+     
+}
+.search-kb-holder
+{
+    margin-top: 5px;
+    box-shadow: 2px 2px 3px -2px rgba(0,0,0,0.3);    
+}
+.kb-link-title
+{
+    color: #1F2A40; 
+    font-size: 20px;
+}
+.kblocation
+{
+    width: 20px;
+    height: 25px;
+}
+.hot
+{
+    width: 20px;
+    height: 20px;
+}
+
+.label-grey
+{
+    color:grey;
+}
+.jusang
+{
+    width: 200px;
+    height: 200px;
+}
+.col-center
+{
+    text-align: center;
+}
+
+.col-notfount
+{
+    text-align: center; 
+    margin-top: 30px;
+    font-size: 20px;
+    color: #1F2A40; 
+}

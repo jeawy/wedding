@@ -1,0 +1,85 @@
+{% extends "admin/base_site.html" %}
+{% block title %} | {{kb.title}}{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" href="/static/kb/css/new.css"/> 
+<link rel="stylesheet" href="/static/plugins/loading/style.css"/>
+{% endblock %} 
+
+{% block content %} 
+ {% if not perm %}
+  <ul class="new_article_ul">
+      <li class="li_title">
+         <label class="errornote" >没有权限修改帖子</label>
+      </li>
+      </ul>
+       {% else %}
+<form action="" method="post" id="article_form" enctype="multipart/form-data">
+<input type="hidden" name="kbinstace" id ="id_kb" value="{{kb.id}}" />
+  <ul class="new_article_ul">
+     
+         <input type="hidden" name="blockid" id ="idblock" value="{{kb.block.id}}" />
+         <input type="hidden" name="slice_count" id ="idslice_count" value="{{kb.slice_set.count}}" />
+       
+      <li class="li_title">
+         <input type="text" class="title form-control" name="title" id="id_title" placeholder="请输入标题..." value="{{kb.title}}" />
+      </li>
+      {% for slice in kb.slice_set.all %}
+      <li>
+            <textarea class="article_content form-control" name="article_content_{{forloop.counter}}" placeholder="输入内容..." cols="30" rows="10">{{slice.content}}</textarea>
+      </li>
+      <li class="li_holder">
+          {% for pic in slice.pic_set.all %}
+            <div class="pic_holder  pic_holder_{{pic.id}}"> 
+                <input type="hidden" class="pic_id" value="{{pic.id}}" />
+                        <i class="fa fa-minus-circle pic-delete"></i>
+            </div>
+      {% endfor %}
+      </li>
+       <li class="li_pic_add_div">
+             <input type="hidden" id="pic_counter" value="1" /> 
+             <input type="hidden" class ="slice_number" name="slice_number_{{forloop.counter}}" value="{{forloop.counter}}" />
+             <input type="hidden" name="kb_slice_instace_{{forloop.counter}}" id ="id_kb_slice_{{forloop.counter}}" value="{{slice.id}}" />
+             <div class="pic_add_div"> 
+              <label class="new_Btn">
+                  <input type="file" name="pic_file" id="id_file_uploader" class="file_upload" accept="image/*"/> 
+                      <i class="fa fa-plus pic-plus"></i> 
+              </label>
+          </div>
+       </li>
+       {% endfor %}
+         <li>
+             <input type="button" class="publish_btn btn btn-primary" id="id_add_pic_text" value="新增图文" />
+       </li>
+       <!---
+        <li>
+             <input type="button" class="publish_btn" id="id_publish_draft" value="存草稿" />
+       </li>
+         -->
+      <li>
+      <div class="publish_msg"></div>
+             <input type="button" class="publish_btn btn btn-primary" id="id_publish" value="发表帖子" />
+      </li>
+     
+  </ul>
+  </form> 
+  <script src="/static/plugins/loading/jquery.isloading.min.js"></script>
+  <script src="/static/kb/js/m_new.js"></script> 
+  <script>
+      $(document).ready(function() {
+          var width = window.innerWidth; 
+          $('.pic_div').css('height', (width/4-10).toString()+'px');
+          
+          //set backgroudimage for pictures
+          {% for slice in kb.slice_set.all %}
+                {% for pic in slice.pic_set.all %}
+                $('.pic_holder_{{pic.id}}').css("background-image", "url({{rootmedia}}{{pic.link.name}})"); 
+                {% endfor %}
+          {% endfor %}
+      });
+  </script>
+   {% endif %}
+ {% endblock %}
+ {% block baidu_spider %}{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{kb.title}}|帖子详情{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/m_detail.css" %}" />
+ 
+{% endblock %}
+ {% block keywords%}心事 每日一句 推荐{%endblock%}
+  {% block description%} 你是不是也想要一个只属于自己的小屋，漂亮温馨就..{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %}
+<input type="hidden" id="kbid" value="{{kb.id}}"/>
+    {% if kb %}
+    {% if kb.top_pic.name %}
+            <div class="div_kb_img"> 
+                        <img class="kb_img" src="{{rootmedia}}{{kb.top_pic.name }}"/ >
+                    </div>
+            {% endif %}
+<div class="main_kb_detail">
+    {% load tz %} 
+        <h1 class="kb_title">{{kb.title}}</h1>
+        <div class="kb_sub_header">
+        <div class="portrait" id="id_user_portrait"></div> 
+       <ul class="ul_date_username"> 
+         <li class="vmlog_date"> {{kb.author.get_full_name}} |{{kb.date  | date:" Y-m-d H:i:s"}}   
+             {% if kb.is_essence == 1 %}
+             <i class="fa fa-diamond fa-diamond-selected "><lable class="lb_fa-diamond-selected"> [精华]</lable></i>
+             {% endif %}</li>
+      </ul>  
+     </div>
+     <hr>
+     
+      {% if slice_ls %}
+      {% for slice in slice_ls %}
+      <pre>{{slice.content}}</pre>
+            {% if pic_ls %}
+            {% for pic in pic_ls %}
+            {% if pic.slices ==  slice%}
+            <div class="div_kb_img"> 
+                <img class="kb_img" src="{{rootmedia}}{{pic.link.name }}"/ >
+            </div>
+          {% endif %}
+            {% endfor %}
+            {% endif %}
+      {% endfor %}
+      {% endif %}
+     
+ </div> 
+ {% if active %}
+  <div class="kb_footer">
+   <i class="fa fa-users"> 活动上限人数:{{active.number}}</i>
+   {% load tz %} 
+        <i class="fa fa-calendar"> 截止日期{{active.deadline | date:" Y-m-d "}}</i>
+        <a href = "{% url 'kb:active_userlist' kb.id %}">
+        <i class="fa fa-user"> 已报名人数:{{kb.active_user_set.all.count}}</i>
+        </a>
+  </div>
+       
+    <div class="kb_footer">
+<input type="button" value="{% if attended %}已报名{% else %}{% if date_expire %}已截止{%else%}{% if count_limit %}报名{%else%}已满额{%endif%}{%endif%}{%endif%}" class="takepart_in" id="takepart_in" />
+    </div>
+    <hr>
+ {% else %}
+ {% if not request.user.is_anonymous %}
+   <div class="kb_footer">
+       <a href = "{% url 'kb:award_userlist' kb.id %}">
+   <i class="fa fa-users"> 打赏人({{kb.kb_award_set.all.count}})</i> </a>
+    
+  </div>
+    <div class="kb_footer">
+      <input type="hidden" value="{{request.user.v_silver}}"  id="id_v_silver" />
+      <input type="button" value="打赏" class="takepart_in" id="id_award" />
+    </div>
+    <hr>
+ {% endif %}
+ {% endif %}
+ <div class="kb_footer">
+   <i class="fa fa-newspaper-o"> 阅读:{{kb.count_read}}</i>
+        <i class="fa  {% if is_say_good > 0 %}fa-thumbs-up{% else %}fa-thumbs-o-up{% endif %}"> 喜欢:{{kb.count_good}}</i>
+        <i class="fa fa-comment-o"> 评论:{{kb.count_reply}}</i>
+        {% if is_collected  %}
+        <i class="fa fa-heart"> 已收藏</i>
+        {% else %}
+           <i class="fa fa-heart-o"> 收藏</i>
+        {% endif %}
+        </div>
+        <hr>
+  
+  {% if  kb.comment_set.all %}
+  {% for comment in kb.comment_set.all %}
+  <div class="comment_div">
+      <input  type="hidden" class="commentid" value="{{ comment.id}}"/>
+        <div class="comment_left_div">
+            <div class="comment_portrait portrait" style="background-image:url('{{comment.commenter.head_portrait}}')"></div>
+        </div>
+        <div class="comment_right_div">
+           <h3 class="comment_title">
+               <label  class="comment_title username">{{  comment.commenter.get_full_name }}</label >
+               <label  class="comment_title date">{{ comment.date  |date:" Y-m-d  H:i:s "}}</label >
+        </h3>
+        {% if comment.type == 1 %}
+        回复<label for="date" class="replied_username" name="words" >{{ comment.replied_comment.commenter.get_full_name }}:</label>
+        {% endif %}
+          <label for="date" class="heartbeat_comment" name="words" >{{ comment.content }}</label>
+          </div>
+          </div>
+          <hr class="comment_hr">
+          
+ {% endfor %}
+ <div class="comment">
+      
+  </div>
+ {% else %}
+ <div class="comment">
+     <i class="fa fa-comment-o">暂无评论...</i> 
+  </div>
+ {% endif %}
+{% else %}
+<div class = "main_kb_detail" >
+     <ul> <li class="vmlog_date">  </li>
+         </ul> 
+        <label class="main_link_container_label main_link_container_label_none"> 没有找到帖子...</label> 
+</div>
+ <hr>
+     
+     
+{% endif %}
+
+ {% endblock %}
+
+{% block custom_footer_building_li_selected %}custom_footer_building_li_selected{% endblock %}
+{% block custom_footer_building_div_selected %}custom_footer_building_div_selected{% endblock %}
+ {% block footer_script %}{{ block.super}} 
+ <script type="text/javascript" language="javascript" src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/detail.js' %}"></script>  
+ <script type="text/javascript"  src="{% static 'good/js/good_day_words.1.js' %}"></script> 
+ <script type="text/javascript"  src="{% static 'good/js/good_day_words.js' %}"></script>  
+  <script type="text/javascript" src="{% static 'kb/js/collect.js' %}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/uncollect.js' %}"></script>  
+ <script type="text/javascript"> 
+$(document).ready(function() {
+ var img = $('.kb_img');
+ img.css('max-width',document.body.clientWidth-3);
+ 
+ 
+ {% if kb   %}
+        $('#id_user_portrait').css("background-image", "url({{kb.author.head_portrait }})");
+        {% else %}
+        $('#id_user_portrait').css("background-image", "url('/static/img/dog.png')");
+    {% endif %}
+});
+ 
+</script>
+ {% endblock %} 
+ 
+  {% block footer %}{{block.super}}
+ <div class="div-comment"> 
+ <textarea onkeyup="auto_grow(this)" id="id_comment_conent"></textarea> 
+       <input type="hidden" id="current_commentid" value =""/>
+        <input type="button" class="comment_ordinary_sent" id="comment_conent_btn"value="评论" />
+        </div>
+ {% endblock %}

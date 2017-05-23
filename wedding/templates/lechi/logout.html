@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}退出登录{% endblock %} 
+ {% load i18n admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}退出登录{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/logout.css" %}" />
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+{% block content %}
+ <div class="div_logout_message">
+    <label  class="logout_message">您已退出，感谢您停留在本站的宝贵时间。</label> 
+  </div >  
+   <div class="div_logout" >
+   <a method="post" class="a_logout" href="{% url 'login'%}">重新登录<br /><i class="fa fa-sign-in fa-5x"></i></a>
+   </div>
+ {% endblock %}

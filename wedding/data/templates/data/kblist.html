@@ -1,0 +1,81 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}{{page_title}}_带你发现真正的美食 因为 关于吃这件事，我们是认真的...{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/data/css/latest.css" />
+ 
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+ <div class="row" >
+        <div class="col-xs-9 col-md-9 col-left">   
+				<div class="row" >
+						<div class="col-sx-12 col-sm-12 col-md-12"> 
+							<span class="week-recommend">{{page_title}}</span> 
+						</div> 
+				</div> 
+			
+				<div class="row">
+					{% for kb in kbs  %}
+					<div class="col-sx-3 col-sm-6  col-md-3 padding-right-sm">
+							<div class="week-container effect1">
+								<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+									<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+									<div class="food-detail ">
+										<div class="food-detail-title  ">
+											{{kb.kb.title}} 
+										</div>
+										<div class="food-detail-right  ">
+										参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+										</div>
+										<div class=" div_kblocation ">
+											<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+											{% for location in kb.kb.foodlocation_set.all %}
+											{{location.area.short_name}}
+											{% endfor %}
+										</div>
+										<div class="  ">
+											{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+										</div>
+									</div>
+								</a>
+							</div>
+					</div>
+					{% endfor %}
+				</div> 
+        </div><!-- left end -->
+		<div class="col-xs-3 col-sm-3 col-md-3 col-right ">
+			<div class="col-sm-12 col-xs-12 ">  
+                <div class="newkb" >  往期精彩推荐：  </div>  
+            </div>
+			{% for magazine in magazines|slice:":4"  %}  
+					{% if current_magazineid != magazine.id %}
+						<div class="col-xs-12  "> 
+							<a class="magazine_link" href="{% url 'data:week_recommend_kb' %}?magazineid={{magazine.id}}" >{{magazine.title}}</a>
+						</div>
+					{% endif %}
+			{% endfor %} 
+		</div><!-- right end -->
+ </div><!-- end top row -->
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}   
+	<script >
+		$(document).ready(function(){
+		     //加载图片
+			
+			  {% for kb in kbs %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+			   
+			  var imgwidth = $('.week-container').width(); 
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			   
+		});
+		</script>
+ {% endblock %} 

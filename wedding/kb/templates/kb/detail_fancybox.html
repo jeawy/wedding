@@ -1,0 +1,310 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}{% for area in  kb.foodlocation_set.all %}{{area.area.short_name}}_{% endfor %}{{kb.title}}的介绍、价格以及推荐去处{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/detail.css" %}" />
+ <link rel="stylesheet" href="{% static "plugins/fancybox/fancy/source/jquery.fancybox.css" %}" type="text/css" media="screen" />
+  
+{% endblock %}
+  {% block keywords%}{% for area in  kb.foodlocation_set.all|slice:"3" %}{{area.area.short_name}}_{% endfor %}{{kb.title}}的介绍、价格以及推荐去处 {%endblock%}
+  {% block description%} {% for area in  kb.foodlocation_set.all|slice:"3" %}{{area.area.short_name}} {% endfor %}的正宗特色美食{{kb.title}} {% if slice_ls %}{{slice_ls.0.content|truncatechars:"180"}}{% endif %}{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %}
+<input type="hidden" id="kbid" value="{{kb.id}}"/>
+    {% if kb %}
+    <div class="row" >
+        <div class="col-xs-9 col-md-9 col-left"> 
+                    <div class="main_kb_detail">
+                        {% load tz %} 
+                            <h1 class="kb_title">{{kb.title}}</h1>
+                             <img id="id_confirm_kb" class="certificate" src="{% static 'img/certificate.ico' %}" data-toggle="tooltip" title="点击进行认证，您的认证会让更多人找到正宗的特色美食.."/>
+                                        {{kb.count_confirm}}人已认证这篇分享为特色美食
+                            <div class="kb_sub_header"> 
+                                <ul class="ul_date_username">  
+                                    <li class="vmlog_date"> 
+                                        {% if administrator %}
+                                         {{kb.author.get_full_name}} | {{kb.date  | date:" Y-m-d H:i:s"}}
+                                       {% endif %}
+                                        {% if kb.is_essence == 1 %}
+                                        <i class="fa fa-diamond fa-diamond-selected ">
+                                            <lable class="lb_fa-diamond-selected"> [精华]</lable>
+                                        </i>
+                                        {% endif %}
+                                        <img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+                                        {% for area in  kb.foodlocation_set.all %}
+                                        <label>
+                                            {{area.area.short_name}}
+                                        </label>
+                                        {% endfor %}
+                                    </li>
+                                    <li class="vmlog_date">
+                                         {% if kb.author == request.user %}
+                                            {% if kb.status == 0   %}
+                                            <label class="red_label" data-toggle="tooltip" title="草稿状态下的美食分享无法被其他用户搜索到，发布之后才可以被其他用户看到.">[草稿]</label>
+                                            <a href="{% url 'kb:set_kb_top_pic'  kb.pk %}" >去发布</a>
+                                            {% else %}
+                                            <div class="btn-group">
+                                            <a href="{% url 'kb:changekb'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="您是作者，可以继续编辑." >编辑</a>
+                                            <a href="{% url 'kb:set_kb_property'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="您是作者，可以继续编辑." >编辑属性</a>
+                                            <a href="{% url 'kb:set_kb_top_pic'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="在展示美食的时候使用缩略图." >设置缩略图</a>
+                                            </div>
+                                            {% endif %}
+                                        {% endif %} 
+                                    </li>
+                                </ul>  
+                            </div>
+                        <hr>
+                    
+                    {% if slice_ls %}
+                        {% for slice in slice_ls %}
+                                <pre>{{slice.content}}</pre>
+                                {% if pic_ls %}
+                                    {% if  slice.pic_set.all %} 
+                                            {% for pic in slice.pic_set.all  %}   
+                                                {% if forloop.counter0|divisibleby:"3"  %}
+                                                <div class="img-container">
+                                                {% endif %}
+                                                <div class=" div_kb_img div_kb_img_{{pic.id}}">
+                                                    <a class="fancybox" href="{{rootmedia}}{{pic.link.name }}" >
+                                                    </a>
+                                                </div>   
+                                                {% if forloop.counter0|add:"1"|divisibleby:"3" or forloop.last %}  
+                                                </div>
+                                                {% endif %} 
+                                            {% endfor %}   
+                                    {% endif %}
+                                {% endif %}
+                        {% endfor %}
+                    {% endif %} 
+            </div>  
+                <div class="kb_footer">
+                        <i class="fa fa-newspaper-o"> 阅读:{{kb.count_read}}</i>
+                        <i class="fa  fa-heart fa-heart-good"> {{kb.count_good}}</i>
+                        <i class="fa fa-comment-o"> 评论:{{kb.count_reply}}</i>  
+                </div>
+                <hr>
+
+                            {% if  kb.comment_set.all %}
+                            {% for comment in kb.comment_set.all %}
+                                    <div class="comment_div">
+                                        <input  type="hidden" class="commentid" value="{{ comment.id}}"/>
+                                            <div class="comment_left_div">
+                                                <div class="comment_portrait portrait " style="background-image:url('{{comment.commenter.head_portrait}}')"></div>
+                                            </div>
+                                            <div class="comment_right_div">
+                                                <h3 class="comment_title"> 
+                                                    <label  class="comment_title username">{{  comment.commenter.get_full_name }}</label >
+                                                   
+                                                    <label  class="comment_title date">{{ comment.date  |date:" Y-m-d  H:i:s "}}</label >
+                                                </h3>
+                                                {% if comment.type == 1 %}
+                                                回复<label for="date" class="replied_username" name="words" >{{ comment.replied_comment.commenter.get_full_name }}:</label>
+                                                {% endif %}
+                                                <label for="date" class="heartbeat_comment" name="words" >{{ comment.content }}</label>
+                                            </div>
+                                    </div>
+                                    <hr class="comment_hr">
+                                    
+                            {% endfor %}
+                            
+                {% else %}
+                <div class="comment">
+                    <i class="fa fa-comment-o">暂无评论...</i> 
+                </div>
+                {% endif %}
+
+
+            {% else %}
+                        <div class = "main_kb_detail" >
+                            <ul> <li class="vmlog_date">  </li>
+                                </ul> 
+                                <label class="main_link_container_label main_link_container_label_none"> 没有找到帖子...</label> 
+                        </div>
+                        <hr>
+                
+            {% endif %}
+
+
+            <div class="row"> 
+                <div class="col-xs-10 col-sm-10 col-md-10">
+                    <textarea class="form-control" onkeyup="auto_grow(this)" id="id_comment_conent"></textarea> 
+                    <input type="hidden" id="current_commentid" value =""/>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="button" class="btn-primary btn  comment_ordinary_sent" id="comment_conent_btn" value="评论" />
+                </div>
+            </div> 
+        </div>
+
+
+        <div class="col-xs-3 col-sm-3 col-md-3 col-right ">
+            <div class="row">  
+                <div class="col-xs-12  col-sm- 12 col-md-12" >
+                    <i class="fa fa-heart fa-iwant" data-toggle="tooltip" title="我想吃" aria-hidden="true"></i>
+                    <label>我也想吃...</label>
+                </div>
+            </div>
+            <div class="row">  
+                <div class="col-xs-12 col-sm- 12  col-md-12" > 
+                    <div class="progress progress-iwant">
+                        <div class="progress-bar progress-bar-iwant progress-bar-danger progress-bar-striped" role="progressbar"
+                        aria-valuenow="{{kb.i_want}}" aria-valuemin="0" aria-valuemax="100" style="width:{{kb.i_ate}}%">
+                           <label class="will_label will_iwant">有{{kb.i_want}}人想吃</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12" >
+                     <i class="fa fa-heart fa-iate" data-toggle="tooltip" title="我吃过" aria-hidden="true"></i>
+                     <label>我们曾吃过同样的美食...</label>
+                </div>
+            </div>
+            <div class="row row-ate"> 
+                <div class="col-xs-12 col-sm-12 col-md-12" > 
+                    <div class="progress progress-ate">
+                        <div class="progress-bar progress-bar-ate progress-bar-danger progress-bar-striped" role="progressbar"
+                        aria-valuenow="{{kb.i_ate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{kb.i_ate}}%">
+                            <label class="will_label will_ate">有{{kb.i_ate}}人吃过</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-4 col-md-4" >
+                    价格区间:
+                </div>
+                <div class="col-xs-8 col-md-8" >
+                    {{kb.lower_price}} -{{kb.higher_price}}  
+                </div>
+            </div>
+             <hr>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12" >
+                    推荐去处:
+                </div> 
+            </div>
+           
+            {% for place in kb.foodplace_set.all %}
+             <div class="row"> 
+                 <div class="col-xs-12 col-md-12" >
+                     {{place.address}}
+                </div> 
+               
+            </div>
+            {% endfor %}
+            <hr>
+            {% if administrator %}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12" >
+                     <h3>精典委员会特权</h3>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12" >
+                    <div class="btn-group">
+                                    <a href="{% url 'kb:changekb' kb.id %}" class="btn btn-button btn-default">
+                                    修改图文
+                                    </a>
+                                    <a href="{% url 'kb:set_kb_property' kb.id %}" class="btn btn-button btn-default">
+                                    设置分享属性
+                                    </a>
+                                    <a href="{% url 'kb:set_kb_top_pic' kb.id %}" class="btn btn-button btn-default">
+                                    设置缩略图
+                                    </a>
+                                    <button type = "button" class="btn btn-button btn-danger btn-delete">
+                                    删除
+                                    </button>
+                    </div>
+                </div>  
+            </div>
+            <hr>
+            <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12" >
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-button btn-default set-to-homepage">
+                                        推至最新
+                                        </button>
+                                        <button type="button" class="btn btn-button btn-default set-to-homepageone">
+                                        推至首页
+                                        </button>
+                                         <button type="button" class="btn btn-button btn-default set-to-week">
+                                        推至本周推荐
+                                        </button> 
+                                        
+                                    </div>
+                        </div>
+                 </div>
+            {% endif %}
+            <div class="row"> 
+                 <div class="col-xs-12 col-sm-12 col-md-12" >
+                     <h3>特色美食地图</h3>
+                </div>  
+            </div>
+            <div class="row"> 
+                 <div class="col-xs-12 col-md-12" >
+                      <img class="chinamap" src="/static/img/china.jpg"/>
+                </div>  
+            </div>
+            <hr>
+        </div>
+    </div>
+       
+  {% endblock %}
+  
+ 
+ {% block footer_script %}{{ block.super}} 
+   
+<script type="text/javascript"   src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/detail.js' %}"></script>   
+ <script type="text/javascript"  src="{% static 'kb/js/good.js' %}"></script> 
+ <script type="text/javascript" src="{% static 'plugins/fancybox/fancy/source/jquery.fancybox.pack.js'%}" ></script>
+ <script>
+			 
+			$(document).ready(function(){  
+             $('.progress-bar-iwant').css({'width':{{kb.i_want}}+'%'});
+             $('.progress-bar-iate').css({'width':{{kb.i_ate}}+'%'});     
+                   {% if slice_ls %}
+                        {% for slice in slice_ls %} 
+                                {% if pic_ls %} 
+                                    {% for pic in pic_ls %}
+                                        {% if pic.slices ==  slice%}
+                                         $('.div_kb_img_{{pic.id}}').css({'background':'url({{rootmedia}}{{pic.link.name }}) no-repeat center center'
+                                                ,'background-size':'contain', 'background-color':'#9BA3A0'});
+                                        {% endif %}
+                                    {% endfor %}
+                                
+                                {% endif %}
+                        {% endfor %}
+                    {% endif %}  
+                 
+                    var imgwidth = $('.div_kb_img').width()*0.8;
+                    $('.img-container').css({'height':imgwidth});
+                    
+                    $(".fancybox")
+                    .attr('rel', 'gallery')
+                    .fancybox({
+                        openEffect  : 'none',
+                        closeEffect : 'none',
+                        nextEffect  : 'none',
+                        prevEffect  : 'none',
+                        padding     : 0, 
+                    });
+            });
+ </script> 
+ <script src="{% static 'plugins/confirm/jquery.confirm.min.js' %}"></script>
+ <script src="{% static 'kb/js/list.js' %}"></script>
+ {% endblock %} 
+ 
+  
+ 
+ 

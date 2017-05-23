@@ -1,0 +1,33 @@
+form ul
+{ 
+    margin:0;
+}
+ 
+.title
+{
+    color:Red;
+}
+
+.help_message
+{
+    text-indent:2em;
+    margin-top:40px;
+    margin-bottom:60px;
+    color:#087972;
+}
+.help_message strong
+{
+    color:Red;
+}
+
+.two_di_code
+{
+    float:right;
+    padding-right:20%;
+}
+
+.two_di_code img
+{
+    width:120px;
+    height:120px;
+}

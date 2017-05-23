@@ -1,0 +1,60 @@
+input[type="button"]{
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+    font-size: 1.2em;
+    width:15%;
+    height: 27px;
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+    height: 22px;
+    width: 80%;
+}
+
+#footer
+{
+    min-height: 35px;
+    height: auto;
+}
+
+.comment_title
+{
+    margin-top:0;
+    font-size: 1em;
+    color: black;
+    font-weight: none;
+    
+}
+
+.comment_portrait
+{
+    height:45px;
+    width :45px;
+    border-radius: 5px;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.comment_left_div
+{
+    float: left;
+    width:15%;
+}
+
+.comment_right_div
+{
+    float: right;
+    margin-left:5px;
+    width:75%;
+}
+.comment_div
+{
+    display: flex;
+}
+.comment_hr
+{
+    margin:5px;
+}

@@ -1,0 +1,71 @@
+{% load admin_static %}{% load firstof from future %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"zh-CN" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title> {% block title %}{% endblock %}</title>
+<link rel="shortcut icon" href="/static/img/favorite.png">
+<link rel="icon" href="/static/img/favorite.png">
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/m_base.css" %}{% endblock %}" />
+{% block extrastyle %}
+<link rel="shortcut icon" href="/static/img/mhlogo.png">
+<link rel="icon" href="/static/img/mhlogo.png"> 
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/jquery.message.css" />
+<link rel="stylesheet"  href="/static/js/bootstrap-3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_base.css" />
+<link rel="stylesheet" href="/static/css/font-awesome-4.4.0/css/font-awesome.min.css"  />
+<link rel="stylesheet" href="/static/plugins/slideout-0.1.11/dist/styles.css">
+<link rel="stylesheet" href="/static/plugins/slideout-0.1.11/dist/fonts.css"> 
+<link rel="stylesheet" href="/static/plugins/slideout-0.1.11/dist/index.css" />
+<link rel="stylesheet" href="/static/css/m_brand.css" />
+
+{% endblock %}
+{% block blockbots %}
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+{% endblock %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content='True' name='HandheldFriendly' /> 
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+ 
+{% block extrahead %}
+<script type="text/javascript"  src="/static/js/jquery-1.9.1.js" charset="utf-8" ></script>
+<script type="text/javascript"  src="/static/js/bootstrap-3.3.7/js/bootstrap.min.js" charset="utf-8" ></script>
+<script src="/static/plugins/slideout-0.1.11/dist/slideout.js"></script>
+
+{% endblock %}
+</head>
+{% load i18n %}
+
+<body > 
+   
+    <div id="main" class="panel slideout-panel">  
+           <i class="fa fa-list fa-2x btn-hamburger js-slideout-toggle"  style="cursor:pointer"></i>
+          
+            <div class="div_title">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3">
+                        </div>
+                        <div class="col-sm-6 col-xs-6 text-center">
+                            <label class="title">{{page_title}}</label>
+                        </div>
+                        <div class="col-sm-3 col-xs-3 text-right"> 
+                        </div>
+                    </div>
+                </div> 
+            </div>
+           
+           {% block content %} 
+           {% endblock %}
+           
+          
+          
+
+    </div>
+  
+     <script type="text/javascript"  src="/static/js/jquery.message.js"></script> 
+     <script type="text/javascript"  src="/static/plugins/confirm/jquery.confirm.min.js"></script>  
+     
+    {% block footer_script %}
+    {% endblock %}
+</body>
+</html>

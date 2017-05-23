@@ -1,0 +1,31 @@
+a.delete
+{
+    position: relative;
+    float:right;
+    right:10px;
+    font-size:0.6em;
+}
+
+.nor_user_a
+{
+    width: 48%;
+    text-align: center;
+}
+.nor_user
+{
+    margin-top: 50px;
+    position: center; 
+    font-size:5em;
+}
+
+.form_detail
+{
+    margin-bottom: 13%;
+}
+
+.main_div
+{
+    width:100%;
+    display: inline-block;
+    text-align: center;
+}

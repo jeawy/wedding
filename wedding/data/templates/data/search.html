@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}个人中心 信息修改 分享的美食列表{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+ 
+{% endblock %}
+ {% block keywords%} {{kb.title}} {%endblock%}
+  {% block description%}  {%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %} 
+    
+    <div class="row" >
+        <div class="col-xs-9 col-md-9 col-left"> 
+                <div class="main_kb_detail">
+                    left
+                </div>   
+        </div>
+
+
+        <div class="col-xs-3 col-md-3 col-right ">
+            <div class="row">  
+              right
+            </div> 
+        </div>
+    </div>
+       
+  {% endblock %}
+  
+ 
+ {% block footer_script %}{{ block.super}} 
+   
+<script type="text/javascript"   src="{% static 'kb/js/comment.js'%}"></script>    
+ <script type="text/javascript"  src="{% static 'kb/js/good.js' %}"></script> 
+  
+ <script>
+			 
+			$(document).ready(function(){  
+             
+            });
+ </script> 
+ <script src="{% static 'plugins/confirm/jquery.confirm.min.js' %}"></script> 
+ {% endblock %} 
+ 
+  
+ 
+ 

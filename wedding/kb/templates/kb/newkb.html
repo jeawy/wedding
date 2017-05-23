@@ -1,0 +1,87 @@
+{% extends "admin/base_site.html" %}
+{% block title %}发表帖子{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/ui/jquery-ui.css" />
+<link rel="stylesheet" href="/static/kb/css/new.css"/> 
+<link rel="stylesheet" href="/static/plugins/loading/style.css"/>
+{% endblock %} 
+
+{% block content %} 
+<form action="" method="post" id="article_form" enctype="multipart/form-data">
+<input type="hidden" name="kbinstace" id ="id_kb" value="0" />
+<input type="hidden" name="page" id ="id_page" value="{{page}}" />
+  <ul class="new_article_ul">
+      {% if request.user.cannot_publish_kb %}
+      <li class="li_title">
+         <label class="errornote" >你已被禁言...</label>
+      </li>
+       {% else %}
+         <input type="hidden" name="type" id ="idtype" value="{{type}}" /> 
+         <input type="hidden" name="slice_count" id ="idslice_count" value="1" />
+       
+      <li class="li_title">
+         <input type="text" class="form-control title" name="title" id="id_title" placeholder="当地特色美食的名称..." />
+      </li>
+     
+      <li>
+            <textarea class="form-control article_content" name="article_content_1" placeholder="详细的介绍可以让更多人了解你分享的美食..." cols="30" rows="10"></textarea>
+      </li>
+      <li class="li_holder">
+      
+      
+      </li>
+       <li class="li_pic_add_div">
+             <input type="hidden" id="pic_counter" value="1" /> 
+             <input type="hidden" class ="slice_number" name="slice_number_1" value="1" />
+             <input type="hidden" name="kb_slice_instace_1" id ="id_kb_slice_1" value="0" />
+             <div class="pic_add_div"> 
+              <label class="new_Btn"  >
+                  <input type="file" name="pic_file" id="id_file_uploader" class="file_upload" accept="image/*"/> 
+                      <i class="fa fa-plus pic-plus"></i> 
+              </label>
+          </div>
+       </li>
+         <li>
+             <input type="button" class="btn btn-primary publish_btn" id="id_add_pic_text" value="新增图文" />
+       </li>
+       
+       
+      <li>
+      <div class="publish_msg"></div>
+             <input type="button" class="btn btn-primary publish_btn" id="id_publish" value="生成" />
+      </li>
+      {% endif %}
+  </ul>
+  </form> 
+  {% if type == 1 %}
+<script src="//cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
+<script src="//cdn.bootcss.com/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+  <script src="/static/kb/js/datepicker_own.js"></script> 
+    {% endif %}
+  <script src="/static/plugins/loading/jquery.isloading.min.js"></script>
+  <script src="/static/kb/js/m_new.js"></script> 
+  
+  <script>
+      $(document).ready(function() {
+          var width = window.innerWidth; 
+          $('.pic_div').css('height', (width/4-10).toString()+'px');
+      });
+  </script>
+ {% endblock %}
+ {% block custom_footer_menu %}
+ 
+ <div id="sub_menu_footer"> 
+<div class="sub_menu_list_div">
+    <a class="sub_menu_list_a" href="{% url 'kb:kb_list' type %}">
+        <i class="fa fa-sitemap sub_menu_list_i"></i>
+        <div class="sub_link_text">List</div>
+        </a>
+        </div>	 
+</div>
+
+ {% endblock %}
+ 
+ {% block baidu_spider %}{% endblock %}

@@ -1,0 +1,56 @@
+#id_permissions
+{
+    height:400px;
+    width: 800px;
+}
+
+.helptext
+{
+    font-size: 2em;
+    color:red; 
+    line-height: 30px;
+}
+
+td input
+{
+  width: 15%;   
+}
+
+th label
+{
+    line-height: 30px;
+}
+
+td input[type="checkbox"]
+{
+  width: 25px;
+  height: 25px;   
+}
+
+#id_groups
+{
+    height: 180px;
+}
+td select
+{
+    width: 80%;
+    height: 280px;
+}
+
+input[type="submit"]
+{
+    text-align: center;
+    margin-left: 40%;
+    width: 80px;
+    height: 40px;
+}
+
+ul.messagelist li{ 
+    height: 20px;
+    
+}
+
+label[for="id_email"], label[for="id_password"]
+{
+    color:red;
+}

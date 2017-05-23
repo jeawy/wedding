@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+{% block title %}登录 吃货界的新华字典{% endblock %} 
+{% load i18n admin_static %}
+{% block extrahead %}{{ block.super }}
+
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}" />
+{% endblock %}
+ 
+  
+{% block content %}
+ 
+<div class="row">
+  <div class="col-sx-8 col-sm-8 col-md-8  padding-right-sm">
+    <img class="loginimg" src="{% static "img/login/login.jpg" %}" />
+  </div>
+
+  <div class="col-sx-4 col-sm-4 col-md-4  padding-left-sm">
+      {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+          <p class="errornote">
+              {{ error }}
+          </p>
+          {% endfor %}
+      {% endif %}
+
+      <div id="content-main " class="div-login-left padding-sm">
+              <div class="form-row">  
+                      <label  >{% trans '登录后您可以分享各地正宗美食' %}</label> 
+              </div>
+              <form action="/login/" method="post" id="login-form">{% csrf_token %}
+                      <div class="row">
+                                  <div class="col-sx-12 col-sm-12 col-md-12">
+                                      <div class="form-row">
+                                        <label for="id_username" class="  required">{% trans '电子邮箱:' %}</label>
+                                        <br /> <input id="id_username" class="form-control "  maxlength="254" name="email" type="text" value="{{email|default:""}}"/>
+                                      </div>
+                                      <div class="form-row">
+                                        <label for="id_password" class=" required">{% trans '密码:' %}</label>
+                                        <br /><input id="id_password" class="form-control "  name="password" type="password" />
+                                        <input type="hidden" name="next" value="{{next|default:"/"}}" />
+                                      </div> 
+                                      <div>
+                                            {% if error %}
+                                            <label class="err_label">{{error}}</label>
+                                            {% endif %}
+                                      </div>
+                                      <div class="div-submit form-row">
+                                        <input type="submit" class="btn btn-primary" value="{% trans '登录' %}" />  
+                                      </div>
+                                      <br />
+                                      &nbsp;<label for="date" name="title" ><a method="post" href="{% url 'base:user_register'%}">{% trans '注册' %}</a></lable> ||
+                                      &nbsp;<label for="date" name="title" ><a method="post" href="{% url 'base:find_password'%}">{% trans '忘记密码' %}</a></lable>
+                                    </div>
+                      </div>
+              </form> 
+      </div> <!--<div id="content-main "-->
+      
+  </div>
+<script type="text/javascript">
+    document.getElementById('id_username').focus(); 
+  {% block content_header %}
+    var innerHeight = window.innerHeight/3;
+    $('#container').css('min-height', innerHeight);
+    {% endblock %}
+</script>
+{% endblock %}
+ 

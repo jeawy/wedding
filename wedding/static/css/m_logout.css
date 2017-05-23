@@ -1,0 +1,53 @@
+
+body
+{
+    text-align:center;
+    /*background-image: url("/static/img/logout1.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    
+#container
+{
+    text-align:center;
+ }
+ 
+
+.div_logout_message
+{
+    margin-top:35%;
+    font-size:1.2em; 
+    color: white;
+    font-weight: bold;
+}
+
+.div_logout  
+{
+    margin-top:10%;
+    padding-top: 2%;
+    border: 1px dashed white;
+    height: 90px;
+    width:  90px;
+    margin-left: 35%;
+    text-align: center; 
+    background-color: rgba(255,255,255, 0.2);
+    border-radius: 10px;
+    -moz-border-radius:10px;
+	-webkit-border-radius:10px;
+    
+}
+
+.a_logout
+{
+    color:white;
+    font-size: 1em;
+}
+
+.a_logout:link, .a_logout:visited  {
+        color: white;
+}
+
+.fa-sign-in
+{
+    color:white;
+}

@@ -1,0 +1,60 @@
+a.delete
+{
+    position: relative;
+    float:right;
+    top:-20px;
+    font-size:1.3em;
+}
+.l3_main_div
+{
+    display: inline-block;
+    text-align: center;
+    width:100%;
+}
+.nor_user_a
+{
+    width: 98%;
+    text-align: left;
+}
+.nor_user
+{
+    margin-top: 400px;
+    position: center;
+    font-size:4em;
+}
+div.empty_detail
+{
+    background:rgba(255, 255, 255, 0.03); 
+    height: 1000px;
+    border:none;
+}
+
+div.detail
+{  
+    border-radius: 0;
+    text-align: left;
+}
+
+.detail i.fa
+{
+    padding-top:0px;
+    padding-bottom:7px;
+    padding-left:10px; 
+}
+.empty_heartbeat_content
+{
+    width:50%;
+    text-align: left;
+}
+
+.empty_nor_user_a
+{
+    border:1px solid red;
+    left:0;
+}
+
+.empty_nor_user
+{
+    left:0;
+}
+

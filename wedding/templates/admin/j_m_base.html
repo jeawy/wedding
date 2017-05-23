@@ -1,0 +1,60 @@
+{% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>吃典|{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/m_base.css" %}{% endblock %}" />
+{% block extrastyle %}
+<link rel="shortcut icon" href="/static/img/change.png">
+<link rel="icon" href="/static/img/change.png">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"> 
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/ui/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_base.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/menu/m_styles.css" />
+<link rel="stylesheet" href="/static/css/font-awesome-4.3.0/css/font-awesome.min.css"/>
+{% endblock %}
+{% block blockbots %}
+<meta name="robots" content="index,follow" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<meta name="baidu-site-verification" content="wqasHCSNoc" />
+<meta name="keywords" content="吃典 小吃 发现中心 {% block keywords%}{%endblock%}" />
+<meta name="description" content="发现各地正宗的小吃，让吃货在吃的路上不再迷茫{% block description%} {%endblock%}" />
+{% endblock %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+<script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
+{% block extrahead %}
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/PopMenu/jquery.popmenu.min.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/m/hostpage.js"></script>
+<script type="text/javascript"  src="/static/js/jquery.message.js"></script> 
+{% endblock %}
+</head>
+{% load i18n %}
+<div data-role="page">
+
+
+  <div data-role="header">
+  {% block pageheader %}
+  {% block nav-global %}{% endblock %}
+  {% endblock %}
+  </div>
+
+{% block content %}
+  <div data-role="content">
+    <p>我是一名移动开发者！</p>
+  </div>
+  {% endblock %}
+ {% block footer %}
+  <div data-role="footer">
+    <h1>页脚文本</h1>
+  </div>
+ {% endblock %}
+</div>
+{% block newpage %}
+{% endblock %}
+<body >
+</html>

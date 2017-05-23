@@ -1,0 +1,5 @@
+User-agent:*
+Disallow:/logout/
+Disallow:/tasks/
+Disallow:/data/
+Disallow:/user/

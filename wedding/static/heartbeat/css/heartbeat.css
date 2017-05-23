@@ -1,0 +1,31 @@
+div.detail {
+    border: 1px dashed #D4D8EB;
+    display: inline-table;
+    /*background: #F0F1F8;*/
+    border-radius:5px;
+    margin-bottom: 10px;
+    background-color:White;
+    width:12%;
+    min-height:230px;
+    min-width: 150px;
+}
+
+ 
+h3.title
+{
+    padding-bottom:10px;
+    font-size:4em;
+    color:Black;
+    margin: .3em 0 .3em 0;
+}
+
+ .heartbeat_content
+{
+    font-size:4em;
+}
+
+.fa-times-circle
+{
+    color:Red;
+    
+}

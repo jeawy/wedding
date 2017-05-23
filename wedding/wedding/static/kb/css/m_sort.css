@@ -1,0 +1,31 @@
+.sort_div
+{
+    margin-top:2px;
+    background-color: white;
+    height: 45px;
+    border-top: 1px dashed #999;
+    border-bottom: 1px dashed #999;
+}
+
+.sort_div .fa{
+    width : 23%;
+    font-size: 16px;
+    color:#999;
+}
+.fa-chevron-read, .fa-chevron-like, .fa-chevron-comments
+{
+   border-left: 1px solid #999;
+}
+.sort_div li{
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.main_link_container
+{
+    margin-top:1px;
+}
+
+.fa-thumbs-up{
+    color:#7BB392;
+}

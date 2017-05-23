@@ -1,0 +1,25 @@
+div.detail {
+    border: 1px dashed #D4D8EB;
+    display: inline-block; 
+    border-radius:10px;
+    margin-bottom: 5px;
+    background-color:White;
+    width:100%;  
+    text-align: left;
+    word-break:break-all;
+}
+
+ 
+h3.title
+{
+    padding-bottom:10px;
+    font-size:1.2em;
+    color:Black;
+    margin: .3em 0 .3em 0;
+}
+ 
+
+.fa-times-circle
+{
+    color:Red; 
+}

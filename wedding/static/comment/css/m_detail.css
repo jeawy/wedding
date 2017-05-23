@@ -1,0 +1,41 @@
+.comment_title
+{
+    font-size: 1em;
+    margin-top:0;
+    font-weight: 400;
+    
+}
+.username
+{
+    color: #7BB392;
+}
+.comment_div
+{
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.comment_right_div
+{
+    margin-left: 15px;
+    width: 100%;
+}
+
+.heartbeat_comment
+{
+    font-weight: 400;
+}
+
+.replied_username
+{
+    color: #7BB392;
+}
+
+ 
+#comment_conent_btn
+{
+    font-size:1em;
+    height: 23px;
+    width: 45px;
+}
+

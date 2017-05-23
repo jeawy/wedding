@@ -1,0 +1,68 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %} {{area.short_name}} 正宗特色美食{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" href="{% static "search/css/inplace.css" %}" /> 
+ 
+{% endblock %}
+ {% block keywords%} {{area.short_name}} 正宗特色美食{%endblock%}
+  {% block description%} {{area.short_name}} 的正宗特色美食{%endblock%}
+  
+{% block content %}
+    <div class="row" >
+            <div class="col-xs-9 col-sm-9 col-md-9 col-left">
+                  {% if words %}
+                  <table class="table">
+                      <caption>用户搜索记录</caption>
+                      <thead>
+                        <th> # </th>
+                        <th> ip </th>
+                        <th> 用户 </th>
+                        <th> 区域 </th>
+                        <th> 日期 </th>
+                        <th> 关键词 </th>
+                      </thead>
+                      <tbody>
+                        {% for word in words %}
+                           <tr>
+                             <td>{{forloop.counter}} </td>
+                             <td>{{word.ip}} </td>
+                             {% if word.user %}
+                             <td>{{word.user.get_full_name}} </td>
+                             {% else %}
+                              <td>  </td>
+                             {% endif %}
+                             {% if word.area %}
+                             <td>
+                               <a target="__blank" href="{% url 'search:inplace'  %}?placeid={{word.area.id}}">{{word.area.short_name}} </a>
+                               
+                              </td>
+                             {% else %}
+                              <td>  </td>
+                             {% endif %}
+                             <td> {{word.date|date:'Y-m-d H:i:s'}} </td>
+                             {% if word.keywords %}
+                             <td> {{word.keywords}} </td>
+                             {% else %}
+                              <td>  </td>
+                             {% endif %}
+                             
+                           </tr>
+                        {% endfor %}
+                      </tbody>
+                   </table>
+                  {% endif %}
+            </div>
+ 
+            <div class="col-xs-3 col-sm-3 col-md-3 col-right ">
+                
+                
+            </div>
+    </div>
+       
+  {% endblock %} 
+ 

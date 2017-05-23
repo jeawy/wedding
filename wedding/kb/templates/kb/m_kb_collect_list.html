@@ -1,0 +1,60 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{block_instance.title}}|帖子列表{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_list.css" %}" />
+{% endblock %}
+ {% block keywords%}心事 每日一句 推荐{%endblock%}
+  {% block description%} 你是不是也想要一个只属于自己的小屋，漂亮温馨就..{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+ {% block headertitle %}   
+ {% endblock %}  
+{% block content %}
+ 
+<div class="main_link_container">
+    {% if collect_list %}
+    {% load tz %}
+{% for collect in collect_list %} 
+    <div class = "main_link_container_a">
+        <a href="{% url 'kb:kb_detail' collect.kb.id %}">  
+         <ul>
+           <li class="vmlog_date">{% if collect.kb.is_essence == 1 %}
+        <i class="fa fa-diamond fa-diamond-selected "><label class="lb_fa-diamond-selected"> [精华]</label></i>
+        {% endif %} <label class="list-user-name">  {{collect.kb.author.get_full_name}} | {{collect.kb.date  | date:" Y-m-d H:i:s"}} </label>
+        {% if collect.kb.type == 1 %}
+         <label class="active-kb">  [活动帖] </label>
+         {% endif %}
+        </li>
+        </ul> 
+        
+        <label class="main_link_container_label"> {{collect.kb.title}}</label>
+        <i class="fa fa-newspaper-o fa-list"> 阅读:{{collect.kb.count_read}}</i>
+        <i class="fa  fa-thumbs-o-up fa-list"> 喜欢:{{collect.kb.count_good}}</i>
+        <i class="fa fa-comment-o fa-list"> 评论:{{collect.kb.count_reply}}</i>
+        </a>
+    </div>
+     <hr>
+{% endfor %}
+{% else %}
+<div class = "main_link_container_a" >
+     <ul> <li class="vmlog_date">  </li>
+         </ul> 
+        <label class="main_link_container_label main_link_container_label_none"> 还没有收藏帖子...</label>
+       
+    </div>
+     <hr>
+{% endif %}
+</div>
+ {% endblock %}
+ 
+{% block custom_footer_user_li_selected %}custom_footer_user_li_selected{% endblock %}
+ {% block custom_footer_user_div_selected %}custom_footer_user_div_selected{% endblock %}
+ 
+ {% block footer_script %}{{ block.super}} 
+ {% endblock %} 

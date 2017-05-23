@@ -1,0 +1,249 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{page_title}}_{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}每期精彩美食推荐，尽在美食期刊！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/data/css/m_latest.css" />
+ <link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+ <div class="swiper-container">
+        <div class="swiper-wrapper">
+			 
+			<div class="swiper-slide swiper-slide1">
+				<div class="container" > 
+					<div class="row" > 
+									{% for kb in kbs|slice:"0:4"  %}
+									<div class="col-xs-6  padding-sm ">
+											<div class="week-container effect1">
+												<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+													<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+													<div class="food-detail ">
+														<div class="food-detail-title  ">
+															{{kb.kb.title}} 
+														</div>
+														<div class="food-detail-right  height100">
+														参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+														</div>
+														<div class="height100" >
+															<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+															{% for location in kb.kb.foodlocation_set.all %}
+															<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+															{{location.area.short_name}}
+															</a>
+															{% endfor %}
+														</div>
+														<div class="height100" >
+															{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+														</div>
+													</div>
+												</a>
+											</div>
+									</div>
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider1 -->
+		 <div class="swiper-slide swiper-slide2">
+				<div class="container" > 
+					<div class="row" > 
+									{% for kb in kbs|slice:"4:8"  %}
+									<div class="col-xs-6  padding-sm ">
+											<div class="week-container effect1">
+												<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+													<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+													<div class="food-detail ">
+														<div class="food-detail-title  ">
+															{{kb.kb.title}} 
+														</div>
+														<div class="food-detail-right  height100">
+														参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+														</div>
+														<div class="height100" >
+															<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+															{% for location in kb.kb.foodlocation_set.all %}
+															<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+															{{location.area.short_name}}
+															</a>
+															{% endfor %}
+														</div>
+														<div class="height100" >
+															{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+														</div>
+													</div>
+												</a>
+											</div>
+									</div>
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider2 -->
+		 {% if kbs|slice:"8:12" %}
+		 <div class="swiper-slide swiper-slide3">
+				<div class="container" > 
+					<div class="row" > 
+									{% for kb in kbs|slice:"8:12"  %}
+									<div class="col-xs-6  padding-sm ">
+											<div class="week-container effect1">
+												<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+													<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+													<div class="food-detail ">
+														<div class="food-detail-title  ">
+															{{kb.kb.title}} 
+														</div>
+														<div class="food-detail-right  height100">
+														参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+														</div>
+														<div class="height100" >
+															<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+															{% for location in kb.kb.foodlocation_set.all %}
+															<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+															{{location.area.short_name}}
+															</a>
+															{% endfor %}
+														</div>
+														<div class="height100" >
+															{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+														</div>
+													</div>
+												</a>
+											</div>
+									</div>
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider3 -->
+		 {% endif %}
+		 {% if kbs|slice:"12:16" %}
+		 <div class="swiper-slide swiper-slide4">
+				<div class="container" > 
+					<div class="row" > 
+									{% for kb in kbs|slice:"12:16"  %}
+									<div class="col-xs-6  padding-sm ">
+											<div class="week-container effect1">
+												<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+													<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+													<div class="food-detail ">
+														<div class="food-detail-title  ">
+															{{kb.kb.title}} 
+														</div>
+														<div class="food-detail-right  height100">
+														参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+														</div>
+														<div class="height100" >
+															<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+															{% for location in kb.kb.foodlocation_set.all %}
+															<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+															{{location.area.short_name}}
+															</a>
+															{% endfor %}
+														</div>
+														<div class="height100" >
+															{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+														</div>
+													</div>
+												</a>
+											</div>
+									</div>
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider4 -->
+		 {% endif %}
+		 {% if kbs|slice:"16:20" %}
+		 <div class="swiper-slide swiper-slide5">
+				<div class="container" > 
+					<div class="row" > 
+									{% for kb in kbs|slice:"16:20"  %}
+									<div class="col-xs-6  padding-sm ">
+											<div class="week-container effect1">
+												<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+													<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+													<div class="food-detail ">
+														<div class="food-detail-title  ">
+															{{kb.kb.title}} 
+														</div>
+														<div class="food-detail-right  height100">
+														参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+														</div>
+														<div class="height100" >
+															<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+															{% for location in kb.kb.foodlocation_set.all %}
+															<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+															{{location.area.short_name}}
+															</a>
+															{% endfor %}
+														</div>
+														<div class="height100" >
+															{{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+														</div>
+													</div>
+												</a>
+											</div>
+									</div>
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider5 -->
+		 {% endif %}
+		 {% if magazines %}
+		 <div class="swiper-slide swiper-slide6">
+				<div class="container" > 
+					<div class="row" > 
+						 <div class="col-sm-12 col-xs-12 text-center">  
+                            <div  >
+                              <img src="/static/img/dish.jpg" class="slider3-img" />
+                            </div>  
+                         </div>
+						  <div class="col-sm-12 col-xs-12 ">  
+                            <div class="newkb" >  往期亦精彩：  </div>  
+                         </div>
+									{% for magazine in magazines|slice:":4"  %}  
+									{% if current_magazineid != magazine.id %}
+									<div class="col-xs-12 text-center "> 
+										<a class="magazine_link" href="{% url 'data:week_recommend_kb' %}?magazineid={{magazine.id}}" >{{magazine.title}}</a>
+									</div>
+									 {% endif %}
+									{% endfor %} 
+							</div> <!-- end top row -->
+				</div><!-- end container -->
+		 </div> <!-- end slider4 -->
+		{% endif %}
+		 
+	</div> <!-- end swiper-wrapper -->
+	 <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div> 
+</div><!-- end swiper-container -->
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}   
+  <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script>
+	<script >
+		$(document).ready(function(){
+		     //加载图片
+			
+			  {% for kb in kbs %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+			   
+			  var imgwidth = $('.week-container').width(); 
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			   
+		});
+		</script>
+		<script>        
+          var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', 
+            loop: true, 
+            // 如果需要分页器
+            pagination: '.swiper-pagination', 
+          
+          });
+           
+  </script>
+ {% endblock %} 

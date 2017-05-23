@@ -1,0 +1,48 @@
+.li_upload_head_img
+{
+    
+    color: green;
+    border: 2px dashed red;
+}
+
+.li_upload_head_img a
+{
+    color: red;
+}
+.fa-unupload-header
+{ 
+    color: red;
+}
+
+.notepaper
+{
+    min-height: 300px;
+    margin-top: 30px;
+}
+ .curly-quotes
+ {  
+     color:#087972;
+     font-size: 12px;
+ }
+ 
+ .quote-by
+ {    
+      font-style:normal;
+      font-weight:bold;
+      color:#00BF9D;
+ }
+ 
+ .history
+ {
+     position: absolute;
+     float:right;
+     bottom:0;
+     margin-bottom:0;
+ }
+ 
+ 
+ .curly-quotes:before, .curly-quotes:after
+ {
+     font-size: 1.5em; 
+     line-height:38px;
+ }

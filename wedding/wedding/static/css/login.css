@@ -1,0 +1,14 @@
+.loginimg
+{
+    width: 100%; 
+}
+.div-login-left
+{
+    margin-top: 30px;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 10px;
+}
+.div-submit 
+{
+    margin-top: 10px;
+}

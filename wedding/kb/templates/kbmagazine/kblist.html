@@ -1,0 +1,145 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}{{page_title}}{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}制定美食期刊 特色美食期刊{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/kb/css/magazine.css" />
+ 
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+ <div class="row" >
+        <div class="col-xs-9 col-md-9 col-left">   
+				<div class="row" >
+						<div class="col-sx-12 col-sm-12 col-md-12"> 
+							<span class="week-recommend">{{page_title}}</span> 
+						</div> 
+				</div> 
+			
+				<div class="row">
+					{% for kb in kbs  %}
+					<div class="col-sx-3 col-sm-6  col-md-3 padding-right-sm">
+							<div class="week-container effect1">
+								<a class="a-week-img" href="{% url 'kb:kb_detail' kb.id %}">
+									<img  class="week-img week-img-{{kb.id}} " src="/static/img/default.jpg" />
+							   </a>
+									<div class="food-detail ">
+									<a class="a-week-img" href="{% url 'kb:kb_detail' kb.id %}">
+										<div class="food-detail-title  ">
+											{{kb.title}} 
+										</div>
+										<div class="food-detail-right  ">
+										参考价格：{{kb.lower_price}}-{{kb.higher_price}} 
+										</div>
+										<div class=" div_kblocation ">
+											<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+											{% for location in kb.foodlocation_set.all %}
+											{{location.area.short_name}}
+											{% endfor %}
+										</div>
+										</a>
+										<div  >
+											 <input class="btn btn-primary btn-xs btn-add" type="button"  addkbid="{{kb.id}}"  value="添加" />
+										</div>
+									</div>
+								
+							</div>
+					</div>
+					{% endfor %}
+				</div> 
+        </div><!-- left end -->
+		<div class="col-xs-3 col-sm-3 col-md-3 col-right ">
+			<div class="row">
+				<div class="col-xs-12 col-md-12" >
+					<select class="form-control magazine" >
+						{% for magazine in magazines %}
+						<option value="{{magazine.id}}" {% if magazine_selected.id == magazine.id %}selected="selected"{% endif %}>{{magazine.title}}</option>
+						{% endfor %}
+					</select> 
+				</div>
+				 
+					 {% for kb in inkbs  %}
+							<div class="col-xs-6 col-md-6 padding-no">
+									<div class="week-container effect1">
+										<a class="a-week-img" href="{% url 'kb:kb_detail' kb.id %}">
+											<img  class="week-img-right week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+											<div class="food-detail ">
+												<div class="food-detail-title  ">
+													{{kb.kb.title}} 
+												</div>
+												 
+												<div class=" div_kblocation ">
+													<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+													{% for location in kb.kb.foodlocation_set.all %}
+													{{location.area.short_name}}
+													{% endfor %}
+												</div>
+												</a>
+												<div class="  ">
+													<input class="btn btn-danger btn-xs btn-delete" deletekbid="{{kb.kb.id}}" type="button" value="删除" />
+												</div>
+											</div>
+										
+									</div>
+							</div>
+					{% endfor %}
+				 
+			</div> <!-- end row -->
+		</div><!-- right end -->
+ </div><!-- end top row -->
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}   
+	<script >
+		$(document).ready(function(){
+		     //加载图片 
+			  {% for kb in kbs %}
+			   $('.week-img-{{kb.id}}').attr('src', '{{rootmedia}}{{kb.top_pic.name}}');
+			  {% endfor %}
+
+			  {% for kb in inkbs %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+			   
+			  var imgwidth = $('.week-container').width(); 
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' }); 
+			   var right_imgwidth = imgwidth/2 + 15; 
+			  $('.week-img-right').css({'height':right_imgwidth+'px','width':right_imgwidth+'px' }); 
+
+			  $('.magazine').change(function(){
+				  var magazineid = $('.magazine').val();
+				  window.location = '{% url "kb:magazine_kb" %}?magazine='+magazineid; 
+			  });
+
+			  $('.btn-add').click(function(){
+				  var magazineid = $('.magazine').val();
+				  var kbid = $(this).attr('addkbid');
+				  $.post('{% url "kb:add_kb_magazine" %}', {kbid:kbid,magazineid:magazineid }, function(result){
+                         if (result['status']  == 1){
+							  $().message('添加成功...');
+					}
+				  } );
+				  
+			  })
+
+			  $('.btn-delete').click(function(){
+				  var magazineid = $('.magazine').val();
+				  var kbid = $(this).attr('deletekbid');
+				  $.post('{% url "kb:del_kb_magazine" %}', {kbid:kbid,magazineid:magazineid }, function(result){
+                         if (result['status']  == 1){
+							  $().message('删除成功...');
+					     }
+						 else{
+							  $().errormessage('未知错误...');
+						 }
+				  } );
+				  
+			  })
+		});
+		</script>
+ {% endblock %} 
+ {% block baidu_spider %}{% endblock %} 

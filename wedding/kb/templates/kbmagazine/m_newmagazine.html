@@ -1,0 +1,69 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}创建美食期刊{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}   
+{% endblock %} 
+
+{% block content %} 
+ 
+ <form action="" method="post" id="article_form" enctype="multipart/form-data"> 
+  <table class="table"  >
+      <tr>
+      {% if request.user.cannot_publish_kb %}
+      <td  >
+         <label class="errornote" >你已被禁言...</label>
+      </td>
+       {% else %} 
+      <td  >
+         <input type="text" class="form-control   require" name="title" id="id_title" placeholder="美食期刊名称..." />
+      </td>
+       <td  > 
+             <input type="submit" class="btn btn-primary " id="id_publish" value="创建" />
+      </td>
+        {% if msg %}
+        <td> 
+                <a href ="">{{msg}}</a>
+        </td>
+        {% endif %} 
+      {% endif %}
+      </tr>
+  </table>
+  </form> 
+  <table class="table" >
+       <theader>
+             
+            <tr>
+              <th>序号</th> 
+              <th>名称</th> 
+              <th>创建者</th> 
+              <th>操作</th>
+            </tr>
+          </theader>
+          <tbody>
+             {% if magazines %}
+                {% for magazine in magazines %}
+                <tr>
+                    <td> 
+                        {{forloop.counter}}
+                    </td> 
+                    <td> 
+                        <a href ="{% url 'data:week_recommend_kb' %}?magazineid={{magazine.id}}">{{magazine.title}}</a> 
+                    </td>
+                    <td> 
+                        {{magazine.author.get_full_name}}
+                    </td>
+                    <td>     
+                        <a href ="{% url 'kb:magazine_kb' %}">去添加美食</a> 
+                        <a href ="{% url 'kb:create_magazine' %}?magazineid={{magazine.id}}">修改</a> 
+                    </td>
+                </tr>
+                {% endfor %}
+        {% endif %}
+  
+          </tbody>
+  </table>
+    
+ {% endblock %}
+  {% block baidu_spider %}{% endblock %}

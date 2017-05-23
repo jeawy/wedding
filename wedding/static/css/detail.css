@@ -1,0 +1,53 @@
+.footer_menu {
+   position:fixed;
+   display:block;
+   right:30px;
+   bottom:50px;
+   height:auto;
+   width:182px;
+   background:#DCDCDC;
+   z-index:99;
+   box-shadow:  6px 0px 20px -2px #003333;
+    -moz-box-shadow:  6px 0px 20px -2px #003333;
+    -webkit-box-shadow:  6px 0px 20px -2px #003333;
+    -moz-border-radius:5px;
+	    -webkit-border-radius:5px;
+	    border-radius:5px;
+}
+.footer_menu .div_action
+{
+    margin-left:30px;
+    margin-right:2px;
+    margin-bottom:5px;
+    width:150px;
+    box-shadow:  -6px 0px 20px -2px #003333, 3px 0px 20px -2px #003333;
+    -moz-box-shadow:  -6px 0px 20px -2px #003333 , 3px 0px 20px -2px #003333;
+    -webkit-box-shadow:  -6px 0px 20px -2px #003333 , 3px 0px 20px -2px #003333;
+    -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;  
+    overflow:hidden;
+}
+.action{
+    
+    background:#417690;    
+    -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+    padding-right:0px;
+    overflow:hidden;
+    width:150px;
+}
+.action  tr td{
+    border:0px;
+    line-height:25px;
+    width:150px;
+}
+.action tr td label a{
+     
+    color: white;
+}
+
+.action tr:hover{
+    background:#2E8B57;
+}

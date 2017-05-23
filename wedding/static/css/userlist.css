@@ -1,0 +1,23 @@
+.user_list
+{
+    display: inline-block;
+    width:100%;
+    color: #4682B4;
+   
+   text-align:center;
+}
+.user_list .portrait
+{
+      display: inline-block;
+}
+ 
+.user_list .portrait p
+{
+      color:#202451;
+      border-bottom:1px solid White;
+      border-top : 1px solid White;
+    /* margin-bottom: 0px; */
+     margin-top : 53px;
+     background-color : rgba(255,255,255,.7);
+     border-radius:0 0 10px 10px;
+}

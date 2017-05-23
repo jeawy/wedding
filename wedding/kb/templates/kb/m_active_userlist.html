@@ -1,0 +1,70 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{kb.title}}|用户详情{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/m_detail.css" %}" />
+{% endblock %}
+ {% block keywords%} {%endblock%}
+  {% block description%}  {%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %} 
+{% if perm %}
+  {% if  active_user_list %}
+  {% for active_user in active_user_list %}
+  <div class="comment_div"> 
+        <div class="comment_left_div">
+            <div class="comment_portrait portrait"  style="background-image:url('{{active_user.user.head_portrait}}')"></div>
+        </div>
+        <div class="comment_right_div">
+           <h3 class="comment_title">
+               <label  class="comment_title username">{{  active_user.user.get_full_name }}</label >
+               <label  class="comment_title date">{{ active_user.date  |date:" Y-m-d  H:i:s "}}</label >
+        </h3>
+          <label for="date" class="heartbeat_comment" name="words" >真实姓名:{{ active_user.user.realname }} </label>
+          <br/>
+          <label for="date" class="heartbeat_comment" name="words" >电话:{{ active_user.user.phone }} </label>
+          </div>
+          </div>
+          <hr class="comment_hr">
+ {% endfor %}
+ <div class="comment">
+      
+  </div>
+
+ {% endif %}
+ {% else %}
+ <div class="comment">
+      <label class="errornote" >你没有权限查看报名人列表...</label>
+  </div>
+{% endif %}
+
+ {% endblock %}
+
+{% block custom_footer_building_li_selected %}custom_footer_building_li_selected{% endblock %}
+{% block custom_footer_building_div_selected %}custom_footer_building_div_selected{% endblock %}
+ {% block footer_script %}{{ block.super}} 
+ <script type="text/javascript" language="javascript" src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"> 
+$(document).ready(function() {
+ var img = $('.kb_img');
+ img.css('max-width',document.body.clientWidth-3);
+ 
+ 
+ {% if kb   %}
+        $('#id_user_portrait').css("background-image", "url({{kb.author.head_portrait }})");
+        {% else %}
+        $('#id_user_portrait').css("background-image", "url('/static/img/dog.png')");
+    {% endif %}
+});
+ 
+</script>
+ {% endblock %} 
+  

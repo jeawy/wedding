@@ -1,0 +1,151 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}带你发现真正的美食 因为 关于吃这件事，我们是认真的...{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/hostpage.css" />
+ 
+{% endblock %} 
+ {% block content %}  	
+		<div  class=" row"    >
+			<div class="col-xs-4 col-sm-4 col-md-4 slider2-holder">
+                <div class="row">
+					<label class="map-words" >我们已找到了{{province_num|default:"0"}}个省份的特色美食</label>
+					<div id="echarts-map"  ></div>
+				</div> 
+			</div>
+			<div class="col-xs-2 col-sm-2 col-md-2 ">
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 slider2-right ">
+				<div class="row">
+					<div id="main"  ></div>
+				</div> 
+			</div>
+		</div> <!--end of slider2 -->
+ 
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}  
+	<script  src="{% static '/static/data/js/map.js'%}"></script> 
+	<script  src="{% static 'plugins/echarts/echarts.min.js'%}"></script>
+	<script  src="{% static 'plugins/echarts/china.js'%}"></script>           
+    <script type="text/javascript">
+	$(document).ready(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+		var map = echarts.init(document.getElementById('echarts-map'));  
+		var provice_count = {{cr.province_count}};
+		var city_count = {{cr.city_count}};
+		var county_count = {{cr.county_count}};
+		
+
+        // 指定图表的配置项和数据
+        option = {
+					title : {
+						text: '美食覆盖数据',
+						 
+					},
+					tooltip : {
+						
+						trigger: 'axis',
+						formatter: function (params) {
+									var res = params[0].value;
+								    if (params[0].name.indexOf('省级') != -1)
+									    return '已覆盖: 省级'+  res + '%,  共：' + provice_count + '个';
+									else if (params[0].name.indexOf('市级') != -1)
+									    return '已覆盖: 市级'+  res + '%, 共：' + city_count+ '个';
+									else if (params[0].name.indexOf('县级') != -1)
+									    return '已覆盖:  县级'+   res + '%, 共：' + county_count+ '个';
+								
+								}
+					}, 
+					toolbox: {
+						show : false 
+					},
+					calculable : true,
+					xAxis : [
+						{
+							type : 'category',
+							data : ['省级共33个','市级共{{total_city}}个','县级 共{{total_county}}个']
+						}
+					],
+					yAxis : [
+						{
+							type : 'value',
+							max: 100,
+							axisLabel: {
+										formatter: '{value}%'
+									}
+						},
+						
+					],
+					series : [
+						{
+							name:'已覆盖',
+							type:'bar',
+							barWidth: 30, 
+							data:[{{cr.province_rate}}*100, {{cr.city_rate}}*100, {{cr.county_rate}}*100],
+							markPoint : {
+								data : [
+									{name : '省级共33个', value : {{cr.province_rate}}*100, xAxis: 0, yAxis:{{cr.province_rate}}*100},
+									{name : '市级共{{total_city}}个', value : {{cr.city_rate}}*100, xAxis: 1, yAxis: {{cr.city_rate}}*100},
+									{name: '县级共{{total_county}}个', value:{{cr.county_rate}}*100, xAxis:2, yAxis:{{cr.county_rate}}*100}
+								],
+								itemStyle : {
+												normal : { 
+													label : {
+														show:true, 
+														formatter: function (param) {
+																			return  param.value + ' %'
+																}
+														}
+										}
+								}
+									
+								 
+							} 
+						},
+						 
+					]
+				};
+      
+		var option_map = {
+				tooltip: {
+					trigger: 'item',
+					formatter: '{b}'
+				},
+				series: [
+					{
+						name: '中国',
+						type: 'map',
+						left :0,
+						top:0,
+						mapType: 'china',
+						selectedMode : false,
+						label: {
+							normal: {
+								show: true
+							},
+							emphasis: {
+								show: true
+							}
+						},
+						data:[
+							{% for province_name in result_provinces %}
+							{name:'{{province_name}}', selected:true},
+							{% endfor %}
+							 
+						]
+					}
+				]
+			};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		map.setOption(option_map);  
+		});
+    </script> 
+ {% endblock %} 

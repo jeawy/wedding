@@ -1,0 +1,42 @@
+/* LOGIN FORM */
+.form_logo
+{
+    border-top:2px solid;
+    left:0;
+    right:0;
+    top:0;
+    text-align:center;
+    margin-top:0px;
+     
+    background:#003333;
+    width:100%;
+    color:White;
+    line-height:50px; 
+    font-size:3.5em;
+    letter-spacing:3px;
+    
+}
+
+.div_title 
+{ 
+    text-align:left; 
+    background:#003333;
+    width:100%;
+    color:White;
+    font-size:1.5em;
+    letter-spacing:3px;
+    border-top:1px solid;
+    border-bottom:2px solid;
+    line-height:30px;
+    margin-top:0px;
+    margin-bottom:10px; 
+}
+.fa-home
+{
+    color:White;
+}
+.host_logo
+{
+    padding-left:10px;
+    float:left;
+}

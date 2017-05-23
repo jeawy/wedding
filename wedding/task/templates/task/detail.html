@@ -1,0 +1,94 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}{{kb.title}} 各地正宗特色美食{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/detail.css" %}" />
+ 
+{% endblock %}
+ {% block keywords%} {{kb.title}} {%endblock%}
+  {% block description%} 正宗特色美食 各地小吃  特色美食 {{kb.title}} {%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %}
+<input type="hidden" id="taskid" value="{{task.id}}"/>
+
+    {% if task %}
+    <div class="row" >
+        <div class="col-xs-9 col-md-9 col-left"> 
+                    <div class="main_kb_detail">
+                        {% load tz %} 
+                            <h1 class="kb_title">{{task.title}}</h1>
+                                <pre>{{task.description}}</pre>
+            </div>  
+            <hr>
+
+                            {% if  task.todo_comments_set.all %}
+                            {% for comment in task.todo_comments_set.all %}
+                                    <div class="comment_div">
+                                        <input  type="hidden" class="commentid" value="{{ comment.id}}"/>
+                                            <div class="comment_left_div">
+                                                <div class="comment_portrait portrait " style="background-image:url('{{comment.user.head_portrait}}')"></div>
+                                            </div>
+                                            <div class="comment_right_div">
+                                                <h3 class="comment_title"> 
+                                                    <label  class="comment_title username">{{  comment.user.get_full_name }}</label >
+                                                   
+                                                    <label  class="comment_title date">{{ comment.date  |date:" Y-m-d  H:i:s "}}</label >
+                                                </h3>
+                                                <label for="date" class="heartbeat_comment" name="words" >{{ comment.comments }}</label>
+                                            </div>
+                                    </div>
+                                    <hr class="comment_hr">
+                                    
+                            {% endfor %}
+                            
+                {% else %}
+                <div class="comment">
+                    <i class="fa fa-comment-o">暂无任何更新...</i> 
+                </div>
+                {% endif %}
+
+
+            {% else %}
+                <div class = "main_kb_detail" >
+                    <ul> <li class="vmlog_date">  </li>
+                </ul> 
+                    <label class="main_link_container_label main_link_container_label_none"> 没有找到帖子...</label> 
+                </div>
+                <hr>
+            {% endif %}
+     <form action="{% url 'task:detail' task.id %}" method="post">
+         完成状态<select  name="status" >
+             <option value="0" {% if task.status == '0'%}selected="selected"{% endif %}>未开始</option>
+             <option value="1"{% if task.status == '1'%}selected="selected"{% endif %}>正在进行</option>
+             <option value="2" {% if task.status == '2'%}selected="selected"{% endif %}>已完成</option>
+         </select>
+         {% csrf_token %} 
+            <div class="row"> 
+                <div class="col-xs-10 col-sm-10 col-md-10">
+                    <textarea class="form-control" placeholder="完成情况" name="comment"></textarea> 
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="submit" class="btn-primary btn  comment_ordinary_sent" id="comment_conent_btn" value="更新" />
+                </div>
+            </div> 
+    </form>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-right ">
+            <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12  btn-group">
+                   <a target="__blank" href="{% url 'task:add' %}" class="btn btn-default" >新建任务</a>                   
+                   <a target="__blank" href="{% url 'task:todolist' %}" class="btn btn-default" >to do list</a>
+            </div> 
+            </div>
+        </div>
+    </div>
+       
+  {% endblock %}

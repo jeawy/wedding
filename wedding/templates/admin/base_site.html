@@ -1,0 +1,26 @@
+﻿{% extends "admin/base.html" %}
+{% block title %}{{ title }} | {{ site_title|default:_('') }}{% endblock %}
+{% block extrahead %}{{block.super}}
+{% endblock %}
+{% block branding %}
+<a href="{% url 'user:portrait' %}"><div class="portrait" id="id_user_portrait"></div></a>
+{% endblock %}
+
+{% block nav-global %}
+ 
+
+{% endblock %}
+ {% block footer_script %}{{block.super}}
+<script>
+    $(document).ready(function() {
+ {% if request.user.head_portrait and request.user%}
+        $('#id_user_portrait').css("background-image", "url({{request.user.head_portrait }})");
+        {%else%}
+        $('#id_user_portrait').css("background-image", "url('/static/img/dog.jpg')");
+        {%endif%}
+        
+        var innerHeight = window.innerHeight;
+    $('#content').css('min-height', innerHeight);
+    });
+</script>
+ {% endblock %}

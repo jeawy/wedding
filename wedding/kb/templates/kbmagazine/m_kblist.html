@@ -1,0 +1,152 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{page_title}}{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/kb/css/m_magazine.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+ <input type="hidden" class="magazine" value="{{magazine_selected.id}}"/>
+  <div class="swiper-container">
+        <div class="swiper-wrapper">
+			 
+			<div class="swiper-slide swiper-slide1">
+					<div class="container" > 
+						<div class="row" > 
+										{% for kb in kbs  %}
+										<div class="col-xs-6  padding-sm ">
+												<div class="week-container effect1">
+													<a class="a-week-img" href="{% url 'kb:kb_detail' kb.id %}">
+														<img  class="week-img week-img-{{kb.id}} " src="/static/img/default.jpg" />
+														<div class="food-detail ">
+															<div class="food-detail-title  ">
+																{{kb.title}} 
+															</div>
+															</a>
+															<div class="food-detail-right  height100">
+															参考价格：{{kb.lower_price}}-{{kb.higher_price}} 
+															</div>
+															<div class="height100" >
+																<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+																{% for location in kb.foodlocation_set.all %}
+																<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+																{{location.area.short_name}}
+																</a>
+																{% endfor %}
+															</div>
+															
+															<div  >
+																<input class="btn btn-primary btn-xs btn-add" type="button"  addkbid="{{kb.id}}"  value="添加" />
+															</div>
+														</div>
+													
+												</div>
+										</div>
+										{% endfor %} 
+								</div>
+					</div><!-- end top row -->
+			</div> <!-- slide1 -->
+			<div class="swiper-slide swiper-slide2">
+					<div class="container" > 
+						<div class="row" > 
+										{% for kb in inkbs  %}
+										<div class="col-xs-6  padding-sm ">
+												<div class="week-container effect1">
+													<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+														<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+														<div class="food-detail ">
+															<div class="food-detail-title  ">
+																{{kb.kb.title}} 
+															</div>
+															<div class="food-detail-right  height100">
+															参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+															</div>
+															<div class="height100" >
+																<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+																{% for location in kb.kb.foodlocation_set.all %}
+																<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+																{{location.area.short_name}}
+																</a>
+																{% endfor %}
+															</div>
+															<div  >
+																<input class="btn btn-danger btn-xs btn-delete" deletekbid="{{kb.kb.id}}" type="button" value="删除" />
+															</div>
+														</div>
+													</a>
+												</div>
+										</div>
+										{% endfor %} 
+								</div>
+					</div><!-- end top row -->
+			</div> <!-- end slide2 -->
+		</div> <!-- swiper-wrapper -->
+		<div class="swiper-pagination"></div> 
+  </div> <!-- swiper-container -->
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}   
+ <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script>
+	<script >
+		$(document).ready(function(){
+		     //加载图片
+			
+			  {% for kb in kbs %}
+			   $('.week-img-{{kb.id}}').attr('src', '{{rootmedia}}{{kb.top_pic.name}}');
+			  {% endfor %}
+			   
+			  var imgwidth = $('.week-container').width(); 
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			  {% for kb in inkbs %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+
+			  $('.magazine').change(function(){
+				  var magazineid = $('.magazine').val();
+				  window.location = '{% url "kb:magazine_kb" %}?magazine='+magazineid; 
+			  });
+
+			  $('.btn-add').click(function(){
+				  var magazineid = $('.magazine').val();
+				  var kbid = $(this).attr('addkbid');
+				  $.post('{% url "kb:add_kb_magazine" %}', {kbid:kbid,magazineid:magazineid }, function(result){
+                         if (result['status']  == 1){
+							  $().message('添加成功...');
+					}
+				  } );
+				  
+			  })
+
+			  $('.btn-delete').click(function(){
+				  var magazineid = $('.magazine').val();
+				  var kbid = $(this).attr('deletekbid');
+				  $.post('{% url "kb:del_kb_magazine" %}', {kbid:kbid,magazineid:magazineid }, function(result){
+                         if (result['status']  == 1){
+							  $().message('删除成功...');
+					     }
+						 else{
+							  $().errormessage('未知错误...');
+						 }
+				  } );
+				  
+			  })
+			   
+		});
+		</script>
+		<script>        
+          var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', 
+            loop: true, 
+            // 如果需要分页器
+            pagination: '.swiper-pagination', 
+          
+          });
+           
+  </script>
+ {% endblock %} 

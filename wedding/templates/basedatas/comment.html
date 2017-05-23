@@ -1,0 +1,49 @@
+<strong>Comment:</strong>
+<table class="history_comment" >
+        {% if history_comment_list %}
+        {% load tz %}
+        {% for history_comment in history_comment_list %}
+		<tr>
+			 <td>
+			    {{history_comment.commenter.get_full_name}} || {{history_comment.Comment_date|utc|date:" Y-m-d h:i:s"}}
+			 </td> 
+        </tr> 
+        <tr>
+			 <td>
+		        {{history_comment.content}}
+		    </td>
+		</tr>
+		{% endfor %}
+		{% endif %}
+		 <tr> 
+		    <td>
+                  <div class="comment_wrap" id="comment_div"></div>
+            </td> 
+        </tr>            
+</table>
+
+<table class="comment" >
+		<tr>
+            <td>
+                <input type="Hidden" id="id_apps_id" value="{{apps_id}}" /> 
+            </td>
+        </tr>
+		<tr>
+			<td colspan="2">
+                <textarea id="id_txt_comments" name ="txt_comments" rows="8" cols="120"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			    <input type="button" id="id_submit_comments" value="comment" /> 
+			    {% if confirm_comment_permission and fix.Status == "0" or fix.Status == "5" and isQA  and user in user_list %}
+			        <label for="id_checkbox" >Confirm:</lable>
+			        <input type="checkbox" id="id_checkbox" name="Review_Confirm"  />
+			    {% endif %}
+		   </td>
+		   <td>
+		        want to notify the creator?: 
+			     <input type="checkbox" id="id_is_sendemail" name="s_sendemail"  />
+		   </td>
+		</tr>
+</table>

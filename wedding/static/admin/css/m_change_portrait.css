@@ -1,0 +1,68 @@
+ 
+
+.upload_portrait_bnt
+{
+    width:96%;
+    font-size:2em;
+    z-index:-100;
+}
+#id_portrain
+{
+    display: none;
+    width:80%;
+    border:1px solid red;
+    height:50px;
+    font-size:40px;
+}
+ 
+.tip
+{
+    font-size:1em;
+    color:red;
+}
+ 
+ .new_Btn li
+{ 
+    border-radius:10px;
+    margin-bottom:5px; 
+ }
+ .upload_portrait
+ {
+     padding-left: 0%;
+ }
+  .portrait_upload
+ {
+     text-align:center;
+ }
+ 
+ .pop_ctrl_upload
+ { 
+     margin-bottom:10px;
+     display: inline-block;
+     width:auto;
+ }
+ 
+   .portrait_upload_big
+ {
+     width:400px;
+     height:400px;
+     margin-left:25%;
+     text-align:center;
+     border-radius:330px;
+     -moz-border-radius:330px;
+	 -webkit-border-radius:330px;
+     background-size:100%, 100%;
+ }
+ 
+ .pop_ctrl_upload_big
+ {
+     width:97%;
+     margin-bottom:10px;
+     height:450px;
+     
+ }
+ 
+ #content
+ {
+     text-align: center;
+ }

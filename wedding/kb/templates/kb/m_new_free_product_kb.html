@@ -1,0 +1,102 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}发表帖子{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/ui/jquery-ui.css" />
+<link rel="stylesheet" href="/static/kb/css/m_new.css"/> 
+{% endblock %} 
+
+{% block content %} 
+<form action="" method="post" id="article_form" enctype="multipart/form-data">
+<input type="hidden" name="kbinstace" id ="id_kb" value="0" />
+<input type="hidden" name="page" id ="id_page" value="{{page}}" />
+  <ul class="new_article_ul">
+      {% if request.user.cannot_publish_kb %}
+      <li class="li_title">
+         <label class="errornote" >你已被禁言...</label>
+      </li>
+       {% else %}
+         <input type="hidden" name="type" id ="idtype" value="{{type}}" />
+         <input type="hidden" name="blockid" id ="idblock" value="{{blockid}}" />
+         <input type="hidden" name="slice_count" id ="idslice_count" value="1" />
+       
+      <li class="li_title">
+         <input type="text" class="title" name="title" id="id_title" placeholder="请输入标题..." />
+      </li>
+      <li class="li_pic_add_div">
+             <input type="hidden" id="pic_counter" value="1" /> 
+             <input type="hidden" class ="slice_number" name="slice_number_1" value="1" />
+             <input type="hidden" name="kb_slice_instace_1" id ="id_kb_slice_1" value="0" />
+             <div class="pic_add_div"> 
+              <label class="new_Btn">
+                  <input type="file" name="pic_file" id="id_file_uploader" class="file_upload" accept="image/*"/> 
+                      <i class="fa fa-plus pic-plus"></i> 
+              </label>
+          </div>
+       </li>
+      <li>
+            <textarea class="article_content" name="article_content_1" placeholder="输入详细内容..." cols="30" rows="3"></textarea>
+      </li>
+      
+      <li  class="li_active">
+           <input type="text" id="id_url" name ="product_url" placeholder="商品在商城中的链接地址..." value="" /> 
+      </li>
+      {% ifequal type  3 %}
+      <li  class="li_active">
+          <select id="id_vip_level" name="vip_level">
+              <option value="0">铁牌会员</option>
+              <option value="1">铜牌会员</option>
+              <option value="2">银牌会员</option>
+              <option value="3">金牌会员</option>
+              <option value="4">钻石会员</option>
+              </select>以上会员可以领取.
+           <input type="number" id="id_num" name ="gift_num" placeholder="礼品库存数量..." value="" /> 
+      </li>
+      {% endifequal %}
+      
+      
+      {% ifequal type  2 %}
+      <li  class="li_active">
+           <input type="number" id="id_money" name ="money" placeholder="预约需要仓库币数量..." value="" /> 
+      </li>
+      {% endifequal %}
+      <li class="li_holder">
+      
+      
+      </li>
+       
+         <li>
+             <input type="button" class="publish_btn" id="id_add_pic_text" value="新增图文" />
+       </li>
+       <!--
+        <li>
+             <input type="button" class="publish_btn" id="id_publish_draft" value="存草稿" />
+       </li>
+       -->
+       
+      <li>
+      <div class="publish_msg"></div>
+             <input type="button" class="publish_btn" id="id_publish" value="发布新品" />
+      </li>
+      {% endif %}
+  </ul>
+  </form> 
+  {% if type == 1 %}
+<script src="//cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
+<script src="//cdn.bootcss.com/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
+  <script src="/static/kb/js/datepicker_own.js"></script> 
+    {% endif %}
+  <script src="/static/kb/js/m_new.js"></script> 
+ 
+ 
+  
+  <script>
+      $(document).ready(function() {
+          var width = window.innerWidth; 
+          $('.pic_div').css('height', (width/4-10).toString()+'px');
+      });
+  </script>
+ {% endblock %}
+ 

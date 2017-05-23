@@ -1,0 +1,374 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}带你发现真正的美食 因为 关于吃这件事，我们是认真的...{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/hostpage.css" />
+<style> 
+        .jssorb05 {
+            position: absolute;
+        }
+        .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 8px;
+            height: 8px;
+            background: url('/static/plugins/full-width-slider.slider/img/b05.png') no-repeat;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .jssorb05 div { background-position: -7px -7px; }
+        .jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
+        .jssorb05 .av { background-position: -67px -7px; }
+        .jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
+
+        .jssora22l, .jssora22r {
+            display: block;
+            position: absolute;
+            /* size of arrow element */
+            width: 40px;
+            height: 58px;
+            cursor: pointer;
+            background: url('/static/plugins/full-width-slider.slider/img/a22.png') center center no-repeat;
+            overflow: hidden;
+        }
+        .jssora22l { background-position: -10px -31px; }
+        .jssora22r { background-position: -70px -31px; }
+        .jssora22l:hover { background-position: -130px -31px; }
+        .jssora22r:hover { background-position: -190px -31px; }
+        .jssora22l.jssora22ldn { background-position: -250px -31px; }
+        .jssora22r.jssora22rdn { background-position: -310px -31px; }
+        .jssora22l.jssora22lds { background-position: -10px -31px; opacity: .3; pointer-events: none; }
+        .jssora22r.jssora22rds { background-position: -70px -31px; opacity: .3; pointer-events: none; }
+</style> 
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+<div id="slider1_container" style="position: relative; top: 0px; left: 0px;  ">
+	<!-- Slides Container -->
+	<div u="slides" class="slider1_container_child" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px;    ">
+		<div  class="effect1 slider1 row"  >
+			<div class="col-sx-12 col-md-12 slider1-holder">
+				<div class="slider1-words-holder1"> 
+
+				</div>
+				<div class="slider1-holder slider1-words-holder2"> 
+					<h1 class="">吃典</h1>
+					<h3> 吃货们用来寻找各地正宗特色美食的"新华字典"</h3>
+					<div class="row div-items-top">
+						<div class="col-xs-1 col-md-1 ">   </div>
+						<div class="col-xs-10 col-md-10 item-explain"> 
+
+							<span class="label label-danger" >正宗的:</span>
+							<i class="fa fa-circle" aria-hidden="true"></i>
+							<label>我们整理的每份特色美食都是由我们邀请的当地吃货用心分享出来的，或者由普通网友提供，并受到大部分网友认可的特色美食</label>
+						</div>  
+						<div class="col-xs-1 col-md-1 ">   </div>
+					</div>
+					<div class="row  ">
+						<div class="col-xs-1 col-md-1  ">   </div>
+						<div class="col-xs-10 col-md-10 item-explain">
+
+							<span class="label label-danger" >全面的:</span>
+							<i class="fa fa-circle" aria-hidden="true"></i>
+							<label>我们计划在未来一年内覆盖全国所有省份，90%的市区和80%的县</label>
+						</div> 
+						<div class="col-xs-1 col-md-1  ">   </div> 
+					</div>
+					<div class="row div-items-bottom">
+						<div class="col-xs-4 col-md-4  "> 
+						</div>
+						<div class="col-xs-4 col-md-4">
+							<a href="{% url 'kb:newkb'%}">
+								<input type="bottun" class="btn btn-success btn-write" data-toggle="tooltip" title="点击开始分享，让更多的人知道你们当地的美食.."
+                          value="开始分享我们当地的特色美食"/></a>
+						</div>  
+						<div class="col-xs-4 col-md-4"> 
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div> <!---end of slider1 -->
+
+
+		<div  class="  slider2 row"    >
+			<div class="col-sx-4 col-sm-4 col-md-4 slider2-holder">
+                <div class="row">
+					<label class="map-words" >我们已找到了{{province_num|default:"0"}}个省份的特色美食</label>
+					<div id="echarts-map"  ></div>
+				</div> 
+			</div>
+			<div class="col-sx-2 col-sm-2 col-md-2 ">
+			</div>
+			<div class="col-sx-6 col-sm-6 col-md-6 slider2-right ">
+				<div class="row slider2-header">
+					<form action="{% url 'search:inplace' %}", method='get'>
+						<div class="col-sx-12 col-sm-12 col-md-12 " >
+							<label class="slider2-header-words" >找正宗特色美食就来吃典,用心分享每份特色美食.</label>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 area-select" >
+							<select name='homepage_province' class="homepage_province form-control" >
+								{% for province in provinces %}
+								<option value="{{province.pk}}">{{province.short_name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 area-select" >
+							<select name='homepage_city' class="homepage_city form-control" >
+								
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3 col-md-3 area-select" >
+							<select name='homepage_county' class="homepage_county form-control" >
+								
+							</select>
+						</div>
+						<div class="col-sx-3 col-sm-3  col-md-3 area-select" >
+							<input type="submit" class="btn btn-success btn-search-inplace" data-toggle="tooltip" title="点击查看当地美食."  value="搜索看看"/>
+						</div>
+					</form>
+					<div class="col-sx-12 col-sm-12 col-md-12 silder-title-bottom " >
+						
+					</div>
+				</div>
+				 
+				<div class="row">
+					<div id="main"  ></div>
+				</div> 
+			</div>
+
+		</div> <!--end of slider2 -->
+        <div class="slider3 row" >
+			<div class="row"> 
+				<div class="col-sx-12 col-sm-12 col-md-12 "> 
+			           <a class="new-recommend"  href="" >最新发现</a>  
+				</div> 
+			</div>
+			<div class="row">
+				  {% for kb in kbs|slice:":4" %}
+						<div class="col-sx-3 col-sm-3 col-md-3 padding-sm">
+								<div class="week-container effect1">
+									<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+										<img  class="new-img  new-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+										<div class="food-detail ">
+											<div class="food-detail-title  ">
+												{{kb.kb.title}} 
+											</div>
+											<div class="food-detail-right  ">
+											参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+											</div>
+											<div >
+												<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+												{% for location in kb.kb.foodlocation_set.all %}
+												{{location.area.short_name}}
+												{% endfor %}
+											</div> 
+										</div>
+									</a>
+								</div>
+						</div>
+					{% endfor %}
+			</div>
+        </div><!-- end of slider3 -->
+	</div> <!---end of slider1_container_child -->
+	<div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
+		<!-- bullet navigator item prototype -->
+		<div data-u="prototype" style="width:16px;height:16px;"></div>
+	</div>
+
+</div><!--end of slider1_container -->
+<hr>
+
+
+	<div class="row" >
+		<div class="col-sx-5 col-sm-5 col-md-5"> 
+			  <hr class="hr-left">
+      </div>
+      <div class="col-sx-2 col-sm-2 col-md-2"> 
+			  <span class="week-recommend">本周推荐</span> 
+      </div>
+	   <div class="col-sx-5 col-sm-5 col-md-5"> 
+			<hr class="hr-right">
+      </div>
+	</div> 
+ 
+	 <div class="row">
+		 {% for kb in week_kbs  %}
+		 <div class="col-sx-3 col-sm-3  col-md-3 padding-sm">
+			       <div class="week-container effect1">
+					<a class="a-week-img" href="{% url 'kb:kb_detail' kb.kb.id %}">
+						<img  class="week-img week-img-{{kb.kb.id}} " src="/static/img/default.jpg" />
+						<div class="food-detail ">
+							<div class="food-detail-title  ">
+								{{kb.kb.title}} 
+							</div>
+							<div class="food-detail-right  ">
+							 参考价格：{{kb.kb.lower_price}}-{{kb.kb.higher_price}} 
+							</div>
+							<div class="  ">
+								<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+								{% for location in kb.kb.foodlocation_set.all %}
+								{{location.area.short_name}}
+								{% endfor %}
+							</div>
+							<div class="  ">
+								 {{kb.kb.i_want}}人想吃 {{kb.kb.i_ate}}吃过
+							</div>
+						</div>
+					</a>
+			    </div>
+		 </div>
+		{% endfor %}
+	 </div> 
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}  
+	<script  src="{% static 'plugins/full-width-slider.slider/js/jssor.slider-22.0.15.min.js'%}"></script> 
+	<script  src="{% static 'js/homepage.js'%}"></script> 
+	<script  src="{% static 'plugins/echarts/echarts.min.js'%}"></script>
+	<script  src="{% static 'plugins/echarts/china.js'%}"></script>           
+    <script type="text/javascript">
+	$(document).ready(function(){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+		var map = echarts.init(document.getElementById('echarts-map'));  
+		var provice_count = {{cr.province_count}};
+		var city_count = {{cr.city_count}};
+		var county_count = {{cr.county_count}};
+		
+
+        // 指定图表的配置项和数据
+        option = {
+					title : {
+						text: '美食覆盖数据',
+						 
+					},
+					tooltip : {
+						
+						trigger: 'axis',
+						formatter: function (params) {
+									var res = params[0].value;
+								    if (params[0].name.indexOf('省级') != -1)
+									    return '已覆盖: 省级'+  res + '%,  共：' + provice_count + '个';
+									else if (params[0].name.indexOf('市级') != -1)
+									    return '已覆盖: 市级'+  res + '%, 共：' + city_count+ '个';
+									else if (params[0].name.indexOf('县级') != -1)
+									    return '已覆盖:  县级'+   res + '%, 共：' + county_count+ '个';
+								
+								}
+					}, 
+					toolbox: {
+						show : false 
+					},
+					calculable : true,
+					xAxis : [
+						{
+							type : 'category',
+							data : ['省级共33个','市级共{{total_city}}个','县级 共{{total_county}}个']
+						}
+					],
+					yAxis : [
+						{
+							type : 'value',
+							max: 100,
+							axisLabel: {
+										formatter: '{value}%'
+									}
+						},
+						
+					],
+					series : [
+						{
+							name:'已覆盖',
+							type:'bar',
+							barWidth: 30, 
+							data:[{{cr.province_rate}}*100, {{cr.city_rate}}*100, {{cr.county_rate}}*100],
+							markPoint : {
+								data : [
+									{name : '省级共33个', value : {{cr.province_rate}}*100, xAxis: 0, yAxis:{{cr.province_rate}}*100},
+									{name : '市级共{{total_city}}个', value : {{cr.city_rate}}*100, xAxis: 1, yAxis: {{cr.city_rate}}*100},
+									{name: '县级共{{total_county}}个', value:{{cr.county_rate}}*100, xAxis:2, yAxis:{{cr.county_rate}}*100}
+								],
+								itemStyle : {
+												normal : { 
+													label : {
+														show:true, 
+														formatter: function (param) {
+																			return  param.value + ' %'
+																}
+														}
+										}
+								}
+									
+								 
+							} 
+						},
+						 
+					]
+				};
+      
+		var option_map = {
+				tooltip: {
+					trigger: 'item',
+					formatter: '{b}'
+				},
+				series: [
+					{
+						name: '中国',
+						type: 'map',
+						left :0,
+						top:0,
+						mapType: 'china',
+						selectedMode : false,
+						label: {
+							normal: {
+								show: true
+							},
+							emphasis: {
+								show: true
+							}
+						},
+						data:[
+							{% for province_name in result_provinces %}
+							{name:'{{province_name}}', selected:true},
+							{% endfor %}
+							 
+						]
+					}
+				]
+			};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+		map.setOption(option_map);  
+		});
+    </script>
+	<script >
+		$(document).ready(function(){
+		     //加载图片
+			
+			  {% for kb in week_kbs|slice:":4" %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+			  {% for kb in week_kbs|slice:"4:8" %}
+			   $('.week-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			  {% endfor %}
+
+			   {% for kb in kbs|slice:":4" %}
+			   $('.new-img-{{kb.kb.id}}').attr('src', '{{rootmedia}}{{kb.kb.top_pic.name}}');
+			   $('.new-img-{{kb.kb.id}}').css('display', 'block');
+			  {% endfor %}
+			  var imgwidth = $('.week-container').width();
+			  $('.new-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			  //new-img
+			  imgwidth = imgwidth +10;
+			  
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			   
+		});
+		</script>
+ {% endblock %} 

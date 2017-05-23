@@ -25,7 +25,7 @@ SECRET_KEY = 'lz#r8abl@j&q!wn4ei5r0k-ldmbjjc*n!&mnl$$yqu=z$mmu_q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.101','127.0.0.1']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'wedding.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,8 +95,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = ( 
+   os.path.join(BASE_DIR,'wedding/static/').replace('\\','/'), 
+)
+
+print STATICFILES_DIRS
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' 
+MEDIA_URL  = '/media/' 
+STATIC_ROOT = os.path.join(BASE_DIR,'../static').replace('\\','/') 
+MEDIA_ROOT  = os.path.join( BASE_DIR ,'../media').replace('\\','/') 
+

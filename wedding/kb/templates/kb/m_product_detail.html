@@ -1,0 +1,227 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{kb.title}}|帖子详情{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/m_detail.css" %}" />
+ <link rel="stylesheet" type="text/css" href="{% static "plugins/sliderman/css/sliderman.css" %}" />
+{% endblock %}
+ {% block keywords%}心事 每日一句 推荐{%endblock%}
+  {% block description%} 你是不是也想要一个只属于自己的小屋，漂亮温馨就..{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %}
+
+
+    {% if kb %}
+      {% if kb.top_pic.name %}
+            <div class="div_kb_img"> 
+                        <img class="kb_img" src="{{rootmedia}}{{kb.top_pic.name }}"/ >
+                    </div>
+            {% endif %}
+            <h1 class="kb_title">{{kb.title}}</h1> 
+    <input type="hidden" id="kbid" value="{{kb.id}}"/>
+    <div id="slider_container_2">
+    <div id="SliderName_2">
+        {% if pic_ls %}
+                    {% for pic in pic_ls %}
+                        {% if pic.slices ==  slice_ls.0 %}
+                         
+                            <img class="kb_img" src="{{rootmedia}}{{pic.link.name }}"   alt="Demo2 first" title="Demo2 first"/ >
+                         
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+         
+    <div class="SliderName_2Description">Featured model: <strong>Charlize Theron</strong></div>
+    </div>
+    <div id="SliderNameNavigation_2"></div>
+    </div>
+  
+<div class="main_kb_detail">
+    {% load tz %} 
+        
+    {% comment %}
+      {% if pic_ls %}
+                    {% for pic in pic_ls %}
+                        {% if pic.slices ==  slice_ls.0 %}
+                        <div class="div_kb_img"> 
+                            <img class="kb_img" src="{{rootmedia}}{{pic.link.name }}"/ >
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+     {% endcomment %}
+     <pre>{{slice_ls.0.content}}</pre>
+     <hr>
+     {% if not request.user.is_anonymous %}
+   <div class="kb_footer">
+       {% ifequal kb.type 2 %}
+       <a href = "{% url 'kb:book_userlist' kb.id %}">
+   <i class="fa fa-users"> 预约人({{kb.book_user_set.all.count}})</i> </a>
+    {% endifequal %}
+    {% ifequal kb.type 3 %}
+    <label>领取规则:
+        {% ifequal freeGift.min_level 0 %}
+        铁牌
+        {% endifequal %}
+        {% ifequal freeGift.min_level 1 %}
+        铜牌
+        {% endifequal %}
+        {% ifequal freeGift.min_level 2 %}
+        银牌
+        {% endifequal %}
+        {% ifequal freeGift.min_level 3 %}
+        金牌
+        {% endifequal %}
+        {% ifequal freeGift.min_level 4 %}
+        钻石
+        {% endifequal %}以上会员可以领取
+    </label>
+    <a href = "{% url 'kb:freegift_userlist' kb.id %}">
+   <i class="fa fa-users"> {{kb.freegift_user_set.all.count}}人已领取</i> </a>
+    {% endifequal %}
+  </div>
+    <div class="kb_footer">
+      <input type="hidden" value="{{request.user.v_silver}}"  id="id_v_silver" />
+      {% ifequal kb.type 2 %}
+      <input type="hidden" value="{{kb.money}}"  id="id_need_money" />
+      <input type="button" value="预约" class="takepart_in" id="id_book" />
+      {% endifequal %}
+      {% ifequal kb.type 3 %} 
+      <input type="button" value="领取" class="takepart_in" id="id_recieve" />
+      {% endifequal %}
+    </div>
+    <hr>
+ {% endif %}
+     {% ifequal kb.type 2 %}
+     <label class="need_money_text_lb" >所需仓库币:</label><label class="need_money_lb" >{{kb.money}}</label>
+     {% endifequal %}
+     {% ifequal kb.type 3 %}
+     <label class="need_money_text_lb" >礼品总库存:</label><label class="need_money_lb" >{{freeGift.number}}</label>
+     {% endifequal %}
+     
+     <a class="out_link" href="{% if 'http://' not in kb.url %}http://{% endif %}{{kb.url}}" target="_blank"><i class="fa fa-link">新品外部链接</i></a>
+      <hr>
+      {% if slice_ls %}
+        {% for slice in slice_ls %}
+            {% if forloop.counter != 1 %}
+            <pre>{{slice.content}}</pre>
+                    {% if pic_ls %}
+                        {% for pic in pic_ls %}
+                            {% if pic.slices ==  slice%}
+                            <div class="div_kb_img"> 
+                                <img class="kb_img" src="{{rootmedia}}{{pic.link.name }}"/ >
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+     
+ </div> 
+ <div class="kb_footer">
+   <i class="fa fa-newspaper-o"> 阅读:{{kb.count_read}}</i>
+        <i class="fa  {% if is_say_good > 0 %}fa-thumbs-up{% else %}fa-thumbs-o-up{% endif %}"> 喜欢:{{kb.count_good}}</i>
+        <i class="fa fa-comment-o"> 评论:{{kb.count_reply}}</i>
+        {% if is_collected  %}
+        <i class="fa fa-heart"> 已收藏</i>
+        {% else %}
+           <i class="fa fa-heart-o"> 收藏</i>
+        {% endif %}
+        </div>
+        <hr>
+  
+  {% if  kb.comment_set.all %}
+  {% for comment in kb.comment_set.all %}
+  <div class="comment_div">
+      <input  type="hidden" class="commentid" value="{{ comment.id}}"/>
+        <div class="comment_left_div">
+            <div class="comment_portrait portrait"   style="background-image:url('{{comment.commenter.head_portrait}}')"></div>
+        </div>
+        <div class="comment_right_div">
+           <h3 class="comment_title">
+               <label  class="comment_title username">{{  comment.commenter.get_full_name }}</label >
+               <label  class="comment_title date">{{ comment.date  |date:" Y-m-d  H:i:s "}}</label >
+        </h3>
+        {% if comment.type == 1 %}
+        回复<label for="date" class="replied_username" name="words" >{{ comment.replied_comment.commenter.get_full_name }}:</label>
+        {% endif %}
+          <label for="date" class="heartbeat_comment" name="words" >{{ comment.content }}</label>
+          </div>
+          </div>
+          <hr class="comment_hr">
+          
+ {% endfor %}
+ <div class="comment">
+      
+  </div>
+ {% else %}
+ <div class="comment">
+     <i class="fa fa-comment-o">暂无评论...</i> 
+  </div>
+ {% endif %}
+{% else %}
+<div class = "main_kb_detail" >
+     <ul> <li class="vmlog_date">  </li>
+         </ul> 
+        <label class="main_link_container_label main_link_container_label_none"> 没有找到帖子...</label> 
+</div>
+ <hr>
+     
+     
+{% endif %}
+
+ {% endblock %}
+ {% block custom_footer_comments_li_selected %}custom_footer_comments_li_selected{% endblock %}
+ {% block custom_footer_comments_div_selected %}custom_footer_comments_div_selected{% endblock %}
+ {% block footer_script %}{{ block.super}} 
+ <script type="text/javascript" language="javascript" src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/detail.js' %}"></script>  
+ <script type="text/javascript"  src="{% static 'good/js/good_day_words.1.js' %}"></script> 
+ <script type="text/javascript"  src="{% static 'good/js/good_day_words.js' %}"></script>  
+  <script type="text/javascript"  src="{% static 'kb/js/collect.js' %}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/uncollect.js' %}"></script>  
+ <script type="text/javascript"  src="{% static 'plugins/sliderman/js/sliderman.1.3.8.js' %}"></script>  
+ <script type="text/javascript"> 
+$(document).ready(function() {
+    var client_width = document.body.clientWidth-3;
+    var effectsDemo2 = 'Fade';
+    var demoSlider = Sliderman.slider({ container: 'SliderName_2', width: client_width, height: client_width, effects: effectsDemo2, 
+    display: { autoplay: 4000, 
+    loading: {background: '#000000', 
+    opacity: 0.5, image: '/static/plugins/sliderman/img/loading.gif'}, 
+    buttons: { hide: true, opacity: 1, 
+    prev: {className: 'SliderNamePrev_2', label: ''}, 
+    next: {className: 'SliderNameNext_2', label: ''} }, 
+    navigation: {container: 'SliderNameNavigation_2', label: '<img src="/static/plugins/sliderman/img/clear.gif" />'} } });
+ var img = $('.kb_img');
+ img.css('max-width',client_width);
+ $('.SliderNamePrev_2').css('height',client_width);
+ $('.SliderName_2').css('height',client_width);
+ $('.SliderNameNext_2').css('height',client_width);
+ 
+ {% if kb   %}
+        $('#id_user_portrait').css("background-image", "url({{kb.author.head_portrait }})");
+        {% else %}
+        $('#id_user_portrait').css("background-image", "url('/static/img/dog.png')");
+    {% endif %}
+});
+ 
+</script>
+ {% endblock %} 
+ 
+  {% block footer %}{{block.super}}
+ <div class="div-comment"> 
+ <textarea onkeyup="auto_grow(this)" id="id_comment_conent"></textarea> 
+       <input type="hidden" id="current_commentid" value =""/>
+        <input type="button" class="comment_ordinary_sent" id="comment_conent_btn"value="评论" />
+        </div>
+ {% endblock %}

@@ -1,0 +1,63 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %} 所有的美食分享 {% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_list.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_sort.css" %}" />
+{% endblock %}
+ {% block keywords%}心事 每日一句 推荐{%endblock%}
+  {% block description%} 你是不是也想要一个只属于自己的小屋，漂亮温馨就..{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+ {% block headertitle %}   
+ {% endblock %}  
+{% block content %} 
+{% include "kb/m_sort.html" %}
+<div class="main_link_container">
+    {% if  manage_perm %}
+    {% if kb_list %}
+    {% load tz %}
+{% for kb in kb_list %} 
+    <div class = "main_link_container_a container">
+        <ul> <li class="vmlog_date"> {{kb.author.get_full_name}}|<label class="kbdate">{{kb.date  | date:" Y-m-d H:i:s"}}   </label> 
+            <a class="block_in_all_list" href="{% url 'kb:changekb'   kb.id %}"> [修改] </a> 
+         </ul> 
+        <a href="{% url 'kb:kb_detail' kb.id %}">  
+        <label class="main_link_container_label"> {{kb.title}}</label>
+        <i class="fa fa-newspaper-o fa-list"> 阅读:{{kb.count_read}}</i>
+        <i class="fa  fa-thumbs-up fa-list"> 喜欢:{{kb.count_good}}</i>
+        <i class="fa fa-comment-o fa-list"> 评论:{{kb.count_reply}}</i>
+        </a> 
+        <hr>
+    </div>
+     
+{% endfor %}
+{% else %}
+<div class = "main_link_container_a" >
+     <ul> <li class="vmlog_date">  </li>
+         </ul> 
+        <label class="main_link_container_label main_link_container_label_none"> 还没有帖子...</label> 
+    </div>
+     <hr>
+{% endif %}
+{% else %}
+ 
+        <label class="errornote"> 没有权限...</label>
+    
+{% endif %}
+</div>
+ {% endblock %}
+ 
+ {% block custom_footer_user_li_selected %}custom_footer_user_li_selected{% endblock %}
+ {% block custom_footer_user_div_selected %}custom_footer_user_div_selected{% endblock %}
+ 
+ {% block footer_script %}{{ block.super}}
+ <script src="/static/kb/js/list.js"></script> 
+ <script src="/static/kb/js/m_kb_sort.js"></script>  
+ {% endblock %} 
+ {% block baidu_spider %}{% endblock %}

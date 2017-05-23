@@ -1,0 +1,30 @@
+ 
+ #content
+ {
+     text-align: center;
+ }
+ 
+.group_list
+{
+    text-align: center;
+    /*margin-bottom: 40px; 
+    margin-top:10%;*/
+    margin: 0 auto;
+    display: inline-flex;
+}
+.application_name
+{ 
+    padding-top:20px;
+    color: white; 
+    border: 1px solid white;  
+    width: 60px;
+    height:60px;
+    border-radius: 20px;
+    background-color:  #DC1915;
+    
+}
+.group_list a
+{   
+    text-align: center;
+}
+ 

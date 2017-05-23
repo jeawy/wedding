@@ -1,0 +1,96 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}任务列表{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin/css/m_todolist.css' %}" /> 
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'task/css/m_comm.css'%}" />
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'task/css/m_index.css'%}" />
+{% endblock %}
+ 
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }} 
+ app-{{ opts.app_label}} 
+ model-{{ opts.model_name }} 
+ change-form{% endblock %} 
+		
+{% block content %}
+<div class="background_div"> 
+</div>
+<div class="container">
+      {% if not has_perm %} 
+      <div>
+        <label class="errornote" >你没权限！</label>
+      </div>
+      
+      {% else %} 
+        
+        <table class="table">
+          <theader>
+            <tr>
+              <th colspan="5">
+                <a class="btn btn-default" href="{% url 'task:add' %}" >新建任务</a>
+              </th>
+            </tr>
+            <tr>
+              <th>序号</th>
+              <th>名称</th>
+              
+             
+              <th>操作</th>
+            </tr>
+          </theader>
+          <tbody>
+            {% if todo_ls %} 
+              {% for todo in todo_ls %}  
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'task:detail' todo.id %}">{{todo.title}}</a></td> 
+                
+                <td> 
+                  <a href="{% url 'task:change' todo.id %}">修改</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  日期：{{todo.date | date:"m-d H:i:s"}} 
+                </td>
+                <td colspan="2">
+                  {% if todo.status == '2'%}
+                  完成人：{{todo.finisher.get_full_name}}
+                  {% else %} 
+                  发布人：{{todo.publisher.get_full_name}}
+                  {% endif %}
+                </td>
+              </tr>
+               <tr>
+                <td colspan="2">
+                  状态：{{todo.get_status_display }} 
+                </td>
+                <td colspan="2">
+                  更新：【<a href="{% url 'task:detail' todo.id %}">{{todo.todo_comments_set.all|length}}</a>】次
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  {{todo.description}} 
+                </td>
+              </tr>
+              {% endfor %}          
+         {% else %} 
+          <tr>
+                <td colspan="4">还没有制定任务...</td>
+                <td colspan="1">
+                  <a href="{% url 'task:add' %}">立即制定</a>
+                </td>
+              </tr>
+         {% endif%}
+         </tbody>
+         </table>
+       {% endif%}
+ </div>
+ {% endblock %}
+ 

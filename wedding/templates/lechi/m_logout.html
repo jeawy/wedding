@@ -1,0 +1,23 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}退出登录{% endblock %} 
+{% load i18n admin_static %}
+{% block content %} 
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <label  class="logout_message">{% trans '您已退出，感谢您停留在本站的宝贵时间...' %}</label>
+      </div>
+      <div class="col-xs-4">
+         
+      </div>
+         <div class="col-xs-4">
+        <a method="post" class="a_logout" href="{% url 'login'%}">{% trans '重新登录' %}<br />
+        <i class="fa fa-sign-in fa-5x"></i></a>
+      </div>
+         <div class="col-xs-4">
+         
+      </div>
+    </div>  
+ </div >   
+{% endblock %}
+

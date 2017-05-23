@@ -1,0 +1,73 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}分享美食{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" href="/static/kb/css/m_new.css"/> 
+<link rel="stylesheet" href="/static/plugins/loading/style.css"/>
+{% endblock %} 
+
+{% block content %} 
+<form action="" method="post" id="article_form" enctype="multipart/form-data">
+<input type="hidden" name="kbinstace" id ="id_kb" value="0" />
+<input type="hidden" name="page" id ="id_page" value="{{page}}" />
+  <ul class="new_article_ul">
+      {% if request.user.cannot_publish_kb %}
+      <li class="li_title">
+         <label class="errornote" >你已被禁言...</label>
+      </li>
+       {% else %}
+         <input type="hidden" name="type" id ="idtype" value="{{type}}" /> 
+         <input type="hidden" name="slice_count" id ="idslice_count" value="1" />
+       
+      <li class="li_title">
+         <input type="text" class="title" name="title" id="id_title" placeholder="特色美食名称..." />
+      </li>
+     
+      <li>
+            <textarea class="article_content" name="article_content_1" placeholder="输入内容让大家更多的了解..." cols="30" rows="10"></textarea>
+      </li>
+      <li class="li_holder">
+      
+      
+      </li>
+       <li class="li_pic_add_div">
+             <input type="hidden" id="pic_counter" value="1" /> 
+             <input type="hidden" class ="slice_number" name="slice_number_1" value="1" />
+             <input type="hidden" name="kb_slice_instace_1" id ="id_kb_slice_1" value="0" />
+             <div class="pic_add_div"> 
+              <label class="new_Btn">
+                  <input type="file" name="pic_file" id="id_file_uploader" class="file_upload" accept="image/*"/> 
+                      <i class="fa fa-plus pic-plus"></i> 
+              </label>
+          </div>
+       </li>
+         <li>
+             <input type="button" class="btn btn-primary publish_btn" id="id_add_pic_text" value="新增图文" />
+       </li>
+       <!--
+        <li>
+             <input type="button" class="publish_btn" id="id_publish_draft" value="存草稿" />
+       </li>
+       -->
+       
+      <li>
+      <div class="publish_msg"></div>
+             <input type="button" class="btn btn-primary publish_btn" id="id_publish" value="分享创建" />
+      </li>
+      {% endif %}
+  </ul>
+  </form> 
+
+   
+  <script>
+      $(document).ready(function() {
+          var width = window.innerWidth; 
+          $('.pic_div').css('height', (width/4-10).toString()+'px');
+      });
+  </script>
+  <script src="/static/kb/js/m_new.js"></script> 
+  <script src="/static/plugins/loading/jquery.isloading.min.js"></script>
+ {% endblock %}
+  {% block baidu_spider %}{% endblock %}

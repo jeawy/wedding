@@ -1,0 +1,29 @@
+form ul
+{
+    font-size:4em;
+    margin:0;
+    margin-left:50px;
+}
+
+form li
+{
+    padding-top:30px;
+}
+
+.title
+{
+    color:Red;
+    font-size:0.5em;
+}
+
+.help_message
+{
+    text-indent:2em;
+    margin-top:40px;
+    font-size:3em;
+    color:#087972;
+}
+.help_message strong
+{
+    color:Red;
+}

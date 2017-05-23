@@ -1,0 +1,153 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %} 分享各地正宗美食，唤醒我们的味蕾{% endblock %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link  href="/static/plugins/cropper-master/dist/cropper.css" rel="stylesheet"> 
+<link rel="stylesheet" href="/static/kb/css/main.css"/>
+<link rel="stylesheet" href="/static/kb/css/m_settopic.css"/>
+<link rel="stylesheet" href="/static/admin/css/change_portrait.css"/>
+<link rel="stylesheet" href="/static/plugins/loading/style.css"/>
+{% endblock %}
+ 
+{% block content %}
+
+{% if not has_perm and not has_own_perm %}
+<label class="errornote">没有权限设置顶图...</label>
+{% else %}
+
+<div class="container  ">
+    {% if kb %}
+    <input type="hidden" id="id_kbid" value="{{kb.id}}"/>
+    {% endif %}
+    <div class="row"> 
+      <div class="col-xs-12 col-md-12 " >
+        <h1><a href="{% url 'kb:kb_detail' kb.id %}" >{{kb.title}}</a></h1> 
+      </div> 
+    </div>
+    <hr> 
+    <div class="row" >
+        <div class="col-xs-12" >
+          【必填项】参考价格[元]：
+        </div>
+        <div class="col-xs-4  " >
+          <input type="number" min="0" class="form-control " id="price_lower" value="{{kb.lower_price}}" />
+        </div>
+        <div class="col-xs-1 col-md-1  col-line" >
+          -
+        </div>
+        <div class="col-xs-5" > 
+          <input type="number" min= "0" class="form-control" id="price_higher" value="{{kb.higher_price}}" />
+        </div>
+        
+    </div> 
+  <hr>
+   <div class="row">
+     <div class="col-xs-12 col-md-12" >
+     <label class="promt" >所属地区，用来说明这款美食是属于哪些区域的特色美食，如果属于多个区域可以点击添加按钮。</label>
+     </div>
+   </div>
+   <div class="row" >
+        <div class="col-xs-12 col-md-12" >
+         【必填项】 所属地区：
+        </div>
+         <div class=" col-xs-4 col-sm-4 padding-right-no"> 
+              <select class="form-control" id="kb_provice">
+                  {% for province in provinces %}
+                    {% if area_insession %}
+                    <option value="{{province.id}}" {% if province.id == provinceid %}selected="selected"{% endif %} >{{province.short_name}}</option>
+                    {% else %}
+                    <option value="{{province.id}}"  >{{province.short_name}}</option>
+                    {% endif %}
+                  {% endfor %}
+              </select>
+          </div>
+          <div class="col-xs-4 col-sm-4 padding-no"> 
+              <select class="form-control" id="kb_city">
+                {% if parents %}
+                  {% for parent in parents %}
+                  <option value="{{parent.id}}" {% if parent.id == area_insession.id %}selected="selected"{% endif %}  >{{parent.short_name}}</option>
+                  {% endfor %}
+                {% endif %}
+              </select>
+          </div>
+          <div class="col-xs-4 col-sm-4 padding-left-no"> 
+              <select class=" form-control" id="kb_county"> 
+                 {% if children %}
+                  {% for child in children %}
+                  <option value="{{child.id}}" {% if child.id == area_insession.id %}selected="selected"{% endif %} >{{child.short_name}}</option>
+                  {% endfor %}
+                {% endif %}
+              </select>
+          </div>
+          <div class="col-xs-12 col-sm-12  "> 
+              <input class="form-control btn btn-primary btn-add-place" data-toggle="tooltip" title="点击添加可以添加多个区域" value="添加">
+          </div> 
+    </div> 
+     <hr>
+     <div class="row row-place"> 
+       {% for location in kb.foodlocation_set.all %}
+         <div class="col-xs-4 col-sm-4 padding-right-no"> 
+              <div class="alert alert-success fade in m-b-1">
+                        <label >{{location.area.short_name}}</label>
+                         <input type="hidden" class="placeid_list" value="{{location.area.id}}" > 
+                  <span class="close close-place" data-dismiss="alert">&times;</span>
+            </div> 
+          </div>
+          {% endfor %}
+    </div>
+    
+  <hr>
+    <div class="row">
+     <div class="col-xs-12 col-md-12" >
+     <label class="promt" >推荐品尝处，用来告诉吃货们在什么地方可以吃到如此正宗的美味。</label>
+     </div>
+   </div>
+  <div class="row" >
+        <div class="col-xs-12   col-price-label" >
+          【必填项】推荐品尝处：
+        </div>
+        <div class="col-xs-12" >
+          <input class="form-control place_go" name="place_go" placeholder="请告诉小伙伴们如何才能品尝到这份美食"  value="" />
+        </div>
+  
+        <div class="col-xs-4" > 
+             <input class="form-control btn btn-primary btn-add-address" data-toggle="tooltip" title="点击添加可以添加多个推荐去处" value="添加">
+        </div>
+    </div> 
+    <hr>
+    <div class="row row-addresses">
+      {% for place in kb.foodplace_set.all %}
+       <div class="col-xs-12 col-md-12" >
+                  <div class="alert alert-success fade in m-b-15"> 
+                  <label class="address_list">{{place.address}}</label> 
+                        <span class="close" data-dismiss="alert">&times;</span>
+                  </div> 
+                  </div>
+      {% endfor %}
+    </div>
+  <hr>
+   <div class="row" >  
+        <div class="col-xs-12 col-md-12" > 
+             <input class="form-control btn btn-success btn-publish"   value="发布 Ready Go">
+        </div>
+    </div> 
+<hr>
+     
+  </div>      
+ </div>      
+<script src="/static/plugins/cropper-master/dist/cropper.js"></script>
+<script src="/static/plugins/cropper-master/dist/canvas-toBlob.js"></script>
+<script src="/static/kb/js/m_top_pic.js"></script> 
+<script src="/static/kb/js/kb_place.js"></script>
+<script src="/static/kb/js/m_publish.js"></script>   
+<script src="/static/plugins/loading/jquery.isloading.min.js"></script>
+
+
+
+ 
+ {% endif %}
+ 
+ {% endblock %}
+  {% block baidu_spider %}{% endblock %}

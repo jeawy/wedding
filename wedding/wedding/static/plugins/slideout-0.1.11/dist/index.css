@@ -1,0 +1,29 @@
+ 
+.slideout-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  width: 230px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  box-shadow: 7px 0px 5px -5px rgba(0,0,0,0.4);
+}
+
+.slideout-panel {
+  position:relative;
+  z-index: 1; 
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+  display: block;
+}

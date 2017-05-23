@@ -1,0 +1,54 @@
+a.delete
+{
+    position: relative;
+    float:right;
+    right:-10px;
+    top:-12px;
+   
+}
+.main_div
+{
+    margin-bottom: 13%;
+    display: inline-block;
+    text-align: center;
+}
+.nor_user_a
+{
+   
+    width: 98%;
+    text-align: left;
+}
+.nor_user
+{
+    padding-top: 30px;
+    padding-left: 60px;
+    position: center;
+   
+}
+div.heattbeat_empty_div
+{
+    padding-top: 20px;
+    padding-left: 10px;
+    background:none;
+    border:none;
+    text-align: left;
+}
+
+
+
+.empty_heartbeat_content
+{
+    width:50%;
+    text-align: left;
+}
+
+.empty_nor_user_a
+{
+    border:1px solid red;
+    left:0;
+}
+
+.empty_nor_user
+{
+    left:0;
+}

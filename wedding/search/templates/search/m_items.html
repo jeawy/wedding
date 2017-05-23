@@ -1,0 +1,79 @@
+   
+{% for foodslocation_item in foodslocation %}
+    {% if foodslocation_item.kb.top_pic %}
+    <div class="col-xs-12 col-sm-12   search-kb-holder">
+        <div class="row">
+            
+            <div class="col-xs-4 col-sm-4   ">
+                <a target="__blank" href="{% url 'kb:kb_detail' foodslocation_item.kb.id %}" >
+                <img class="search-detail-img" src="{{rootmedia}}/{{foodslocation_item.kb.top_pic.name}}"/>
+                </a>
+            </div>
+            <div class="col-xs-8 col-sm-8  "> 
+                <div class="row row-words-detail">
+                    <div class="col-xs-12 col-sm-12   ">
+                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' foodslocation_item.kb.id %}" >
+                        {{foodslocation_item.kb.title}} 
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12   ">
+                            <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>
+                            <label>人气指数:</label><label class="hot-{{foodslocation_item.id}}" >0</label>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-12   ">
+                        <img class="kblocation" src="/static/img/map.png"/>
+                        {% for location in foodslocation_item.kb.foodlocation_set.all %}
+                            <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.area.id}}">
+                                {{location.area.short_name}}  
+                            </a>
+                        {% endfor%}
+                    </div>
+                        <div class="col-xs-12 col-sm-12   ">
+                            <img class="hot " data-toggle="tooltip" title="参考价格" src="/static/img/money.png"/>
+                            <label>参考价格:
+                        {{foodslocation_item.kb.lower_price}}-{{foodslocation_item.kb.higher_price}}
+                            </label>
+                    </div>
+                </div>
+            </div> 
+            
+        </div> 
+    </div>
+    {% endif %}
+{% endfor %}<!---->
+{% for foodslocation_item in foodslocation %}
+    {% if not foodslocation_item.kb.top_pic %}
+    <div class="col-xs-6 col-sm-6 col-md-6 search-kb-holder">
+        <div class="row"> 
+            <div class="col-xs-12 col-sm-12 ">
+                        <div class="row row-words-detail">
+                                <div class="col-xs-12 col-sm-12 ">
+                                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' foodslocation_item.kb.id %}" >
+                                        {{foodslocation_item.kb.title}}
+                                        </a>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 ">
+                                        <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>：
+                                        <label class="hot-{{foodslocation_item.id}}" >0</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 ">
+                                    <img class="kblocation" src="/static/img/map.png"/>：
+                                        {% for location in foodslocation_item.kb.foodlocation_set.all %}
+                                            <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.id}}">
+                                            {{location.area.short_name}}  
+                                            </a>
+                                        {% endfor%}
+                                </div>
+                                <div class="col-xs-12 col-sm-12 ">
+                                        <img class="hot " data-toggle="tooltip" title="参考价格" src="/static/img/money.png"/>：
+                                    <label>
+                                    {{foodslocation_item.kb.lower_price}}-{{foodslocation_item.kb.higher_price}}
+                                    </label>
+                                </div>
+                        </div>
+            </div> 
+        </div> 
+    </div>
+        {% endif %}
+{% endfor %}<!---->

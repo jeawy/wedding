@@ -1,0 +1,53 @@
+{% extends "admin/m_base_site.html" %}
+
+{% load admin_static %}
+
+{% block title %}联系我们 | 获得支持{% endblock %}
+
+{% block keywords%}各地正宗美食分享 各地小吃 {%endblock%}
+{% block description%}吃典网用心收集全国各地正宗的特色美食，特色小吃，发扬光大各地的美食，也方便外地的旅行者可以准确的了解当地的特色美食{%endblock%}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'basedata/css/m_contact.css'%}" />
+{% endblock %} 
+
+
+{% block content %}  
+
+
+   
+    <h3 class="about_title" >关于吃典网</h3>
+    <div class="help_message">  
+      吃典网用心收集全国各地正宗的特色美食，特色小吃，发扬光大各地的美食，也方便外地的旅行者可以准确的了解当地的特色美食
+    </div>
+    <div class="help_message"> 
+      吃典网希望用户出去玩的时候，在找当地正宗美食的时候，第一想到的就是找吃典网。吃典网将竭力做到：
+    </div>
+    <ul> 
+      <li>1 你可以在吃典网上找到最全的当地的美食。</li>
+      <li>2 只要你找到在吃典网找到的美食，就一定是当地最正宗的。</li>
+      <li>3 吃典网立志让吃货们摆脱全国千篇一律的小吃街。</li> 
+    </ul>
+   
+    <h3 class="about_title" >版权声明</h3>
+    <div class="help_message">  
+      吃典网全站所有的内容均系吃典网精心收集以及网友自身分享，未经吃典网书面许可，不得转载！
+    </div>
+
+    <h3 class="about_title" >联系我们</h3>
+    <div class="help_message">  
+      电话号码：18811082245<br/>
+      Email:   postmaster@map2family.com
+    </div>
+    <div class="two_di_code">
+      <img  src="{% static 'basedata/img/two_de_code.jpg'%}"/>
+    </div>
+ 
+{% endblock %}
+
+ 

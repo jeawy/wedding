@@ -1,0 +1,293 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{% for area in  kb.foodlocation_set.all %}{{area.area.short_name}}_{% endfor %}{{kb.title}}的介绍、价格以及推荐去处{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
+ 
+{% endblock %}
+ {% block keywords%}{% for area in  kb.foodlocation_set.all|slice:"3" %}{{area.area.short_name}}_{% endfor %}{{kb.title}}的介绍、价格以及推荐去处 {%endblock%}
+  {% block description%} {% for area in  kb.foodlocation_set.all|slice:"3" %}{{area.area.short_name}} {% endfor %}的正宗特色美食{{kb.title}} {% if slice_ls %}{{slice_ls.0.content|truncatechars:"180"}}{% endif %}{%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %}
+<input type="hidden" id="kbid" value="{{kb.id}}"/>
+    {% if kb %}
+    
+<div class="main_kb_detail">
+    {% load tz %} 
+                            <h1 class="kb_title">{{kb.title}}</h1>
+                             <img id="id_confirm_kb" class="certificate" src="{% static 'img/certificate.ico' %}" data-toggle="tooltip" title="点击进行认证，您的认证会让更多人找到正宗的特色美食.."/>
+                                        {{kb.count_confirm}}人已认证这篇分享为特色美食
+                            <div class="kb_sub_header"> 
+                                <ul class="ul_date_username">  
+                                    <li class="vmlog_date">
+                                        
+                                        {% if administrator %}
+                                         {{kb.author.get_full_name}} | {{kb.date  | date:" Y-m-d H:i:s"}}
+                                       {% endif %}
+                                        {% if kb.is_essence == 1 %}
+                                        <i class="fa fa-diamond fa-diamond-selected "><lable class="lb_fa-diamond-selected"> [精华]</lable></i>
+                                        {% endif %}
+                                        <img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+                                        {% for area in  kb.foodlocation_set.all %}
+                                        <label>
+                                            {{area.area.short_name}}
+                                        </label>
+                                        {% endfor %}
+                                    </li>
+                                     <li class="vmlog_date">
+                                         {% if kb.author == request.user %}
+                                            {% if kb.status == 0   %}
+                                            <label class="red_label" data-toggle="tooltip" title="草稿状态下的美食分享无法被其他用户搜索到，发布之后才可以被其他用户看到.">[草稿]</label>
+                                            <a href="{% url 'kb:set_kb_top_pic'  kb.pk %}" >去发布</a>
+                                            {% else %}
+                                            <div class="btn-group">
+                                            <a href="{% url 'kb:changekb'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="您是作者，可以继续编辑." >编辑</a>
+                                            <a href="{% url 'kb:set_kb_property'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="您是作者，可以继续编辑." >编辑属性</a>
+                                            <a href="{% url 'kb:set_kb_top_pic'  kb.pk %}" class="btn btn-button btn-default" data-toggle="tooltip" title="在展示美食的时候使用缩略图." >设置缩略图</a>
+                                            </div>
+                                            {% endif %}
+                                        {% endif %} 
+                                    </li>
+                                </ul>  
+                            </div>
+                        <hr>
+     
+      {% if slice_ls %}
+      {% for slice in slice_ls %}
+      <pre>{{slice.content}}</pre>
+            {% if pic_ls %}
+            {% for pic in pic_ls %}
+            {% if pic.slices ==  slice%}
+            <div class="div_kb_img"> 
+                <img class="kb_img" src="{{rootmedia}}{{pic.link.name }}"/ >
+            </div>
+          {% endif %}
+            {% endfor %}
+            {% endif %}
+      {% endfor %}
+      {% endif %}
+     
+ </div> 
+  <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide2">
+                 <div class="container">
+                     <div class="row">
+                         <div class="col-xs-12  col-sm-12 col-md-12" >
+                            <i class="fa fa-heart fa-iwant" data-toggle="tooltip" title="我想吃" aria-hidden="true"></i>
+                            <label>我也想吃...</label>
+                        </div>
+                     </div> <!-- end row-->
+                     <div class="row">  
+                            <div class="col-xs-12 col-sm-12  col-md-12" > 
+                                <div class="progress progress-iwant">
+                                    <div class="progress-bar progress-bar-iwant progress-bar-danger progress-bar-striped" role="progressbar"
+                                    aria-valuenow="{{kb.i_want}}" aria-valuemin="0" aria-valuemax="100" style="width:{{kb.i_ate}}%">
+                                    <label class="will_label will_iwant">有{{kb.i_want}}人想吃</label>
+                                    </div>
+                                </div>
+                            </div>
+                    </div><!-- end row-->
+                  
+                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12" >
+                        <i class="fa fa-heart fa-iate" data-toggle="tooltip" title="我吃过" aria-hidden="true"></i>
+                        <label>我们曾吃过同样的美食...</label>
+                    </div>
+                </div>
+                <div class="row row-ate"> 
+                    <div class="col-xs-12 col-sm-12 col-md-12" > 
+                        <div class="progress progress-ate">
+                            <div class="progress-bar progress-bar-ate progress-bar-danger progress-bar-striped" role="progressbar"
+                            aria-valuenow="{{kb.i_ate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{kb.i_ate}}%">
+                                <label class="will_label will_ate">有{{kb.i_ate}}人吃过</label>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end row-ate-->
+                <hr>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4" >
+                            价格区间:
+                        </div>
+                        <div class="col-xs-8 col-md-8" >
+                            {{kb.lower_price}} -{{kb.higher_price}}  
+                        </div>
+                    </div>
+                <hr>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12" >
+                            推荐去处:
+                        </div> 
+                    </div>
+                    {% for place in kb.foodplace_set.all %}
+                        <div class="row"> 
+                            <div class="col-xs-12 col-md-12" >
+                                {{place.address}}
+                            </div>  
+                        </div>
+                    {% endfor %}
+                </div><!--end container-->
+            </div><!--end slider2-->
+            <div class="swiper-slide swiper-slide1">
+                <div class="kb_footer">
+                    <i class="fa fa-newspaper-o"> 阅读:{{kb.count_read}}</i>
+                            <i class="fa  fa-thumbs-up"> {{kb.count_good}}</i>
+                            <i class="fa fa-comment-o"> 评论:{{kb.count_reply}}</i>
+                            
+                            </div>
+                            <hr>
+                    
+                    {% if  kb.comment_set.all %}
+                    {% for comment in kb.comment_set.all %}
+                    <div class="comment_div">
+                        <input  type="hidden" class="commentid" value="{{ comment.id}}"/>
+                            <div class="comment_left_div">
+                                <div class="comment_portrait portrait " style="background-image:url('{{comment.commenter.head_portrait}}')"></div>
+                            </div>
+                            <div class="comment_right_div">
+                            <h3 class="comment_title ">
+                                {% if check_kb_autor %}
+                                <label  class="comment_title username">{{  comment.commenter.get_full_name }}</label >
+                                {% endif %}
+                                <label  class="comment_title date">{{ comment.date  |date:" Y-m-d  H:i:s "}}</label >
+                            </h3>
+                            {% if comment.type == 1 %}
+                            回复<label for="date" class="replied_username comment_click" name="words" >{{ comment.replied_comment.commenter.get_full_name }}:</label>
+                            {% endif %}
+                            <label for="date" class="heartbeat_comment comment_click" name="words" >{{ comment.content }}</label>
+                            <input type="hidden" class="heartbeat_comment_hid_user" username="{{comment.commenter.get_full_name}}" commentid="{{  comment.id }}" />
+                            </div>
+                            </div>
+                            <hr class="comment_hr">
+                            
+                    {% endfor %}
+                    
+                    {% else %}
+                    <div class="comment">
+                        <i class="fa fa-comment-o">暂无评论...</i> 
+                    </div>
+                     
+                    {% endif %}
+                    <div class="div-comment"> 
+                            <textarea class="form-control" id="id_comment_conent"></textarea> 
+                            <input type="hidden" id="current_commentid" value =""/>
+                            <input type="button" class="btn btn-primary comment_ordinary_sent" id="comment_conent_btn"value="评论" />
+                    </div>
+                    
+            </div><!--end slider1-->
+            
+            {% if administrator %}
+            <div class="swiper-slide swiper-slide3">
+                 <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12" >
+                                <h3>精典委员会特权</h3>
+                            </div>  
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12" >
+                                <div class="btn-group">
+                                    <a href="{% url 'kb:changekb' kb.id %}" class="btn btn-button btn-default">
+                                    修改图文
+                                    </a>
+                                    <a href="{% url 'kb:set_kb_property' kb.id %}" class="btn btn-button btn-default">
+                                    设置分享属性
+                                    </a>
+                                    <a href="{% url 'kb:set_kb_top_pic' kb.id %}" class="btn btn-button btn-default">
+                                    设置缩略图
+                                    </a>
+                                    <button type = "button" class="btn btn-button btn-danger btn-delete">
+                                    删除
+                                    </button>
+                                </div>
+                            </div>  
+                        </div>
+                        <hr>
+                        <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12" >
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-button btn-default set-to-homepage">
+                                                    推至最新
+                                                    </button>
+                                                    <button type="button" class="btn btn-button btn-default set-to-homepageone">
+                                                    推至首页
+                                                    </button>
+                                                    <button type="button" class="btn btn-button btn-default set-to-week">
+                                                    推至本周推荐
+                                                    </button>  
+                                                </div>
+                                    </div>
+                        </div><!--end row-->
+                 </div>  <!--end container-->
+            </div><!--end slider3-->
+            {% endif %}
+            {% if kb.author == request.user and not administrator %}
+            <div class="swiper-slide swiper-slide4">
+                 <div class="container container-modify"> 
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center"  >
+                                <div class="btn-group">
+                                    <a href="{% url 'kb:changekb' kb.id %}" class="btn btn-button btn-primary">
+                                    修改图文
+                                    </a>
+                                    <a href="{% url 'kb:set_kb_top_pic' kb.id %}" class="btn btn-button btn-primary">
+                                    设置分享属性
+                                    </a> 
+                                </div>
+                            </div>  
+                        </div> 
+                 </div>  <!--end container-->
+            </div><!--end slider3-->
+            {% endif %}
+        </div>
+        <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div> 
+</div>
+ 
+ <hr>
+ {% else %}
+        <div class = "main_kb_detail" >
+            <ul> <li class="vmlog_date">  </li>
+                </ul> 
+                <label class="main_link_container_label main_link_container_label_none"> 没有找到帖子...</label> 
+        </div>
+     
+{% endif %}
+
+ {% endblock %}
+ 
+ {% block footer_script %}{{ block.super}} 
+ 
+ <script type="text/javascript"> 
+    $(document).ready(function() {
+    var img = $('.kb_img');
+    img.css('max-width',document.body.clientWidth);  
+}); 
+</script>
+
+<script type="text/javascript" language="javascript" src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"  src="{% static 'kb/js/m_detail.js' %}"></script>  
+ <script type="text/javascript"  src="{% static 'kb/js/good.js' %}"></script>  
+ <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script> 
+ <script src="{% static 'kb/js/list.js' %}"></script>
+ <script>        
+          var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', 
+            loop: true, 
+            // 如果需要分页器
+            pagination: '.swiper-pagination', 
+          
+          }); 
+  </script>
+ {% endblock %} 
+ 
+   

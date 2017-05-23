@@ -1,0 +1,45 @@
+ 
+          
+          <div class="custom_footer_menu">
+              <div class="container">
+                                <div class="row row-fa"> 
+                                    <div class="col-sm-3 col-xs-3 text-center  " >
+                                        <a href="{% url 'data:latest_kb' %}" >
+                                            <i class="fa fa-puzzle-piece fa-2x  " aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3  text-center " >
+                                        <a href="{% url 'data:week_recommend_kb' %}"  >
+                                            <i class="fa fa-star fa-2x  " aria-hidden="true"></i>
+                                          
+                                        </a>
+                                    </div>
+                                     <div class="col-sm-3 col-xs-3  text-center " >
+                                        <a href="{% url 'kb:newkb' %}" >
+                                            <i class="fa fa-plus-square fa-2x yellow" aria-hidden="true"></i>
+                                            </a>
+                                    </div>
+                                     <div class="col-sm-3 col-xs-3  text-center " > 
+                                            <i class="fa fa-search fa-2x fa-search-header "  data-toggle="modal" data-target="#search-modal" aria-hidden="true" >
+                                            </i> 
+                                    </div> 
+                                </div>
+                                <div class="row  row-words"> 
+                                    <div class="col-sm-3 col-xs-3 text-center  " >
+                                        <a href="{% url 'data:latest_kb' %}" >最新</a>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3  text-center " >
+                                        <a href="{% url 'data:week_recommend_kb' %}"  >推荐</a>
+                                    </div>
+                                     <div class="col-sm-3 col-xs-3  text-center ">
+                                        <a href="{% url 'kb:newkb' %}"  >分享</a>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3  text-center " >
+                                        <div   class="location" data-toggle="modal" data-target="#placemodal">
+                                            {{request.session.locationname | default:'陕西'}}
+                                        </div>
+                                    </div>
+                                </div>
+            </div><!-- end container-->
+          </div><!-- end custom_footer_menu-->
+        

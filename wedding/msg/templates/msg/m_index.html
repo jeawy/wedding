@@ -1,0 +1,40 @@
+{% extends "admin/m_base_site.html" %}
+{% block title %}{{ page }} 每日精选|说出那些让你久久不能移开视线的...{% endblock %}
+{% load admin_static %}
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" language="javascript" src="{% static 'good/js/good_day_words.js'%}"></script> 
+<script type="text/javascript" language="javascript" src="{% static 'good/js/good_day_words.1.js'%}"></script> 
+<script type="text/javascript" language="javascript" src="{% static 'basedata/js/m_index.js'%}"></script> 
+{{ media }}
+{% endblock %}
+{% block coltype %}colM{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'basedata/css/m_daywords_comm.css'%}" />
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'msg/css/m_daywords_index.css'%}" />
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'good/css/comm.css'%}" />
+<link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/m_background_div.css'%}" />
+{% endblock %}
+
+{% block content %}
+<div class="background_div"> 
+</div>
+<div class="l3_main_div">
+    <div class="detail"  > 
+{% if msg_list %}
+	{% load tz %}
+	{% for msg in msg_list %} 
+	<a class="a_go_comment" href="{{msg.url}}">
+		<input type="hidden" class="word_id" value="{{ msg.id}}"/>
+	    <h3 class="title"><label  class="title date">{{ msg.date  |date:" Y-m-d  H:i:s "}}</label >
+        <label  class="title username">{{ msg.owner.get_full_name }}</label ></h3>
+        {% if msg.type == 0 %}<i class="fa fa-heart fa-heart"></i>{% else %}<i class="fa fa-comment"></i>{% endif %}
+	    <label for="date" class="heartbeat_content" name="words" >{{ msg.msgtext }}</label> </a>
+	 <hr />
+{% endfor %}
+{% endif %}
+</div>
+</div>
+{% endblock %}
+ {% block footer %}
+ <script type="text/javascript" language="javascript" src="{% static 'js/m_background_div.js'%}"></script>
+ {% endblock %}

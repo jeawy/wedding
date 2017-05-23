@@ -1,0 +1,12 @@
+#id_permissions
+{
+    height:400px;
+    width: 800px;
+}
+
+.helptext
+{
+    font-size: 2em;
+    color:red;
+    background-color: lightgray;
+}

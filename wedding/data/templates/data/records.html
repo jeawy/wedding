@@ -1,0 +1,39 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %} {{area.short_name}} 正宗特色美食{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+ 
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}  
+ 
+{% endblock %}
+ {% block keywords%} {{area.short_name}} 正宗特色美食{%endblock%}
+  {% block description%} {{area.short_name}} 的正宗特色美食{%endblock%}
+  
+{% block content %}
+  <div class="container" >
+    <div class="row" >
+            <div class="col-xs-10 col-sm-12 ">
+                  {% if result %}
+                  <table class="table"> 
+                      
+                      <tbody>
+                        {% for r in result %}
+                           <tr>
+                             <td>{{forloop.counter}} </td>
+                             <td> 
+                               {{r}} 
+                              </td> 
+                           </tr>
+                        {% endfor %}
+                      </tbody>
+                   </table>
+                  {% endif %}
+            </div>
+ 
+     </div>       
+    </div>
+       
+  {% endblock %} 
+ 

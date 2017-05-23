@@ -1,0 +1,74 @@
+{% extends "admin/base_site.html" %}
+{% block title %}{{ page }} Problem| {{ site_title|default:_('L2 tools management') }}{% endblock %}
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" language="javascript" src="/static/js/datatable/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/datatable/dataTables.jqueryui.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/ticket-jquery-table.js"></script>
+{{ media }}
+{% endblock %}
+{% block coltype %}colM{% endblock %}
+{% block extrastyle %}{{ block.super }}
+ <link rel="stylesheet" type="text/css" media="screen"  href="/static/css/fix/index.css" />
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/datatable/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/datatable/dataTables.jqueryui.css" />
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/datatable/dataTables.extend.css" />
+{% endblock %}
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+{% block content %}
+<form id="problem_search_form" action="" method="get">
+
+<table width="100%" class="display" id="data-table-list" cellspacing="0" >
+<thead>
+	<tr>
+		<th>Date</th>
+		<th>arcserve backup</th>
+		<th>arcserve D2D</th>
+		<th>arcserve UDP</th>
+		<th>XOSWAN</th>
+	</tr>
+</thead>
+<tfoot>
+	<tr>
+		<th>Date</th>
+		<th>arcserve backup</th>
+		<th>arcserve D2D</th>
+		<th>arcserve UDP</th>
+		<th>XOSWAN</th>
+	</tr>
+</tfoot>
+<tbody>
+		{% if ticket_list %}
+			{% csrf_token %}
+			{% for ticket in ticket_list %}
+		<tr  class="tr_problem_info">
+     		<td class="field-problemid"><label for="date" id="problemid" class="problemid" name="problemid" >{{ ticket.id }}</lable></td> 
+    		<td>
+    			<label for="date" name="title" ><a method="get" href="{% url 'ticket:detail' ticket.id %}">{{ ticket.title }}</a></lable>
+    			</td>
+    		<td class="field-createDate_date nowrap"><label for="date">{{ ticket.createDate_date }}</lable></td>
+    		<td class="field-creator">{{ ticket.creator.get_full_name  }}</td>
+    		<td class="field-get_problemTitle">{{ ticket.comments }}</td>
+    		<td >
+    		{% if ticket.isFinished == "1"%}
+    		    <img src="/static/ticket/img/icon-yes.gif" alt="Finished" />
+                {% else %}
+                <img src="/static/ticket/img/icon-no.gif" alt="Not finished" />
+            {% endif %}
+             </td>
+    		{% if has_permission %}
+    		<td>
+    			<label for="date" name="title" ><a method="get" href="{% url 'ticket:change' ticket.id %}">change</a></lable>
+    	    </td>
+    	    {% endif %}
+		</tr>
+		{% endfor %}
+		{% else %}
+    		<label class="err_msg" >No Tickets are available.</lable>
+		{% endif %}
+		</tbody>
+</table>
+{% if ticket_list.counter %}
+		<strong>Total:{{ ticket_list.counter  }} Tickets, Finished: {{ finished_num }} </strong>
+{% endif %}
+</form>
+{% endblock %}

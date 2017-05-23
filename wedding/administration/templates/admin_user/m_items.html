@@ -1,0 +1,78 @@
+   
+{% for kb in mykbs %}
+    {% if kb.top_pic %}
+    <div class="col-xs-6 col-sm-6 col-md-6 search-kb-holder">
+        <div class="row">
+            
+            <div class="col-xs-4 col-sm-4 col-md-4 padding-sm">
+                <a target="__blank" href="{% url 'kb:kb_detail' kb.id %}" >
+                <img class="search-detail-img" src="{{rootmedia}}/{{kb.top_pic.name}}"/>
+                </a>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8  padding-sm"> 
+                <div class="row row-words-detail">
+                    <div class="col-xs-12 col-sm-12 col-md-12  padding-sm">
+                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' kb.id %}" >
+                        {{kb.title}} 
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12  padding-sm">
+                            <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>
+                            <label>人气指数:</label><label class="hot-{{kb.id}}" >0</label>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12  padding-sm">
+                        <img class="kblocation" src="/static/img/map.png"/>
+                        {% for location in kb.foodlocation_set.all %}
+                            <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.area.id}}">
+                                {{location.area.short_name}}  
+                            </a>
+                        {% endfor%}
+                    </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12  padding-sm">
+                            <label>
+                                    {{kb.date|date:'Y-m-d H:i:s'}}
+                             </label>
+                             <a target="__blank" href="{% url 'kb:changekb' kb.id %}">编辑</a>
+                    </div>
+                </div>
+            </div> 
+            
+        </div> 
+    </div>
+    {% endif %}
+{% endfor %}<!---->
+{% for kb in mykbs %}
+    {% if not kb.top_pic %}
+    <div class="col-xs-6 col-sm-6 col-md-6 search-kb-holder">
+        <div class="row"> 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="row row-words-detail">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' kb.id %}" >
+                                        {{kb.title}}
+                                        </a>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>：
+                                         <label>人气指数:</label><label class="hot-{{kb.id}}" >0</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <img class="kblocation" src="/static/img/map.png"/>：
+                                        {% for location in kb.foodlocation_set.all %}
+                                            <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.id}}">
+                                            {{location.area.short_name}}  
+                                            </a>
+                                        {% endfor%}
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12"> 
+                                    <label>
+                                    {{kb.date|date:'Y-m-d H:i:s'}}
+                                    </label>
+                                </div>
+                        </div>
+            </div> 
+        </div> 
+    </div>
+        {% endif %}
+{% endfor %}<!---->

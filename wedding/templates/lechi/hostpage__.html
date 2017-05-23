@@ -1,0 +1,254 @@
+{% extends "admin/base_site.html" %}
+ {% block title %}带你发现真正的美食 因为 关于吃这件事，我们是认真的...{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/css/hostpage.css" />
+<style> 
+        .jssorb05 {
+            position: absolute;
+        }
+        .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 8px;
+            height: 8px;
+            background: url('/static/plugins/full-width-slider.slider/img/b05.png') no-repeat;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .jssorb05 div { background-position: -7px -7px; }
+        .jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
+        .jssorb05 .av { background-position: -67px -7px; }
+        .jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
+
+        .jssora22l, .jssora22r {
+            display: block;
+            position: absolute;
+            /* size of arrow element */
+            width: 40px;
+            height: 58px;
+            cursor: pointer;
+            background: url('/static/plugins/full-width-slider.slider/img/a22.png') center center no-repeat;
+            overflow: hidden;
+        }
+        .jssora22l { background-position: -10px -31px; }
+        .jssora22r { background-position: -70px -31px; }
+        .jssora22l:hover { background-position: -130px -31px; }
+        .jssora22r:hover { background-position: -190px -31px; }
+        .jssora22l.jssora22ldn { background-position: -250px -31px; }
+        .jssora22r.jssora22rdn { background-position: -310px -31px; }
+        .jssora22l.jssora22lds { background-position: -10px -31px; opacity: .3; pointer-events: none; }
+        .jssora22r.jssora22rds { background-position: -70px -31px; opacity: .3; pointer-events: none; }
+</style>
+<style>
+ 
+
+/* 提示自定义 */
+.stateTip, #StateTip{display:none; position:absolute; padding:8px; background:#fff; border:2px solid #2385B1; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; font-size:12px; font-family:Tahoma; color:#333;}
+
+.regionList{margin-top:15px;overflow: hidden;}
+.regionList ul{margin-right:5px; display:inline;}
+.regionList ul li{ height:24px; margin-left:10px; padding:0 0px; border:1px solid #fff; line-height:24px;float:left;width:100px;}
+.regionList ul li.select{border:1px solid #D3D3D3; background:#FFF1BF}
+
+.mapInfo i{ display:inline-block; width:15px; height:15px; margin-top:5px; line-height:15px; font-style:normal; background:#aeaeae; color:#fff; font-size:11px; font-family: Tahoma; -webkit-border-radius:15px; border-radius:15px; text-align:center}
+.mapInfo i.active{background:#E27F21;}
+.mapInfo span{ padding:0 5px 0 3px;}
+.mapInfo b{ font-weight:normal; color:#2770B5}
+.regionMap{float:left; margin-left:10px; display:inline;}
+</style>
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+<div id="slider1_container" style="position: relative; top: 0px; left: 0px;  height: 260px;">
+	<!-- Slides Container -->
+	<div u="slides" class="slider1_container_child" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px;   height: 260px;">
+		<div  class="effect1 slider1 row"  >
+			<div class="col-sx-12 col-md-12 slider1-holder">
+				<div class="slider1-words-holder1"> 
+
+				</div>
+				<div class="slider1-holder slider1-words-holder2"> 
+					<h1 class="">吃典</h1>
+					<h3> 吃货们用来寻找各地正宗特色美食的"新华字典"</h3>
+					<div class="row div-items-top">
+						<div class="col-xs-2 col-md-2 ">   </div>
+						<div class="col-xs-10 col-md-10 item-explain"> 
+
+							<span class="label label-danger" >正宗的:</span>
+							<i class="fa fa-circle" aria-hidden="true"></i>
+							<label>我们整理的每份特色美食都是由我们邀请的当地吃货用心分享出来的，或者由普通网友提供，并受到大部分网友认可的特色美食</label>
+						</div>  
+					</div>
+					<div class="row  ">
+						<div class="col-xs-2 col-md-2  ">   </div>
+						<div class="col-xs-10 col-md-10 item-explain">
+
+							<span class="label label-danger" >全面的:</span>
+							<i class="fa fa-circle" aria-hidden="true"></i>
+							<label>我们计划在未来一年内覆盖全国所有省份，90%的市区和80%的县</label>
+						</div>  
+					</div>
+					<div class="row div-items-bottom">
+						<div class="col-xs-4 col-md-4  "> 
+						</div>
+						<div class="col-xs-4 col-md-4">
+							<a href="{% url 'kb:newkb'%}">
+								<input type="bottun" class="btn btn-success btn-write" data-toggle="tooltip" title="点击开始分享，让更多的人知道你们当地的美食.."
+                          value="开始分享我们当地的特色美食"/></a>
+						</div>  
+						<div class="col-xs-4 col-md-4"> 
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div> <!---end of slider1 --->
+
+
+		<div  class="effect1 slider2 row"    >
+			<div class="col-sx-12 col-md-12 slider2-holder">
+
+          <div id="Region" style="overflow: hidden;clear:both;">
+            <div class="regionMap" id="RegionMap"></div>
+            <div id="MapColor" style=" display:none; float:left; width:30px; height:180px; margin:80px 0 0 10px; display:inline; "></div>
+          </div>
+
+
+			</div>
+
+		</div> <!---end of slider1 --->
+
+	</div> <!---end of slider1_container_child --->
+	<div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
+		<!-- bullet navigator item prototype -->
+		<div data-u="prototype" style="width:16px;height:16px;"></div>
+	</div>
+
+</div><!---end of slider1_container --->
+<hr>
+
+
+	<div class="row" >
+
+	</div> 
+	<div class="kb_holder">
+  {% for kb in kbs %}
+  {% if kb.top_pic %}
+		<a data-toggle="tooltip" title="{{kb.title}}" href="{% url 'kb:kb_detail' kb.id %}"><img  class="img-circle effect1" src="{{rootmedia}}{{kb.top_pic.name}}" /></a>
+  {% endif %}
+  {% endfor %}
+
+		<a href="{% url 'kb:newkb'%}"><img src="/static/img/kb_write1.png" /></a>
+		<a href=""><img src="/static/img/kb_write2.png" /></a>
+		<a href=""><img src="/static/img/kb_write3.png" /></a> 
+		<a href="{% url 'kb:newkb'%}"><img src="/static/img/kb_write1.png" /></a>
+
+		<a href=""><img src="/static/img/kb_write3.png" /></a>  
+		<a data-toggle="tooltip" title="创建你所知道的特色美食词条" href="{% url 'kb:newkb'%}"><img src="/static/img/kb_write1.png" /></a>
+
+	</div> 
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}  
+	<script  src="{% static 'plugins/full-width-slider.slider/js/jssor.slider-22.0.15.min.js'%}"></script> 
+	<script  src="{% static 'js/homepage.js'%}"/>   
+
+  <script type="text/javascript" src="{% static 'plugins/map/js/lib/jquery.js' %}"></script>
+	<script type="text/javascript" src="{% static 'plugins/map/js/lib/raphael-min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'plugins/map/js/res/chinaMapConfig.js' %}"></script>
+	<script type="text/javascript" src="{% static 'plugins/map/js/map.js' %}"></script> 
+	<script type="text/javascript">
+	  $(function(){
+	var data = {
+	"jiangsu":{"value":"30.05%","index":"1","stateInitColor":"0"},
+	"henan":{"value":"19.77%","index":"2","stateInitColor":"0"},
+	"anhui":{"value":"10.85%","index":"3","stateInitColor":"0"},
+	"zhejiang":{"value":"10.02%","index":"4","stateInitColor":"0"},
+	"liaoning":{"value":"8.46%","index":"5","stateInitColor":"0"},
+	"beijing":{"value":"4.04%","index":"6","stateInitColor":"1"},
+	"hubei":{"value":"3.66%","index":"7","stateInitColor":"1"},
+	"jilin":{"value":"2.56%","index":"8","stateInitColor":"1"},
+	"shanghai":{"value":"2.47%","index":"9","stateInitColor":"1"},
+	"guangxi":{"value":"2.3%","index":"10","stateInitColor":"1"},
+	"sichuan":{"value":"1.48%","index":"11","stateInitColor":"2"},
+	"guizhou":{"value":"0.99%","index":"12","stateInitColor":"2"},
+	"hunan":{"value":"0.78%","index":"13","stateInitColor":"2"},
+	"shandong":{"value":"0.7%","index":"14","stateInitColor":"2"},
+	"guangdong":{"value":"0.44%","index":"15","stateInitColor":"2"},
+	"jiangxi":{"value":"0.34%","index":"16","stateInitColor":"3"},
+	"fujian":{"value":"0.27%","index":"17","stateInitColor":"3"},
+	"yunnan":{"value":"0.23%","index":"18","stateInitColor":"3"},
+	"hainan":{"value":"0.21%","index":"19","stateInitColor":"3"},
+	"shanxi":{"value":"0.11%","index":"20","stateInitColor":"3"},
+	"hebei":{"value":"0.11%","index":"21","stateInitColor":"4"},
+	"neimongol":{"value":"0.04%","index":"22","stateInitColor":"4"},
+	"tianjin":{"value":"0.04%","index":"23","stateInitColor":"4"},
+	"gansu":{"value":"0.04%","index":"24","stateInitColor":"4"},
+	"shaanxi":{"value":"0.02%","index":"25","stateInitColor":"4"},
+	"macau":{"value":"0.0%","index":"26","stateInitColor":"7"},
+	"hongkong":{"value":"0.0%","index":"27","stateInitColor":"7"},
+	"taiwan":{"value":"0.0%","index":"28","stateInitColor":"7"},
+	"qinghai":{"value":"0.0%","index":"29","stateInitColor":"7"},
+	"xizang":{"value":"0.0%","index":"30","stateInitColor":"7"},
+	"ningxia":{"value":"0.0%","index":"31","stateInitColor":"7"},
+	"xinjiang":{"value":"0.0%","index":"32","stateInitColor":"7"},
+	"heilongjiang":{"value":"0.0%","index":"33","stateInitColor":"7"},
+	"chongqing":{"value":"0.0%","index":"34","stateInitColor":"7"}
+	};
+			var i = 1;
+			for(k in data){
+				var _cls = i < 4 ? 'active' : ''; 
+				$('#MapControl .list1').append('<li name="'+k+'"><div class="mapInfo"><i class="'+_cls+'">'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+			}
+
+			var mapObj_1 = {};
+			var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
+			
+			$('#RegionMap').SVGMap({
+				external: mapObj_1,
+				mapName: 'china',
+				mapWidth: 600,
+				mapHeight: 380,
+				stateData: data,
+				stateTipHtml: function (mapData, obj) {
+					var _value = mapData[obj.id].value;
+					var _idx = mapData[obj.id].index;
+					var active = '';
+					_idx < 4 ? active = 'active' : active = '';
+					var tipStr = '<div class="mapInfo"><i class="' + active + '">' + _idx + '</i><span>' + obj.name + '</span><b>' + _value + '</b></div>';
+					return tipStr;
+				}
+			});
+			$('#MapControl li').hover(function () {
+				var thisName = $(this).attr('name');
+				
+				var thisHtml = $(this).html();
+				$('#MapControl li').removeClass('select');
+				$(this).addClass('select');
+				$(document.body).append('<div id="StateTip"></div');
+				$('#StateTip').css({
+					left: $(mapObj_1[thisName].node).offset().left - 150,
+					top: $(mapObj_1[thisName].node).offset().top - 40
+				}).html(thisHtml).show();
+				mapObj_1[thisName].attr({
+					fill: '#E99A4D'
+				});
+			}, function () {
+				var thisName = $(this).attr('name');
+
+				$('#StateTip').remove();
+				$('#MapControl li').removeClass('select');
+				mapObj_1[$(this).attr('name')].attr({
+					fill: "#" + stateColorList[data[$(this).attr('name')].stateInitColor]
+				});
+			});
+			
+			$('#MapColor').show();
+});
+	</script>
+ {% endblock %} 

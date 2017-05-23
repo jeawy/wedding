@@ -1,0 +1,56 @@
+
+<nav id="menu" class="menu slideout-menu"> 
+        <header class="menu-header">
+            <div class="portrait" id="id_user_portrait"></div> 
+            {% if user and not user.is_anonymous and user.is_authenticated %}
+            <div>
+                <div ><h3 class="header-username">{{ request.user.get_full_name }}</h3></div>
+            <div>
+             
+             <ul class="menu-header-ul">
+            <li class="menu-header-li"> <a class ="msg-holder" href="{% url 'logout' %}">退出</a>
+           <a class ="headerlink2" href="{% url 'user:portrait' %}">编辑头像</a></li></ul>
+            {% else %}
+            <div>
+                <div ><h3 class="header-username">游客</h3></div>
+            <div>
+            <ul class="menu-header-ul">
+            <li class="menu-header-li"> <a class ="msg-holder" href="{% url 'login' %}" >登录</a>
+            <a class ="msg-holder" href="{% url 'base:user_register' %}" >注册</a></li>
+            </ul>
+            {% endif %}
+            </div>
+            <div> <ul class="menu-header-ul">
+            <li class="menu-header-li">
+            <a class ="msg-holder" href="">新消息[40]</a></li>
+            </ul>
+            </div>
+            </div>
+        </header> 
+      <section class="menu-section">
+        <h3 class="menu-section-title"><a href="/" >首页</a></h3>
+        <ul class="menu-section-list">    
+          <li><a href="{% url 'kb:my_kb_list'%}" >我的分享</a></li> 
+          <li><a href="{% url 'user:usercenter'%}" >个人中心</a></li> 
+        </ul>
+      </section>
+{% if request.user.is_administrator %}
+      <section class="menu-section">
+        <h3 class="menu-section-title">管理员</h3>
+        <ul class="menu-section-list">
+          <li><a href="{% url 'user:admin_list_users' %}" >用户管理</a></li>
+          <li><a href="{% url 'user:grouplist' %}" >组管理</a></li>
+          <li><a href="">帖子管理</a></li>
+        </ul>
+      </section>
+{% endif %}
+      <section class="menu-section">
+        <h3 class="menu-section-title">关于</h3>
+        <ul class="menu-section-list">
+          <li><a href="{% url 'data:map' %}" >美食数据</a></li>
+          <li><a href="{% url 'base:contact_us' %}" >关于我们</a></li>
+          
+        </ul>
+      </section>
+    </nav>
+<!-- menu end -->

@@ -1,0 +1,77 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{pagetitle}} 带你发现真正的美食 因为 关于吃这件事，我们是认真的...{% endblock %} 
+ {% load admin_static %}
+{% block extrahead %}{{ block.super }} 
+{{ media }}
+{% endblock %}
+{% block keywords%}带你发现真正的美食 因为关于吃这件事，我们是认真的！{%endblock%}"
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" media="screen"  href="/static/kb/css/m_latest.css" />
+ 
+{% endblock %}
+ {% block coltype %}colM{% endblock %} 
+ {% block bodyclass %}{{ block.super }}  {% endblock %} 
+ {% block content %}  
+ <div class="container" > 
+	  <div class="row" > 
+		  {% if kbs %}
+		  <div class="col-xs-12  padding-sm ">
+			  我的{{kbs|length}}次分享
+		  </div>
+					{% for kb in kbs  %}
+					<div class="col-xs-6  padding-sm ">
+							<div class="week-container effect1">
+								<a class="a-week-img" href="{% url 'kb:kb_detail' kb.id %}">
+									<img  class="week-img week-img-{{kb.id}} " src="/static/img/default.jpg" />
+									<div class="food-detail ">
+										<div class="food-detail-title  ">
+											{{kb.title}} 
+										</div>
+										<div class="food-detail-right  height100">
+										参考价格：{{kb.lower_price}}-{{kb.higher_price}} 
+										</div>
+										<div class="height100" >
+											<img class="kblocation" src="{% static 'img/kblocation.png' %}"/>
+											{% for location in kb.foodlocation_set.all %}
+											<a target="_blank" href="{% url 'search:inplace' %}?placeid={{location.area.id}}">
+											{{location.area.short_name}}
+											</a>
+											{% endfor %}
+										</div>
+										<div class="height100" >
+											{{kb.i_want}}人想吃 {{kb.i_ate}}吃过 
+										</div>
+									</div>
+								</a>
+							</div>
+					</div>
+					{% endfor %} 
+				{% else %} 
+				 
+				<div class="col-xs-12 text-center share-none-text">
+					WOW, 你还没有进行任何分享
+				</div>
+				<br>
+				<div class="col-xs-12  text-center share-none-btn">
+					<a href="{% url 'kb:newkb' %}">点击开始分享</a>
+				</div>
+				{% endif %} 
+			</div>
+ </div><!-- end top row -->
+ {% endblock %}
+  
+ {% block footer_script %}{{ block.super}}   
+	<script >
+		$(document).ready(function(){
+		     //加载图片
+			
+			  {% for kb in kbs %}
+			   $('.week-img-{{kb.id}}').attr('src', '{{rootmedia}}{{kb.top_pic.name}}');
+			  {% endfor %}
+			   
+			  var imgwidth = $('.week-container').width(); 
+			  $('.week-img').css({'height':imgwidth+'px','width':imgwidth+'px' });
+			   
+		});
+		</script>
+ {% endblock %} 

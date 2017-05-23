@@ -1,0 +1,282 @@
+.words-homepage
+{
+  font-size: 40px;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.homepage
+{
+  background-color: red;
+}
+.kb_holder
+{
+  padding-top: 5px;
+}
+
+
+.box {
+	width:70%;
+	height:200px;
+	background:#FFF;
+	margin:40px auto;
+}
+.effect1  {
+	-webkit-box-shadow: 4px 5px 6px -6px #777;
+	   -moz-box-shadow: 4px 5px 6px -6px #777;
+	        box-shadow: 4px 5px 6px -6px #777;
+}
+
+
+#slider1_container
+{
+  width: 100%;
+}
+
+.slider1
+{ 
+  /*background: url("/static/img/homepage/food-wallpaper.jpg") right center / contain no-repeat rgba(155, 163, 160, 0.2);*/
+  color: white;
+  padding-left:0px;
+
+}
+
+.slider1-holder
+{
+  margin-top:40px; 
+  text-align: center;
+  padding-right: 0px;
+  padding-left:2px;
+}
+
+
+.slider1-words-holder2
+{
+  padding-right: 0px;
+  padding-top:10px;
+  background-color: rgba(0,0,0,0.6);
+}
+ 
+.item-explain
+{
+  text-align: left;
+}
+
+.div-items-bottom
+{
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+ 
+/* slider2 */
+
+#slider2_container
+{
+  width: 100%;
+}
+
+.slider2
+{  
+  padding-left:0px; 
+  background-color: #F6F6F4;
+}
+
+.slider2-holder
+{
+  margin-top:40px; 
+  text-align: center;
+  padding-right: 0px;
+  padding-left:1px;
+}
+
+.slider2-words-holder1
+{
+    height: 60px; 
+}
+
+.slider2-words-holder2
+{
+  padding-right: 0px;
+  padding-top:10px;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.item-explain
+{
+  text-align: left;
+}
+
+.div-items-bottom
+{
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+.btn-write
+{
+  width: 100%;
+  border-radius: 0;
+}
+.chinamap
+{
+  float:left;
+}
+  
+
+.silder-title-bottom
+{
+   padding-bottom: 15px;
+}
+.area-select
+{
+  padding-left:0;
+  padding-right: 0;
+}
+.map-words
+{
+   position: absolute;
+   top: 20px;
+   left: 20px;
+}
+
+.slider3-header
+{
+  padding-left: 15px;
+  
+}
+.week-recommend
+{
+    display: block;
+    color: black;
+    font-size: 40px; 
+    line-height: 24px;
+    margin: 0;
+    padding: 25px 0;
+    position: relative;
+    text-transform: uppercase;
+}
+.hr-right, .hr-left
+{
+   margin-top: 35px;
+   color: #7BB392;
+   background-color: #7BB392;
+   border-color: #7BB392; 
+   height:2px !important;
+}
+ 
+.a-week-img:visited, .a-week-img:active, .a-week-img:hover
+{
+  text-decoration: none;
+}
+.week-container
+{
+  margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.food-detail
+{
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color:#011F2A;
+  
+}
+.food-detail-title
+{
+  color:#FF8A4C;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+
+.new-recommend
+{
+    display: block;
+    color: black;
+    font-size: 30px;  
+    margin: 0; 
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+}
+.hr-new-right, .hr-new-left
+{
+   margin-top: 20px !important;
+   color: #7BB392;
+   background-color: #7BB392;
+   border-color: #7BB392; 
+   height:2px !important;
+}
+.slider3-title
+{
+  display: flex;
+}
+.new-more
+{
+  margin-top: 20px !important;
+}
+
+.kblocation
+{
+    width: 35px;
+    height: 20px; 
+}
+
+
+@media (max-width:980px){
+    /*.container{
+        width: 100%;
+    }
+    */
+    .week-img , .a-week-img
+    {
+        width: 160px; 
+        height: 160px;
+        text-decoration: none; 
+    }
+    .div-items-top{
+      padding-top: 0px;
+    }
+    .week-recommend
+    {
+      font-size: 22px;
+    }
+    .slider2-header-words
+    { 
+      padding-top: 10px; 
+      font-size: 15px;
+    } 
+    .slider3
+    {
+      padding-left: 30px;
+    }
+}
+ 
+@media (min-width:980px){
+  /* pc */
+  .week-img , .a-week-img
+  {
+      width: 260px;
+      height: 260px;
+      text-decoration: none; 
+  }
+  .div-items-top{
+    padding-top: 40px;
+  }
+    .slider1-words-holder1
+  {
+      height: 60px; 
+  }
+  .week-recommend
+  {
+    font-size: 40px;
+  }
+  .slider2-header-words
+  { 
+    padding-top: 10px; 
+    font-size: 20px;
+  } 
+  .slider3
+    {
+      padding-left: 10px;
+    }
+}

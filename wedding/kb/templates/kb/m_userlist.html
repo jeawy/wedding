@@ -1,0 +1,63 @@
+{% extends "admin/m_base_site.html" %}
+ {% block title %}{{kb.title}}|用户详情{% endblock %} 
+{% load admin_static %}
+{% block extrahead %} {{ block.super }} 
+<script type="text/javascript"  src="{% static 'js/common.js' %}"></script>  
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }} 
+<link rel="stylesheet" type="text/css" href="{% static "css/m_brand.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "kb/css/m_detail.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "comment/css/m_detail.css" %}" />
+{% endblock %}
+ {% block keywords%} {%endblock%}
+  {% block description%}  {%endblock%}
+ {% block bodyclass %}{{ block.super }} 
+{% endblock %}
+
+{% block content %} 
+  {% if  kb_award_list %}
+  {% for kb_award in kb_award_list %}
+  <div class="comment_div"> 
+        <div class="comment_left_div">
+            <div class="comment_portrait portrait"  style="background-image:url('{{kb_award.user.head_portrait}}')"></div>
+        </div>
+        <div class="comment_right_div">
+           <h3 class="comment_title">
+               <label  class="comment_title username">{{  kb_award.user.get_full_name }}</label >
+               <label  class="comment_title date">{{ kb_award.date  |date:" Y-m-d  H:i:s "}}</label >
+        </h3>
+          <label for="date" class="heartbeat_comment" name="words" >{{ kb_award.money }} 银币</label>
+          </div>
+          </div>
+          <hr class="comment_hr">
+ {% endfor %}
+ <div class="comment">
+      
+  </div>
+
+ {% endif %}
+
+
+ {% endblock %}
+
+{% block custom_footer_building_li_selected %}custom_footer_building_li_selected{% endblock %}
+{% block custom_footer_building_div_selected %}custom_footer_building_div_selected{% endblock %}
+ {% block footer_script %}{{ block.super}} 
+ <script type="text/javascript" language="javascript" src="{% static 'kb/js/comment.js'%}"></script> 
+ <script type="text/javascript"> 
+$(document).ready(function() {
+ var img = $('.kb_img');
+ img.css('max-width',document.body.clientWidth-3);
+ 
+ 
+ {% if kb   %}
+        $('#id_user_portrait').css("background-image", "url({{kb.author.head_portrait }})");
+        {% else %}
+        $('#id_user_portrait').css("background-image", "url('/static/img/dog.png')");
+    {% endif %}
+});
+ 
+</script>
+ {% endblock %} 
+  

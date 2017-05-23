@@ -1,0 +1,62 @@
+#id_permissions
+{
+    height:400px;
+    width: 800px;
+}
+
+.helptext
+{ 
+    color:green; 
+    line-height: 10px;
+}
+
+td input
+{
+  width: 95%;     
+} 
+
+td input[type="checkbox"]
+{
+  width: 20px;
+  height: 20px;   
+}
+
+#id_groups
+{
+    height: 130px;
+}
+td select
+{ 
+    width: 95%;
+    height: 140px;
+}
+
+input[type="submit"]
+{
+    text-align: center; 
+    width: 98%;
+    height: 30px;
+    margin-bottom: 45px;
+}
+td
+{
+   margin-top:30px;   
+}
+ul.messagelist li{  
+    line-height: 15px; 
+    padding-left: 40px;
+    background: #dfd url(../img/icon_success.gif) 5px .01em no-repeat;
+    background-size: 20px;
+}
+.errornote
+{
+    line-height: 15px; 
+    padding-left: 40px;
+    background: #ffefef url(../img/icon_error.gif) 5px .08em no-repeat;
+    background-size: 20px;
+}
+
+label[for="id_email"] 
+{
+    color:red;
+}

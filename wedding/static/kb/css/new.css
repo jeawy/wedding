@@ -1,0 +1,135 @@
+li .title
+{
+    width: 100%;
+    border:none;
+    line-height: 30px;
+    height: 30px;
+    font-size: 1.5em;
+    color: #445E75; 
+}
+
+.new_article_ul
+{
+    padding:0;
+}
+
+
+.article_content
+{
+    width: 100%;
+    border-radius: 0px;
+    border:none;
+}
+
+.pic_div
+{
+    margin-top: 5px;
+    width: 98%;
+    height: 70px;
+    border:1px dashed #999;
+    background-color: white;
+    border-radius: 5px;
+    display: inline-block;
+    background-size:100%;
+}
+
+.pic-plus
+{ 
+    color:#999;
+    font-size: 3em; 
+    padding-top:28%;
+    font-weight: 100; 
+}
+
+.publish_btn
+{
+    margin-top:10px; 
+    margin-bottom:10px; 
+    width:100%;
+}
+#id_publish
+{
+    margin-bottom:20px;
+}
+
+.pic_holder
+{
+    display: inline-block;
+    width:71px; 
+    height:71px;  
+    border:1px solid #999;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+li .file_upload
+{
+    display: none;
+}
+.new_Btn
+{
+    width:100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.li_holder
+{
+    margin-left:2%;
+    margin-right:2%;
+    display: block;
+}
+
+.pic_add_div
+{
+    width:70px; 
+    height:70px;
+    background-color: white;
+    border:1px dashed #999;
+    display: inline-block;
+    margin-left:2%;
+}
+
+li div{
+    margin:1px;
+}
+
+.pic-delete
+{
+    color: red;
+}
+
+.li_pic_add_div
+{
+    text-align: center;
+}
+.modal-body
+{
+    font-size: 16px;
+}
+
+.modal-footer
+{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+input[type="number"]
+{
+    margin-bottom: 5px;
+    width: 30%;
+}
+
+#id_url{
+    width: 100%;
+}
+
+#id_money
+{
+    width: 100%;
+}
+
+#id_num
+{
+    width: 40%;
+    margin-bottom: 0;
+}

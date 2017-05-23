@@ -1,0 +1,103 @@
+{% if not foodslocation  %}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-center" >
+            <label class="label-grey">Sorry，我们从未如此沮丧过，因为我们没有找到{{area.short_name}}的美食</label>
+        
+            <img class="jusang" src="/static/img/jusang.jpg"/>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-center" >
+            <a href="{% url 'kb:newkb'%}">
+                <input type="bottun" class="btn btn-success btn-write" data-toggle="tooltip" title="点击开始分享，让更多的人知道你们当地的美食.."
+                value="开始分享当地的特色美食"/></a>
+        </div>
+{% endif %}
+{% if city_locations  %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-notfount">
+    <label >我们在{{city.short_name}}找到了{{city_locations|length}}种美食：</label>
+    </div>
+    {% for city_location in city_locations %}
+       {% if city_location.kb.top_pic %}
+            <div class="col-xs-6 col-sm-6 col-md-6 search-kb-holder">
+                <div class="row">
+                     <div class="col-xs-4 col-sm-4 col-md-4">
+                        <a target="__blank" href="{% url 'kb:kb_detail' city_location.kb.id %}" >
+                           <img class="search-detail-img" src="{{rootmedia}}/{{city_location.kb.top_pic.name}}"/>
+                        </a>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8"> 
+                       <div class="row row-words-detail">
+                           <div class="col-xs-12 col-sm-12 col-md-12">
+                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' city_location.kb.id %}" >
+                        {{city_location.kb.title}} 
+                        </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>
+                                <label>人气指数:</label><label class="hot-{{city_location.id}}" >0</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <img class="kblocation" src="/static/img/map.png"/>
+                            {% for location in city_location.kb.foodlocation_set.all %}
+                                <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.id}}">
+                                    {{location.area.short_name}}  
+                                </a>
+                            {% endfor%}
+                        </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <img class="hot " data-toggle="tooltip" title="参考价格" src="/static/img/money.png"/>
+                                <label>参考价格:
+                            {{city_location.kb.lower_price}}-{{city_location.kb.higher_price}}
+                                </label>
+                        </div>
+                       </div>
+                    </div> 
+                </div>
+            </div> 
+       {% endif %}
+    {% endfor %}
+{% endif %}
+{% if province_locations  %} 
+<hr>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-notfount">
+    <label >但是我们在{{province.short_name}}找到了{{province_locations|length}}种美食:</label>
+    </div>
+    {% for province_location in province_locations %}
+        {% if province_location.kb.top_pic %}
+            <div class="col-xs-6 col-sm-6 col-md-6 search-kb-holder">
+                <div class="row">
+                     <div class="col-xs-4 col-sm-4 col-md-4">
+                        <a target="__blank" href="{% url 'kb:kb_detail' province_location.kb.id %}" >
+                           <img class="search-detail-img" src="{{rootmedia}}/{{province_location.kb.top_pic.name}}"/>
+                        </a>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-8"> 
+                       <div class="row row-words-detail">
+                           <div class="col-xs-12 col-sm-12 col-md-12">
+                        <a target="__blank" class="kb-link-title" href="{% url 'kb:kb_detail' province_location.kb.id %}" >
+                        {{province_location.kb.title}} 
+                        </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                <img class="hot " data-toggle="tooltip" title="人气指数" src="/static/img/hot.png"/>
+                                <label>人气指数:</label><label class="hot-{{province_location.id}}" >0</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <img class="kblocation" src="/static/img/map.png"/>
+                            {% for location in province_location.kb.foodlocation_set.all %}
+                                <a target="__blank" href="{% url 'search:inplace'%}?placeid={{location.id}}">
+                                    {{location.area.short_name}}  
+                                </a>
+                            {% endfor%}
+                        </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <img class="hot " data-toggle="tooltip" title="参考价格" src="/static/img/money.png"/>
+                                <label>参考价格:
+                            {{province_location.kb.lower_price}}-{{province_location.kb.higher_price}}
+                                </label>
+                        </div>
+                       </div>
+                    </div> 
+                </div>
+            </div> 
+        {% endif %}
+    {% endfor %}
+{% endif %}
