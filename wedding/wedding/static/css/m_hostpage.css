@@ -1,5 +1,11 @@
-#main1{
-	background-color:red;
-	height:100px;
+.slideout-panel{
+	height:560px;
 	width:100%;
+}
+.swiper-pagination{
+	bottom:20px;
+	width:100%;
+}
+.swiper-pagination-bullet{
+	margin:0px 5px;
 }

@@ -1,81 +1,68 @@
 <!DOCTYPE html>
-<html >
-<head>
-<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-
-<link rel="stylesheet" type="text/css" media="screen" href="/static/js/jquery.message.css" />
-<link rel="stylesheet"  href="/static/js/bootstrap-3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/static/css/font-awesome-4.4.0/css/font-awesome.min.css"  />
-<link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_hostpage.css" />
-
-
-<script type="text/javascript"  src="/static/js/jquery-1.9.1.js" charset="utf-8" ></script>
-<script type="text/javascript"  src="/static/js/bootstrap-3.3.7/js/bootstrap.min.js" charset="utf-8" ></script>
-</head>
-<body>
-     <div id="main" class="panel slideout-panel">
-        <div class="swiper-container">
-		<div class="swiper-wrapper">
-		    <div class="swiper-slide swiper-slide1">
-                <div class="kb_one_img">
-                    
-                </div> 
-                <h1 class="home_h1"> 划片1</h1>
-                <hr class="home_hr">
-                    <div class="home_silder1_words">
-                      收集全国各地正宗特色美食
-                    </div> 
-                     <div class="home_silder1_words">
-                      做吃货行走江湖的字典
-                    </div> 
-            </div><!--end slider 1-->
-			
-			 <div class="swiper-slide swiper-slide2">
-              <div class="container">
-                <div class="row">
-                  <h1 class="home_h111" id="home_h111"> 划片2</h1>
-                   
-                </div>
-              </div>
-            </div><!--end slider 2-->
-			
-			
-			 <div class="swiper-slide">
-			 <input type="button" value="test" class="btn btn-danger"/>
-			 </div><!--end slider 2-->
-			
-			<div class="swiper-slide swiper-slide2">
-              <div class="container">
-                <div class="row">
-                  <h1 class="home_h1"> 划片qwewq ewqewq e 3</h1>
-                   
-                </div>
-              </div>
-            </div><!--end slider 2-->
-        </div>	
-		</div>
-        <div class="swiper-pagination"></div> 		
-     </div>	 
- 
-<script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script>
-  <script>    
+<html>
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/js/jquery.message.css" />
+    <link rel="stylesheet" href="/static/js/bootstrap-3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/font-awesome-4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_hostpage.css" />
+    <script type="text/javascript" src="/static/js/jquery-1.9.1.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    <title></title>
+  </head>
+  <body>
+  <div id="main" class="panel slideout-panel">
+    <div class="swiper-container" id="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide1">
+          <div class="kb_one_img"></div>
+          <h1 class="home_h1">划片1</h1>
+          <hr class="home_hr" />
+          <div class="home_silder1_words">收集全国各地正宗特色美食</div>
+          <div class="home_silder1_words">做吃货行走江湖的字典</div>
+        </div>
+        <!--end slider 1-->
+        <div class="swiper-slide swiper-slide2">
+          <div class="container">
+            <div class="row">
+              <h1 class="home_2">划片2</h1>
+            </div>
+          </div>
+        </div>
+        <!--end slider 2-->
+        <div class="swiper-slide">
+          <input type="button" value="test" class="btn btn-danger" />
+        </div>
+        <!--end slider 2-->
+        <div class="swiper-slide swiper-slide2">
+          <div class="container">
+            <div class="row">
+              <h1 class="home_h1">划片qwewqqwewqe ewqewq e 3</h1>
+            </div>
+          </div>
+        </div>
+        <!--end slider 2-->
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script> 
+  <script>
+    
 $(document).ready(function(){
-
-      $('#home_h111').text('来自jQuery的文本');
-});  
-
-
-
-
-          var mySwiper = new Swiper ('.swiper-container', {
+	var mySwiper = new Swiper ('.swiper-container', {
             direction: 'horizontal', 
             loop: true, 
             // 如果需要分页器
-            pagination: '.swiper-pagination', 
-          
-          });
-           
+            pagination: '.swiper-pagination', });
+});
+var height = window.innerHeight;
+var obj = document.getElementById('swiper');
+document.write('height');
+obj.style.height = height+'px' ;
   </script>
 </body>
 </html>
