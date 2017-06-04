@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib import auth
-from area.models import Area
+
 
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser,PermissionsMixin
@@ -81,7 +81,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     #If there is message for this user, this column will be marked as TRUE; else will be marked as FALSE
     msg_mark             = models.BooleanField(u'有新消息', default=False)
 
-    area                 = models.ForeignKey(Area, null=True)
+    
     
     objects              = MapFamilyUserManager()
 

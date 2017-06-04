@@ -7,6 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('task', '0002_delete_todo_list'),
     ]
 
     operations = [

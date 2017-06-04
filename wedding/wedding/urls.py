@@ -21,7 +21,7 @@ from wedding import views
 
 urlpatterns = [ 
     url(r'^$', 'basedatas.views.index'),
-    
+    url(r'^task/', include('task.urls', namespace='task')),
     ]
 
 urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT ) 
