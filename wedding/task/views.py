@@ -12,7 +12,7 @@ from django.utils import timezone
 '''
 layer 3 start
 '''
-from .models import Todo_list, Todo_comments
+from .models import Todo_list
 from .form import Todo_listForm
 from mobile.detectmobilebrowsermiddleware import DetectMobileBrowser
 from basedatas.bd_comm import Common
@@ -113,10 +113,8 @@ def change(request, taskid):
     else:
         return render(request, 'task/m_todo.html', context)
 @csrf_exempt
-def  add(request):
+def add(request):
     isMobile = dmb.process_request(request)
-    if  request.user.is_anonymous():
-        return comm.redirect_login_path(isMobile, request)
     
     
     user = request.user
@@ -172,11 +170,7 @@ def detail(request, taskid):
         if status == '2':
             task.finisher = request.user
         task.save()
-        
-        Todo_comments.objects.create(user = request.user,
-        todo = task,
-        comments = comment
-        )
+         
     if isMobile:    
         return render(request, 'task/m_detail.html', context)
     else:

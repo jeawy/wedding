@@ -7,13 +7,11 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('task', '0004_auto_20170128_1452'),
+        ('task', '0001_initial'),
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='todo_comments',
-            old_name='conmments',
-            new_name='comments',
+        migrations.DeleteModel(
+            name='Todo_list',
         ),
     ]

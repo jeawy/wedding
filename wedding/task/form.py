@@ -8,5 +8,5 @@ from .models import Todo_list
 class Todo_listForm(ModelForm): 
     class Meta:
         model = Todo_list
-        fields = ['title', 'description']
-        exclude = ['date', 'publisher','finish_date', 'finisher', 'status']
+        fields = ['whichside', 'name', 'phone', 'address', 'come']
+        exclude = ['date', ]
