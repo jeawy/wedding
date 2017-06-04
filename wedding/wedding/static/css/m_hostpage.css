@@ -9,3 +9,17 @@
 .swiper-pagination-bullet{
 	margin:0px 5px;
 }
+.swiper-slide1{
+	background-image: url(/static/img/slider1.jpg);
+	background-repeat:no-repeat;
+    background-size:cover;
+}
+h1{
+	font-size: 29pt; 
+	color: #360000; 
+	font-family:Tahoma;
+	text-align:center;
+	position:relative;
+	top:75%;
+}
+
