@@ -10,16 +10,18 @@
 	margin:0px 5px;
 }
 .swiper-slide1{
-	background-image: url(/static/img/slider1.jpg);
-	background-repeat:no-repeat;
-    background-size:cover;
+	background-image: url(/static/img/slider1.png);
+	background-size:100%;
 }
 h1{
-	font-size: 29pt; 
+	font-size: 29pt;
 	color: #360000; 
 	font-family:Tahoma;
 	text-align:center;
 	position:relative;
 	top:75%;
 }
-
+.bg_img{
+	background-image: url(/static/img/slider3.jpg);
+	background-size:100%;
+}
