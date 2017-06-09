@@ -28,28 +28,35 @@
           </div>
         </div>
         <!--end slider 2-->
-        <div class="swiper-slide bg_img">
-          我们的幸福需要您的祝福与见证：诚意邀请您参加xxx和xxx的婚礼答谢宴—xxxx月x日下午18：0某某饭店大厅。感谢您一直以来的支持与关爱，我们携手期待着您的到来!
-        </div>
+        <div  class="swiper-slide">
+			谨定于2017年公历XX月XX日（农历XX月XX日）为 张继伟 唐婧 举行结婚典礼敬备喜筵
+			敬请光临
+			席设：XX大酒店
+			时间：2017年07月1日 上午11时30分
+		</div>
         <!--end slider 2-->
         <div class="swiper-slide swiper-slide2">
           <div class="container">
-            <div class="row">
 				<form method="post" action=""><!--服务器文件-->
-					<label>嘉宾姓名：</label>
-					<input type="text" name="name" value="">
-						<br/>
-					<label display="block">性别：</label>
-					<label for="man">男</label><input type="radio" name="man" value="">
-					<label for="woman">女</label><input type="radio" name="woman" value="">
-						<br/>
-					<label>电话号码：</label>
-					<input type="text" name="phoneNumber" value="">
-						<br/>
-					<label>留言备注：</label>
-					<textarea cols="35" rows="8">输入留言...</textarea>
-						<br/>
-					<input type="submit" name="phoneNumber" value="提交">
+								<div class="input-group">
+									<span class="input-group-addon">嘉宾姓名</span>
+									<input class="form-control" type="text" name="name" value=""/>
+								</div>
+								<br/>
+								<div class="input-group">
+									<span class="input-group-addon">电话号码</span>
+									<input class="form-control" type="text" name="phoneNumber" value=""/>
+								</div>
+								<br/>
+								<textarea class="form-control" id="texta"  rows="5" name="msg" placeholder="请在这里	留言..."></textarea>
+								<br/>
+								<div>
+									<span>是否赴宴</span>
+									<label>
+									<input type="checkbox" value="">
+									</label>
+									<input class="btn btn-default" type="submit" name="phoneNumber" value="提交"/>
+								</div>
 				</form>
             </div>
           </div>
@@ -74,4 +81,5 @@ var obj = document.getElementById('swiper');
 obj.style.height = height+'px' ;
   </script>
 </body>
+
 </html>

@@ -21,7 +21,3 @@ h1{
 	position:relative;
 	top:75%;
 }
-.bg_img{
-	background-image: url(/static/img/slider3.jpg);
-	background-size:100%;
-}
