@@ -55,10 +55,10 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  日期：{{todo.date | date:"m-d H:i:s"}} 
+                  {{todo.date | date:"m-d H:i:s"}} 
                 </td>
                 <td >
-                  出席：{{todo.get_come_display}} 
+                  {{todo.get_come_display}} 
                 </td>
                  <td  >
                   <a href="{% url 'task:delitem' todo.id %}">删除</a>
