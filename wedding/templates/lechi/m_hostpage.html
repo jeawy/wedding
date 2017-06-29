@@ -17,7 +17,15 @@
 <div id="main" class="panel slideout-panel">
   <div class="swiper-container" id="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide swiper-slide1"> </div>
+       <div class="swiper-slide swiper-slide1">
+        
+      </div>
+      <div class="swiper-slide swiper-slide1">
+        <img class="slider1_img sliderimg" src="" />
+      </div>
+      <div class="swiper-slide swiper-slide1">
+        <img class="slider2_img sliderimg" src="" />
+      </div>
       <!--end slider 1-->
       <div class="swiper-slide swiper-slide2">
         <div class="container">
@@ -27,7 +35,7 @@
         </div>
       </div>
       <!--end slider 2-->
-      <div  class="swiper-slide content">
+      <div  class="swiper-slide silder_content">
         <p>谨定于2017年公历XX月XX日（农历XX月XX日）为 张继伟 唐婧 举行结婚典礼敬备喜筵
           敬请光临
         </p>
@@ -70,17 +78,25 @@
 </div>
 <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script> 
 <script>
-      
-  $(document).ready(function(){
-      var mySwiper = new Swiper ('.swiper-container', {
-              direction: 'horizontal', 
-              loop: true, 
-              // 如果需要分页器
-              pagination: '.swiper-pagination', });
-  });
-  var height = window.innerHeight;
-  var obj = document.getElementById('swiper');
-  obj.style.height = height+'px' ;
+  var height = window.innerHeight;    
+  var width = window.innerWidth;  
+      $(document).ready(function(){
+          var mySwiper = new Swiper ('.swiper-container', {
+                  direction: 'horizontal', 
+                  loop: true, 
+                  // 如果需要分页器
+                  pagination: '.swiper-pagination', });
+      }); 
+    
+    // 后加载图片
+    $(document).ready(function(){
+         $('.slider1_img').attr('src', '/static/img/1.jpg');
+         $('.slider2_img').attr('src', '/static/img/2.jpg');
+         $('.sliderimg').width(width);
+         $('.sliderimg').height(height);
+      }); 
+    var obj = document.getElementById('swiper');
+    obj.style.height = height+'px' ;
     </script>
 </body>
 </html>

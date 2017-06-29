@@ -30,3 +30,9 @@
 .box{
 	
 }	
+
+.silder_content
+{
+	background-image: url(/static/img/slider2.png);
+	background-size: 100%;
+}
