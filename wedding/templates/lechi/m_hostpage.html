@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="generator"
-    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/js/jquery.message.css" />
-    <link rel="stylesheet" href="/static/js/bootstrap-3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/css/font-awesome-4.4.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_hostpage.css" />
-    <script type="text/javascript" src="/static/js/jquery-1.9.1.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/js/bootstrap-3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-    <title></title>
-  </head>
-  <body>
-  <div id="main" class="panel slideout-panel">
-    <div class="swiper-container" id="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide swiper-slide1">
-          <div class="kb_one_img"></div>
-          <h1 class="home_h1">邀请函</h1>
-        </div>
-        <!--end slider 1-->
-        <div class="swiper-slide swiper-slide2">
-          <div class="container">
-            <div class="row">
-              <h1 class="home_2">划片2</h1>
-            </div>
+<head>
+<meta name="generator"
+      content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/js/jquery.message.css" />
+<link rel="stylesheet" href="/static/js/bootstrap-3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/static/css/font-awesome-4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/plugins/swiper-3.4.1/dist/css/swiper.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/m_hostpage.css" />
+<script type="text/javascript" src="/static/js/jquery-1.9.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap-3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+<title></title>
+</head>
+<body>
+<div id="main" class="panel slideout-panel">
+  <div class="swiper-container" id="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide swiper-slide1"> </div>
+      <!--end slider 1-->
+      <div class="swiper-slide swiper-slide2">
+        <div class="container">
+          <div class="row">
+            <h1 class="home_2">划片2</h1>
           </div>
         </div>
-        <!--end slider 2-->
-        <div class="swiper-slide">
-          我们的幸福需要您的祝福与见证：诚意邀请您参加xxx和xxx的婚礼答谢宴—xxxx月x日下午18：0某某饭店大厅。感谢您一直以来的支持与关爱，我们携手期待着您的到来!
-        </div>
-        <!--end slider 2-->
-        <div class="swiper-slide swiper-slide2">
-          <div class="container">
-            <div class="row">
-              <h1 class="home_h1">划片qwewqqwewqe ewqewq e 3</h1>
+      </div>
+      <!--end slider 2-->
+      <div  class="swiper-slide content">
+        <p>谨定于2017年公历XX月XX日（农历XX月XX日）为 张继伟 唐婧 举行结婚典礼敬备喜筵
+          敬请光临
+        </p>
+        
+        <p class="alightLeft">席设：XX大酒店
+        </p>
+        
+        <p class="alightLeft">时间：2017年07月1日 上午11时30分
+        </p> 
+      </div>
+      <!--end slider 3-->
+      <div class="swiper-slide swiper-slide2">
+        <div class="container">
+          <form method="post" action="">
+            <!--服务器文件-->
+            <div class="input-group"> <span class="input-group-addon">宾客姓名</span>
+              <input class="form-control" type="text" name="name" value=""/>
             </div>
-          </div>
+            <br/>
+            <div class="input-group"> <span class="input-group-addon">电话号码</span>
+              <input class="form-control" type="text" name="phoneNumber" value=""/>
+            </div>
+            <br/>
+            <textarea class="form-control" id="texta"  rows="5" name="msg" placeholder="请在这里	留言..."></textarea>
+            <br/>
+            <div class="box"> 是否赴宴
+              <label>
+                <input type="checkbox" value="">
+              </label>
+            </div>
+            <input class="btn btn-default btn-lg btn-block" type="submit" name="phoneNumber" value="提交"/>
+          </form>
         </div>
-        <!--end slider 2-->
       </div>
     </div>
-    <div class="swiper-pagination"></div>
+    <!--end slider 4--> 
   </div>
-  <script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script> 
-  <script>
-    
-$(document).ready(function(){
-	var mySwiper = new Swiper ('.swiper-container', {
-            direction: 'horizontal', 
-            loop: true, 
-            // 如果需要分页器
-            pagination: '.swiper-pagination', });
-});
-var height = window.innerHeight;
-var obj = document.getElementById('swiper');
-obj.style.height = height+'px' ;
-  </script>
+</div>
+<div class="swiper-pagination"></div>
+</div>
+<script src="/static/plugins/swiper-3.4.1/dist/js/swiper.min.js"></script> 
+<script>
+      
+  $(document).ready(function(){
+      var mySwiper = new Swiper ('.swiper-container', {
+              direction: 'horizontal', 
+              loop: true, 
+              // 如果需要分页器
+              pagination: '.swiper-pagination', });
+  });
+  var height = window.innerHeight;
+  var obj = document.getElementById('swiper');
+  obj.style.height = height+'px' ;
+    </script>
 </body>
 </html>

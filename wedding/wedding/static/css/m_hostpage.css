@@ -1,25 +1,32 @@
-.slideout-panel{
-	height:560px;
-	width:100%;
+.slideout-panel {
+	height: 560px;
+	width: 100%;
 }
-.swiper-pagination{
-	bottom:20px;
-	width:100%;
+.swiper-pagination {
+	bottom: 20px;
+	width: 100%;
 }
-.swiper-pagination-bullet{
-	margin:0px 5px;
+.swiper-pagination-bullet {
+	margin: 0px 5px;
 }
-.swiper-slide1{
-	background-image: url(/static/img/slider1.jpg);
-	background-repeat:no-repeat;
-    background-size:cover;
+.swiper-slide1 {
+	background-image: url(/static/img/slider1.png);
+	background-size: 100%;
 }
-h1{
-	font-size: 29pt; 
-	color: #360000; 
-	font-family:Tahoma;
-	text-align:center;
+.container{
 	position:relative;
-	top:75%;
+	top:25%;
 }
-
+.swiper-slide>p{
+	color:#FFF000;
+}
+.content{
+	 vertical-align:middle;/*此处为邀请函文本内容，为什么不垂直居中*/
+}
+.alightLeft{
+	width:100%;
+	text-align:left;
+}
+.box{
+	
+}	
