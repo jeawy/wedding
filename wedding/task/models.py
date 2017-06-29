@@ -16,7 +16,7 @@ class Todo_list(models.Model):
     phone        = models.CharField( max_length=1000,verbose_name='电话',default='')
     address      = models.TextField('地址及留言',default='')  
     whichside    = models.CharField(choices=STATUS, max_length=10, default='0') 
-    come    = models.CharField(choices=STATUS, max_length=10, default='0') 
+    come    = models.CharField(choices=COME_OR_NOT, max_length=10, default='0') 
     class Meta:
         ordering = ['-date']
     

@@ -15,24 +15,49 @@
 }
 .container{
 	position:relative;
-	top:25%;
+	margin-top: 30px;
 }
-.swiper-slide>p{
+.swiper-slide>p, .h1name,.box, .container .alightLeft,.h2name{
 	color:#FFF000;
 }
-.content{
+.headimg
+{ 
+	width: 100%; 
+}
+.h1name
+{
+	font-size: 24px;
+	margin-left:24%;
+}
+.h2name
+{
+	font-size: 24px;
+}
+.content, .silder_content{
+	padding: 10px;
+	padding-top: 110px;
+	
 	 vertical-align:middle;/*此处为邀请函文本内容，为什么不垂直居中*/
 }
 .alightLeft{
 	width:100%;
 	text-align:left;
 }
-.box{
 	
-}	
-
-.silder_content
-{
+.silder_content, .swiper-slide-words
+{ 
 	background-image: url(/static/img/slider2.png);
 	background-size: 100%;
+}
+
+.input-group, textarea
+{
+	margin-top:5px;
+}
+.xinimg
+{
+	margin-top:40%;
+	margin-left: 30%;
+	width: 220px;
+	height: 200px;
 }

@@ -26,67 +26,49 @@
         <label class="errornote" >你没权限！</label>
       </div>
       
-      {% else %} 
-        
+      {% else %}  
         <table class="table">
-          <theader>
-            <tr>
-              <th colspan="5">
-                <a class="btn btn-default" href="{% url 'task:add' %}" >新建任务</a>
-              </th>
-            </tr>
+          <theader> 
             <tr>
               <th>序号</th>
-              <th>名称</th>
-              
-             
-              <th>操作</th>
+              <th>名称</th> 
+              <th> </th>
+              <th> </th>
             </tr>
           </theader>
           <tbody>
             {% if todo_ls %} 
               {% for todo in todo_ls %}  
               <tr>
-                <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'task:detail' todo.id %}">{{todo.title}}</a></td> 
                 
-                <td> 
-                  <a href="{% url 'task:change' todo.id %}">修改</a>
+              </tr>
+              <tr>
+                <td>{{ forloop.counter }}</td> 
+                <td colspan="3"> 
+                  {{todo.name}}  {{todo.phone}} 
+                </td>
+              </tr>
+               <tr>
+                <td colspan="4">
+                  {{todo.address}} 
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   日期：{{todo.date | date:"m-d H:i:s"}} 
                 </td>
-                <td colspan="2">
-                  {% if todo.status == '2'%}
-                  完成人：{{todo.finisher.get_full_name}}
-                  {% else %} 
-                  发布人：{{todo.publisher.get_full_name}}
-                  {% endif %}
+                <td >
+                  出席：{{todo.get_come_display}} 
+                </td>
+                 <td  >
+                  <a href="{% url 'task:delitem' todo.id %}">删除</a>
                 </td>
               </tr>
-               <tr>
-                <td colspan="2">
-                  状态：{{todo.get_status_display }} 
-                </td>
-                <td colspan="2">
-                  更新：【<a href="{% url 'task:detail' todo.id %}">{{todo.todo_comments_set.all|length}}</a>】次
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4">
-                  {{todo.description}} 
-                </td>
-              </tr>
+              
+              
               {% endfor %}          
          {% else %} 
-          <tr>
-                <td colspan="4">还没有制定任务...</td>
-                <td colspan="1">
-                  <a href="{% url 'task:add' %}">立即制定</a>
-                </td>
-              </tr>
+         
          {% endif%}
          </tbody>
          </table>

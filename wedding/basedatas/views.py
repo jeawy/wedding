@@ -30,7 +30,7 @@ from basedatas.e_mail import EmailEx
 from django.conf import settings
 from django.db.models import Q
 import re
-
+from task.models import Todo_list
 from mobile.detectmobilebrowsermiddleware import DetectMobileBrowser
 
 from basedatas.bd_comm import Common
@@ -41,13 +41,20 @@ EMAIL_REGEX = re.compile(r'[^@]+@[^@]+\.[^@]+')
             
 dmb     = DetectMobileBrowser()
  
-  
+@csrf_exempt
 def index(request): 
     isMble  = dmb.process_request(request)
 
     context = {  } 
     user = request.user
-        
+    if request.method == 'POST': 
+        name = request.POST['name']
+        msg = request.POST['msg']
+        phone = request.POST['phone']
+        come = request.POST['come']
+        todo = Todo_list.objects.create(name=name, phone=phone,address=msg ,come=come)
+        todo.save()
+        return HttpResponse('ok');
     next_url = ''
     if next_url: 
             return redirect(next_url)

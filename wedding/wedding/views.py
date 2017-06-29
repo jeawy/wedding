@@ -33,5 +33,37 @@ from basedatas.bd_comm import Common
 dmb     = DetectMobileBrowser()
 comm    = Common()
  
+@csrf_exempt    
+def login(request):
+    isMble  = dmb.process_request(request)
+
+    if  'password' in request.POST:
+            auth.logout(request)
+            username       = 'admin'
+            password      = request.POST['password']  
+            user = auth.authenticate(username =username, password=password)
+         
+            context ={}
+            next_url = '/'
+            if user: 
+                request.user = user
+                auth.login(request, user) 
+		 
+                return redirect(next_url) 
+            else:  
+                msg = '密码错误...' 
+                context = {'error':msg} 
+                if isMble: 
+		    return render(request, 'm_login.html', context)
+		else:  
+		    return render(request, 'login.html', context)
+		    
+    else: 
+        email = request.POST.get('email')
+        context = {'error':''} 
+        if isMble:
+            return render(request, 'm_login.html', context)
+        else:
+            return render(request, 'login.html', context)
 
  
